@@ -305,6 +305,30 @@ function buildSquare(size) {
   return geo
 }
 
+/* pentagonal prism: pentagon front and back (apex up), five square sides.
+   Flat (non-indexed) so every face has its own normal, like the dodecahedron. */
+function buildPrism(R = 1) {
+  const side = 2 * R * Math.sin(Math.PI / 5)        /* pentagon edge length = depth, so the sides are squares */
+  const z = side / 2
+  const V = []
+  for (let k = 0; k < 5; k++) { const a = Math.PI / 2 + k * (Math.PI * 2 / 5); V.push([Math.cos(a) * R, Math.sin(a) * R]) }
+  const pos = []
+  const tri = (a, b, c) => pos.push(...a, ...b, ...c)
+  for (let k = 1; k < 4; k++) {
+    tri([...V[0], z], [...V[k], z], [...V[k + 1], z])          /* front, counter-clockwise from +z */
+    tri([...V[0], -z], [...V[k + 1], -z], [...V[k], -z])       /* back, reversed */
+  }
+  for (let k = 0; k < 5; k++) {
+    const A = V[k], B = V[(k + 1) % 5]
+    tri([...A, z], [...A, -z], [...B, -z])
+    tri([...A, z], [...B, -z], [...B, z])
+  }
+  const geo = new THREE.BufferGeometry()
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3))
+  geo.computeVertexNormals()
+  return geo
+}
+
 /* the 12 pentagonal faces of the dodecahedron: normal, centroid, ordered corners */
 function extractFaces(geo) {
   const pos = geo.attributes.position, nor = geo.attributes.normal
@@ -470,7 +494,10 @@ class RomaiHero {
 
     /* --- glass dodecahedron + edge lines --- */
     this.glassScene = new THREE.Scene()
-    const dodeGeo = new THREE.DodecahedronGeometry(this.R * (cfg.glassSize ?? 1.45), 0)
+    /* glass shape: pentagonal prism (default) or the original dodecahedron */
+    const dodeGeo = cfg.shape === 'dodecahedron'
+      ? new THREE.DodecahedronGeometry(this.R * (cfg.glassSize ?? 1.45), 0)
+      : buildPrism(this.R * (cfg.glassSize ?? 1.45) * 0.95)
     this.faces = extractFaces(dodeGeo)
     this.glassMaterial = new THREE.ShaderMaterial({
       vertexShader: GLASS_VERT, fragmentShader: GLASS_FRAG, side: THREE.FrontSide,
@@ -510,6 +537,19 @@ class RomaiHero {
     this.ro = new ResizeObserver(() => this.resize())
     this.ro.observe(this.root)
     window.addEventListener('pointermove', this.onPointer, { passive: true })
+    /* touch screens have no hover, so the depth would barely move: stronger idle drift,
+       and the phone's tilt steers it where the browser allows it without a prompt (Android) */
+    this.touch = window.matchMedia('(hover: none)').matches
+    if (this.touch && 'DeviceOrientationEvent' in window && typeof DeviceOrientationEvent.requestPermission !== 'function') {
+      this.onTilt = (e) => {
+        if (e.gamma == null || e.beta == null) return
+        if (this.tiltRest == null) this.tiltRest = e.beta
+        this.target.x = clamp(e.gamma / 25, -1, 1)
+        this.target.y = clamp((this.tiltRest - e.beta) / 25, -1, 1)
+        this.lastPointer = this.time
+      }
+      window.addEventListener('deviceorientation', this.onTilt, { passive: true })
+    }
     document.addEventListener('mouseleave', this.onLeave)
     this.onVisibility = () => (document.hidden ? this.stop() : this.start())
     document.addEventListener('visibilitychange', this.onVisibility)
@@ -599,6 +639,7 @@ class RomaiHero {
 
   /* ---------- input ---------- */
   onPointer(e) {
+    if (e.pointerType === 'touch') return               /* a finger scrolling is not a pointer to follow */
     const r = this.root.getBoundingClientRect()
     this.target.x = clamp(((e.clientX - r.left) / r.width) * 2 - 1, -1, 1)
     this.target.y = clamp(-(((e.clientY - r.top) / r.height) * 2 - 1), -1, 1)
@@ -802,6 +843,7 @@ class RomaiHero {
   destroy() {
     this.stop()
     window.removeEventListener('pointermove', this.onPointer)
+    if (this.onTilt) window.removeEventListener('deviceorientation', this.onTilt)
     document.removeEventListener('mouseleave', this.onLeave)
     document.removeEventListener('visibilitychange', this.onVisibility)
     document.removeEventListener('shopify:section:unload', this.onUnload)
@@ -837,8 +879,11 @@ class RomaiHero {
 
     /* pointer: smoothed, idle drift when the mouse is still */
     const idle = t - this.lastPointer > 2.5
-    let tx = idle ? Math.sin(t * 0.32) * 0.35 : this.target.x
-    let ty = idle ? Math.cos(t * 0.21) * 0.22 : this.target.y
+    /* phones: wider, slightly quicker drift and a stronger depth (stays inside the 4% overscan) */
+    const amp = this.touch ? 2.3 : 1, pace = this.touch ? 1.35 : 1
+    let tx = idle ? Math.sin(t * 0.32 * pace) * 0.35 * amp : this.target.x
+    let ty = idle ? Math.cos(t * 0.21 * pace) * 0.22 * amp : this.target.y
+    this.bgMaterial.uniforms.uStrength.value = this.touch ? Math.max(cfg.parallaxStrength ?? 0.08, 0.15) : (cfg.parallaxStrength ?? 0.08)
     if (this.debug.mouse) { [tx, ty] = this.debug.mouse; this.mouse.x = tx; this.mouse.y = ty }
     const k = 1 - Math.pow(0.0025, dt)
     this.mouse.x = lerp(this.mouse.x, tx, k * 0.5)

@@ -70,6 +70,7 @@
       "desktop": { "image": "{{ s.bg_desktop }}", "depth": "{{ s.bg_desktop_depth }}" },
       "mobile":  { "image": "{{ s.bg_mobile }}",  "depth": "{{ s.bg_mobile_depth }}" }
     },
+    "shape": {{ s.glass_shape | default: 'prism' | json }},
     "imageStyle": "{{ s.image_style | default: 'pentagon' }}",
     "spinSpeed": {{ s.spin_speed | default: 0.9 }},
     "glassSize": {{ s.glass_size | default: 1.45 }},
@@ -90,6 +91,9 @@
   "tag": "section",
   "class": "section-hero",
   "settings": [
+    { "type": "select", "id": "glass_shape", "label": "Glass shape", "default": "prism", "options": [
+      { "value": "prism", "label": "Pentagon prism (pentagon front and back, square sides)" }, { "value": "dodecahedron", "label": "Dodecahedron (all pentagons)" }
+    ] },
     { "type": "header", "content": "Copy" },
     { "type": "checkbox", "id": "show_content", "label": "Show copy and buttons", "default": true },
     { "type": "text", "id": "meta_left", "label": "Top-left meta", "default": "Autumn / Winter 2026" },
