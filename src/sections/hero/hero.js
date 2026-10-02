@@ -404,6 +404,16 @@ class RomaiHero {
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75))
     this.renderer.outputColorSpace = THREE.LinearSRGBColorSpace
     this.renderer.autoClear = false
+    /* low memory / weak GPU: a lost context or a shader that fails to compile leaves an empty
+       canvas, so fall back to the static poster instead */
+    const fallback = (why) => {
+      if (this.root.classList.contains("is-fallback")) return
+      console.warn("[hero] WebGL unavailable (" + why + "), keeping poster.")
+      this.root.classList.add("is-fallback", "is-ready")
+      this.stop?.()
+    }
+    this.canvas.addEventListener("webglcontextlost", () => fallback("context lost"))
+    this.renderer.debug.onShaderError = () => fallback("shader error")
 
     /* backdrop render target: room + static image, sampled by the glass */
     this.rt = new THREE.WebGLRenderTarget(2, 2, { depthBuffer: true })
