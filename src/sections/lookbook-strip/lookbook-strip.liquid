@@ -20,7 +20,6 @@
   <script type="application/json" data-strip-config>
   {
     "tilt": {{ s.tilt | default: 10 }},
-    "shape": {{ s.card_shape | default: 'pentagon' | json }},
     "variants": [
       {%- for block in section.blocks -%}
         {
@@ -43,10 +42,7 @@
     { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "light", "options": [
       { "value": "light", "label": "Light" }, { "value": "dark", "label": "Dark" }
     ] },
-    { "type": "select", "id": "card_shape", "label": "Card shape", "default": "pentagon", "options": [
-      { "value": "pentagon", "label": "Pentagon (logo)" }, { "value": "rect", "label": "Tilted rectangle" }
-    ] },
-    { "type": "range", "id": "tilt", "label": "Card tilt (deg, rectangle only)", "min": 0, "max": 16, "step": 1, "default": 10 }
+    { "type": "range", "id": "tilt", "label": "Card tilt (deg)", "min": 0, "max": 16, "step": 1, "default": 10 }
   ],
   "blocks": [
     { "type": "variant", "name": "Capsule", "limit": 3, "settings": [

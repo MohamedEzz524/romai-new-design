@@ -31,9 +31,6 @@ const CARD_VARIANTS = [1, 2, 0, 1, 2, 0]           /* B, C, A, B, C, A */
 const EASE_PER_30FPS = 0.28
 const SCROLL_LERP_PER_60FPS = 0.075
 const SEGMENTS = 8                                /* their plane is 8 x 2 segments */
-/* Romai logo pentagon (svg-logo.svg), normalised to the card box: apex top, wide base */
-const PENTAGON = [[0.5, 0], [1, 0.42], [0.81, 1], [0.19, 1], [0, 0.436]]
-const RECT = [[0, 0], [1, 0], [1, 1], [0, 1]]
 
 const loadImage = (src) => new Promise((resolve) => {
   const img = new Image()
@@ -51,8 +48,6 @@ class LookbookStrip {
     this.ctx = this.canvas.getContext('2d')
     this.cfg = JSON.parse(root.querySelector('[data-strip-config]').textContent)
     this.variants = this.cfg.variants
-    this.shape = this.cfg.shape === 'rect' ? RECT : PENTAGON
-    if (this.cfg.shape !== 'rect') this.cfg.tilt = 0
     this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (this.reduced || !this.ctx || this.variants.length < 1) { root.classList.add('is-static'); return }
 
@@ -163,14 +158,8 @@ class LookbookStrip {
     const s = camZ / (camZ + depth * this.rem)
     const wave = (u) => Math.sin((u + this.time * 2) * Math.PI * 2) * v * 0.00008 * h
     const pts = []
-    const poly = this.shape
-    for (let e = 0; e < poly.length; e++) {
-      const [ax, ay] = poly[e], [bx, by] = poly[(e + 1) % poly.length]
-      for (let j = 0; j < SEGMENTS; j++) {
-        const t = j / SEGMENTS, u = ax + (bx - ax) * t, v = ay + (by - ay) * t
-        pts.push([(u - 0.5) * w, (v - 0.5) * h + wave(u)])
-      }
-    }
+    for (let j = 0; j <= SEGMENTS; j++) { const u = j / SEGMENTS; pts.push([(u - 0.5) * w, -h / 2 + wave(u)]) }
+    for (let j = SEGMENTS; j >= 0; j--) { const u = j / SEGMENTS; pts.push([(u - 0.5) * w, h / 2 + wave(u)]) }
     const c = Math.cos(ang), sn = Math.sin(ang)
     return pts.map(([x, y]) => [cx + (x * c - y * sn) * s, cy + (x * sn + y * c) * s])
   }
@@ -251,17 +240,9 @@ class LookbookStrip {
       const dx = px - cx, dy = py - cy
       const lx = dx * Math.cos(ang) - dy * Math.sin(ang)
       const ly = dx * Math.sin(ang) + dy * Math.cos(ang)
-      if (this.inShape(lx / this.cardW + 0.5, ly / this.cardH + 0.5)) return this.variants[CARD_VARIANTS[i] % this.variants.length]
+      if (Math.abs(lx) <= this.cardW / 2 && Math.abs(ly) <= this.cardH / 2) return this.variants[CARD_VARIANTS[i] % this.variants.length]
     }
     return null
-  }
-  inShape(u, v) {
-    let inside = false
-    const p = this.shape
-    for (let a = 0, b = p.length - 1; a < p.length; b = a++) {
-      if ((p[a][1] > v) !== (p[b][1] > v) && u < ((p[b][0] - p[a][0]) * (v - p[a][1])) / (p[b][1] - p[a][1]) + p[a][0]) inside = !inside
-    }
-    return inside
   }
   hover(e) { this.canvas.classList.toggle('is-link', !!this.variantAt(e)) }
 }
