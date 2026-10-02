@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ settings.shop_name }} — {{ settings.tagline }}</title>
+  <meta name="description" content="{{ settings.tagline }}">
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="/src/js/main.js"></script>
+</head>
+<body class="template-{{ template }}">
+
+  {% section 'preloader' %}
+  {% section 'header' %}
+
+  {% comment %}
+    ============================================================
+    HOMEPAGE CANVAS
+    Add one line per section, in page order:
+      {% section 'section-name' %}
+    which renders src/sections/section-name/section-name.liquid
+    ============================================================
+  {% endcomment %}
+
+  <main id="main" class="main">
+
+    {% section 'hero' %}
+    {% section 'banner-fixed' %}
+    {% section 'lookbook-strip' %}
+    {% section 'fitting' %}
+
+    {% section 'store-collage' %}
+  </main>
+  {% section 'footer' %}
+
+</body>
+</html>

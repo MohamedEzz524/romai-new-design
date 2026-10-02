@@ -1,0 +1,65 @@
+{%- comment -%}
+  Store collage (after suuupply.com "suuupply store"): heading + three equal columns.
+  Desktop: 3 columns, 1px #f2f2f2 dividers. Phones: cards stack as sticky layers;
+  each one shrinks slightly and dims as the next slides over it.
+  Card hover: one vowel in the label stretches (o -> oo -> ooo), like their "suuupply".
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="store-collage" data-section="store-collage">
+  <div class="store-collage__heading">
+    <h2 class="store-collage__title" data-reveal="chars-up" data-reveal-split="chars" data-reveal-stagger="35" data-reveal-duration="900">{{ s.title }}</h2>
+    {%- if s.subtitle != blank -%}<p class="store-collage__sub" data-reveal="fade" data-reveal-delay="350">{{ s.subtitle }}</p>{%- endif -%}
+  </div>
+
+  <div class="store-collage__grid" data-collage data-reveal="trigger" data-reveal-threshold="0.25">
+    {%- for block in section.blocks -%}
+      <div class="store-collage__item" data-collage-item style="--i: {{ forloop.index0 }}">
+        {%- if block.type == 'image' -%}
+          <a class="store-collage__card" href="{{ block.settings.url }}" aria-label="{{ s.title | escape }}">
+            <img class="store-collage__img" src="{{ block.settings.image }}" alt="" loading="eager" decoding="async">
+          </a>
+        {%- else -%}
+          <a class="store-collage__card store-card" href="{{ block.settings.url }}"{% if block.settings.url contains 'http' %} target="_blank" rel="noopener"{% endif %} data-stretch>
+            <img class="store-collage__img" src="{{ block.settings.image }}" alt="" loading="eager" decoding="async">
+            <span class="store-card__info">
+              <span class="store-card__top" data-stretch-text>{{ block.settings.label }}</span>
+              <span class="store-card__bottom">
+                <span class="store-card__line">{{ block.settings.line_1 }}</span>
+                {%- if block.settings.line_2 != blank -%}<span class="store-card__line">{{ block.settings.line_2 }}</span>{%- endif -%}
+              </span>
+            </span>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Store collage",
+  "tag": "section",
+  "class": "section-store-collage",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "romai store" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Image", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "url", "id": "url", "label": "Link" }
+    ] },
+    { "type": "card", "name": "Info card", "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "url", "id": "url", "label": "Link" },
+      { "type": "text", "id": "label", "label": "Label", "default": "opening hours" },
+      { "type": "text", "id": "line_1", "label": "Line 1" },
+      { "type": "text", "id": "line_2", "label": "Line 2" }
+    ] }
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "Store collage" }]
+}
+{% endschema %}

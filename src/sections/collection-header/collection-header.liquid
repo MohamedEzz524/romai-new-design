@@ -1,0 +1,64 @@
+{%- comment -%}
+  Collection header (after aoiofficial.com/collections/*).
+  Left: title + description. Right: a strip of collection cards; the active one is wide
+  (25% desktop / 60% phone), the rest are slivers (12.5% / 20%) with a 20% black tint
+  and a centred label. Hovering a sliver widens it; the strip scrolls with the chevron.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="ch" data-section="collection-header" data-active="{{ s.active_handle }}">
+  <div class="ch__row">
+    <div class="ch__intro">
+      <h1 class="ch__title" data-reveal="fade">{{ s.title }}</h1>
+      <p class="ch__desc" data-reveal="up" data-reveal-delay="120">{{ s.description }}</p>
+    </div>
+
+    <div class="ch__media">
+      <div class="ch__viewport" data-ch-viewport>
+        <div class="ch__track" data-ch-track>
+          {%- for block in section.blocks -%}
+            {%- assign active = false -%}
+            {%- if block.settings.handle == s.active_handle -%}{%- assign active = true -%}{%- endif -%}
+            <div class="ch__item{% if active %} is-active is-wide{% endif %}" data-ch-item data-handle="{{ block.settings.handle }}">
+              <a class="ch__link" href="{{ block.settings.url }}"{% if active %} aria-current="page"{% endif %}>
+                <div class="ch__frame">
+                  <img class="ch__img" src="{{ block.settings.image }}" alt="" loading="{% if forloop.index < 4 %}eager{% else %}lazy{% endif %}" decoding="async">
+                  <div class="ch__tint" aria-hidden="true"></div>
+                </div>
+                <div class="ch__label"><span>{{ block.settings.title }}</span></div>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <button class="ch__next" type="button" data-ch-next aria-label="Next slide">
+        <span class="ch__next-dot">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1"><path d="m9 18 6-6-6-6"/></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection header",
+  "tag": "section",
+  "class": "section-collection-header",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title (on Shopify use collection.title)" },
+    { "type": "textarea", "id": "description", "label": "Description (on Shopify use collection.description)" },
+    { "type": "text", "id": "active_handle", "label": "Active collection handle (on Shopify use collection.handle)" }
+  ],
+  "blocks": [
+    { "type": "collection", "name": "Collection card", "settings": [
+      { "type": "text", "id": "handle", "label": "Handle" },
+      { "type": "text", "id": "title", "label": "Label" },
+      { "type": "url", "id": "url", "label": "Link" },
+      { "type": "image_picker", "id": "image", "label": "Image" }
+    ] }
+  ],
+  "presets": [{ "name": "Collection header" }]
+}
+{% endschema %}

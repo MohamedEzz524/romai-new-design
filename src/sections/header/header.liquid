@@ -1,0 +1,251 @@
+{%- liquid
+  assign s = section.settings
+  assign see_through = false
+  if s.transparent_on_top and template == 'index'
+    assign see_through = true
+  endif
+  assign pills = s.search_pills | split: ','
+-%}
+<header
+  class="site-header site-header--{{ s.solid_scheme | default: 'light' }}{% if see_through %} is-transparent{% endif %}"
+  data-section="header"
+  data-transparent="{{ see_through }}"
+>
+  <div class="site-header__bar">
+    {%- comment -%} mobile: menu toggle {%- endcomment -%}
+    <button class="site-header__burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" data-open="mobile">
+      <span></span><span></span>
+    </button>
+
+    <nav class="site-header__nav site-header__nav--left" aria-label="Primary">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.side == 'left' -%}
+          {%- if block.type == 'mega' -%}
+            <button class="site-header__link site-header__link--mega" type="button" aria-expanded="false" aria-controls="mega-{{ forloop.index }}" data-open="mega" data-mega="mega-{{ forloop.index }}">
+              {{ block.settings.title }}
+              <svg class="site-header__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          {%- else -%}
+            <a class="site-header__link" href="{{ block.settings.url }}">{{ block.settings.title }}</a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <a class="site-header__logo" href="/" aria-label="{{ settings.shop_name }} home">
+      {% render 'logo-mark', class: 'site-header__mark' %}
+    </a>
+
+    <div class="site-header__right">
+    <nav class="site-header__nav site-header__nav--right" aria-label="Secondary">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.side == 'right' and block.type == 'link' -%}
+          <a class="site-header__link" href="{{ block.settings.url }}">{{ block.settings.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+
+    <div class="site-header__tools">
+      <button class="site-header__link site-header__tool" type="button" aria-expanded="false" aria-controls="header-search" data-open="search">
+        <span class="site-header__tool-label">Search</span>
+        <svg class="site-header__icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="m11 11 3.5 3.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      </button>
+      <span class="site-header__link site-header__currency">{{ s.currency_label }}
+        <svg class="site-header__chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+      </span>
+      <button class="site-header__link site-header__tool site-header__bag" type="button" aria-expanded="false" aria-controls="cart-drawer" data-open="cart" aria-label="Open bag">
+        <svg class="site-header__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 5h10l-.8 9H3.8L3 5Z" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 5V4a2.5 2.5 0 0 1 5 0v1" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+        <span class="site-header__count" data-cart-count hidden>0</span>
+      </button>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ---------------- mega menus ---------------- {%- endcomment -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'mega' -%}
+      {%- assign handles = block.settings.collections | split: ',' -%}
+      <div class="mega" id="mega-{{ forloop.index }}" data-panel="mega" hidden>
+        <div class="mega__inner">
+          <ul class="mega__list" role="list">
+            {%- for raw in handles -%}
+              {%- assign h = raw | strip -%}
+              {%- for c in collections -%}
+                {%- if c.handle == h -%}
+                  <li>
+                    <a class="mega__link" href="/collection.html?c={{ c.handle }}"
+                       data-title="{{ c.title | escape }}" data-text="{{ c.description | escape }}" data-image="{{ c.image }}">{{ c.title }}</a>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          </ul>
+          <div class="mega__copy">
+            <p class="mega__title" data-mega-title>{{ block.settings.title }} all</p>
+            <p class="mega__text" data-mega-text data-default="{{ block.settings.description | escape }}">{{ block.settings.description }}</p>
+          </div>
+          <div class="mega__media">
+            {%- assign first = handles.first | strip -%}
+            {%- for c in collections -%}
+              {%- if c.handle == first -%}
+                <div class="mega__img"><img data-mega-img src="{{ c.image }}" alt="" loading="lazy"></div>
+              {%- endif -%}
+            {%- endfor -%}
+            <div class="mega__img"><img src="/assets/banner/fall-mobile.webp" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- comment -%} ---------------- search dropdown ---------------- {%- endcomment -%}
+  <div class="search-panel" id="header-search" data-panel="search" role="dialog" aria-label="{{ s.search_title }}" hidden>
+    <div class="search-panel__inner">
+      <div class="search-panel__head">
+        <p class="search-panel__title">{{ s.search_title }}</p>
+        <button class="search-panel__close" type="button" aria-label="Close search" data-close>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3 3 10 10M13 3 3 13" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+      </div>
+      <label class="search-panel__field">
+        <svg class="search-panel__icon" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m11 11 3.5 3.5" stroke="currentColor" stroke-width="1.3"/></svg>
+        <span class="visually-hidden">{{ s.search_title }}</span>
+        <input class="search-panel__input" type="search" placeholder="{{ s.search_placeholder }}" autocomplete="off" data-search-input>
+      </label>
+      <ul class="search-panel__pills" role="list" data-search-pills>
+        {%- for p in pills -%}
+          <li><button class="chip search-panel__pill" type="button" data-pill="{{ p | strip | escape }}">{{ p | strip }}</button></li>
+        {%- endfor -%}
+      </ul>
+      <div class="search-panel__results" data-search-results aria-live="polite"></div>
+    </div>
+  </div>
+
+  {%- comment -%} ---------------- mobile menu ---------------- {%- endcomment -%}
+  <div class="mobile-menu" id="mobile-menu" data-panel="mobile" hidden>
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'mega' -%}
+          <details class="mobile-menu__group">
+            <summary class="mobile-menu__link">{{ block.settings.title }}</summary>
+            <ul role="list">
+              {%- assign handles = block.settings.collections | split: ',' -%}
+              {%- for raw in handles -%}
+                {%- assign h = raw | strip -%}
+                {%- for c in collections -%}{%- if c.handle == h -%}
+                  <li><a class="mobile-menu__sub" href="/collection.html?c={{ c.handle }}">{{ c.title }}</a></li>
+                {%- endif -%}{%- endfor -%}
+              {%- endfor -%}
+            </ul>
+          </details>
+        {%- else -%}
+          <a class="mobile-menu__link" href="{{ block.settings.url }}">{{ block.settings.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+
+  <div class="site-header__scrim" data-scrim hidden></div>
+</header>
+
+{%- comment -%} ---------------- cart drawer ---------------- {%- endcomment -%}
+{%- if s.enable_cart_drawer -%}
+<div class="cart-drawer is-empty" id="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title" data-currency="{{ settings.currency | default: 'USD' }}" hidden>
+  <div class="cart-drawer__overlay" data-close></div>
+  <aside class="cart-drawer__panel">
+    <div class="cart-drawer__head">
+      <h2 class="cart-drawer__title" id="cart-drawer-title">
+        <span>{{ s.cart_title }}</span>
+        <span class="cart-drawer__count" data-cart-drawer-count aria-label="items">0</span>
+      </h2>
+      <button class="cart-drawer__close" type="button" aria-label="Close cart" data-close>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.1"/></svg>
+      </button>
+    </div>
+
+    <ul class="cart-drawer__items" role="list" data-cart-items></ul>
+
+    <div class="cart-drawer__empty" data-cart-empty>
+      <p class="cart-drawer__empty-title">{{ s.cart_empty_title }}</p>
+      <p class="cart-drawer__empty-text">{{ s.cart_login_prefix }} <a class="link link--quiet" href="{{ s.cart_login_url }}">{{ s.cart_login_label }}</a> {{ s.cart_login_suffix }}</p>
+      <a class="btn cart-drawer__empty-cta" href="{{ s.cart_empty_url }}" data-close>{{ s.cart_empty_cta }}</a>
+    </div>
+
+    <div class="cart-drawer__foot" data-cart-foot hidden>
+      <div class="cart-drawer__discount" data-discount>
+        <button class="cart-drawer__discount-toggle" type="button" aria-expanded="false" aria-controls="cart-discount-body" data-discount-toggle>
+          <span>{{ s.cart_discount_label }}</span>
+          <svg class="cart-drawer__plus" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="1.1"/><path class="cart-drawer__plus-v" d="M8 3v10" stroke="currentColor" stroke-width="1.1"/></svg>
+        </button>
+        <div class="cart-drawer__discount-body" id="cart-discount-body" data-discount-body>
+          <div class="cart-drawer__discount-inner">
+            <form class="cart-drawer__discount-form" data-discount-form>
+              <label class="visually-hidden" for="cart-discount-code">{{ s.cart_discount_label }} code</label>
+              <input class="cart-drawer__discount-input field-line" id="cart-discount-code" type="text" placeholder="{{ s.cart_discount_placeholder }}" autocomplete="off" data-discount-input>
+              <button class="btn btn--secondary btn--sm cart-drawer__discount-apply" type="submit">Apply</button>
+            </form>
+            <p class="cart-drawer__discount-msg" data-discount-msg aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+      <div class="cart-drawer__total">
+        <span>Estimated total</span>
+        <span class="cart-drawer__amount"><span data-cart-total></span> <span class="cart-drawer__code">{{ settings.currency | default: 'USD' }}</span></span>
+      </div>
+      <p class="cart-drawer__note">{{ s.cart_note }}</p>
+      <a class="btn btn--block cart-drawer__checkout" href="/cart.html">{{ s.cart_cta }}</a>
+    </div>
+  </aside>
+</div>
+{%- endif -%}
+
+<script type="application/json" data-catalog>
+  {{ products | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "section-header",
+  "settings": [
+    { "type": "select", "id": "solid_scheme", "label": "Solid header colours", "default": "light", "options": [
+      { "value": "light", "label": "White with black text" },
+      { "value": "dark", "label": "Black with white text" }
+    ] },
+    { "type": "checkbox", "id": "transparent_on_top", "label": "Transparent over the first section", "default": true },
+    { "type": "text", "id": "currency_label", "label": "Currency label", "default": "USD" },
+    { "type": "header", "content": "Search" },
+    { "type": "text", "id": "search_title", "label": "Title", "default": "Search" },
+    { "type": "text", "id": "search_placeholder", "label": "Placeholder", "default": "Type to search..." },
+    { "type": "text", "id": "search_pills", "label": "Suggestion pills (comma separated)" },
+    { "type": "header", "content": "Cart drawer" },
+    { "type": "checkbox", "id": "enable_cart_drawer", "label": "Enable cart drawer", "default": true },
+    { "type": "text", "id": "cart_title", "label": "Title", "default": "Cart" },
+    { "type": "text", "id": "cart_empty_title", "label": "Empty heading", "default": "Your cart is empty" },
+    { "type": "text", "id": "cart_login_prefix", "label": "Empty login text before link", "default": "Have an account?" },
+    { "type": "text", "id": "cart_login_label", "label": "Empty login link label", "default": "Log in" },
+    { "type": "text", "id": "cart_login_suffix", "label": "Empty login text after link", "default": "to check out faster." },
+    { "type": "url", "id": "cart_login_url", "label": "Login link" },
+    { "type": "text", "id": "cart_empty_cta", "label": "Empty button label", "default": "Continue shopping" },
+    { "type": "url", "id": "cart_empty_url", "label": "Empty button link" },
+    { "type": "text", "id": "cart_discount_label", "label": "Discount label", "default": "Discount" },
+    { "type": "text", "id": "cart_discount_placeholder", "label": "Discount placeholder", "default": "Discount code" },
+    { "type": "text", "id": "cart_note", "label": "Total note", "default": "Duties and taxes included. Shipping is calculated at checkout." },
+    { "type": "text", "id": "cart_cta", "label": "Checkout button label", "default": "Check out" }
+  ],
+  "blocks": [
+    { "type": "link", "name": "Link", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "url", "id": "url", "label": "Link" },
+      { "type": "select", "id": "side", "label": "Side", "default": "left", "options": [{ "value": "left", "label": "Left of logo" }, { "value": "right", "label": "Right of logo" }] }
+    ] },
+    { "type": "mega", "name": "Mega menu", "limit": 1, "settings": [
+      { "type": "text", "id": "title", "label": "Title", "default": "Shop" },
+      { "type": "textarea", "id": "description", "label": "Description" },
+      { "type": "text", "id": "collections", "label": "Collection handles (comma separated)" },
+      { "type": "select", "id": "side", "label": "Side", "default": "left", "options": [{ "value": "left", "label": "Left of logo" }, { "value": "right", "label": "Right of logo" }] }
+    ] }
+  ]
+}
+{% endschema %}

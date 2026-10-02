@@ -1,0 +1,137 @@
+/* =====================================================================
+   Collection header — values taken from aoiofficial.com (Tailwind build):
+   lg:mt-4 · intro px-4 pb-4 pt-6, lg:p-20, lg:w-47.5% · media lg:w-52.5%
+   h1 mb-4 mt-4 text-md uppercase, lg:mt-0 lg:text-xl
+   p font-body text-md black/50, md:max-w-475px, lg:mb-20, pre-line
+   cards: gap 2px (md+) / 6px (phone); active 25% / 60%, others 12.5% / 20%
+   width transition .5s ease-in-out; frame h 300 / md 400 / 2xl 600 / 4xl 800
+   tint black .2 (0 on active); label font-heading 8px uppercase white,
+   rotated 90deg on phones, hidden on the active card
+   next button: absolute right-0 top-80% p-8, white dot with chevron
+   ===================================================================== */
+.ch {
+  --ch-gap: 2px;
+  --ch-w-active: 25%;
+  --ch-w: 12.5%;
+  --ch-h: 400px;
+  --ch-ease: ease-in-out;
+  background: #fff;
+  color: #000;
+  padding-top: calc(var(--header-h) + 1rem);          /* lg:mt-4 below the fixed header */
+}
+.ch__row { display: flex; flex-direction: column; }
+
+/* ---------- intro ---------- */
+.ch__intro { order: 1; padding: 1.5rem 1rem 1rem; }
+.ch__title {
+  margin: 1rem 0;
+  font-family: var(--ff-body);
+  font-size: 1rem;                                    /* text-md */
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ch__desc {
+  font-family: var(--ff-heading);                     /* their font-body is a serif */
+  font-size: 1rem;
+  line-height: 1.375;
+  color: rgb(0 0 0 / 0.5);
+  white-space: pre-line;
+}
+
+/* ---------- media strip ---------- */
+.ch__media { order: 2; position: relative; width: 100%; overflow: hidden; }
+.ch__viewport { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; scroll-behavior: smooth; }
+.ch__viewport::-webkit-scrollbar { display: none; }
+.ch__track { display: flex; gap: var(--ch-gap); margin-left: 0; }
+
+.ch__item {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: var(--ch-w);
+  max-width: var(--ch-w);
+  transition: width 0.5s var(--ch-ease), min-width 0.5s var(--ch-ease), max-width 0.5s var(--ch-ease);
+}
+.ch__item.is-wide { width: var(--ch-w-active); max-width: var(--ch-w-active); }
+
+.ch__link { position: relative; display: flex; flex-grow: 1; width: 100%; height: 100%; cursor: pointer; color: #fff; }
+.ch__item.is-active .ch__link { cursor: default; }
+.ch__frame {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  height: var(--ch-h);
+  max-height: var(--ch-h);
+  overflow: hidden;
+  transform-origin: center;
+}
+.ch__img { position: relative; width: 100%; height: 100%; object-fit: cover; }
+.ch__tint { position: absolute; inset: 0; background: #000; opacity: 0.2; transition: opacity 0.5s var(--ch-ease); }
+.ch__item.is-wide .ch__tint { opacity: 0; }
+
+.ch__label {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s var(--ch-ease);
+  pointer-events: none;
+}
+.ch__item.is-wide .ch__label { opacity: 0; }
+.ch__label span {
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  font-family: var(--ff-body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.ch__next {
+  position: absolute;
+  right: 0;
+  top: 80%;
+  z-index: 40;
+  translate: 0 -50%;
+  padding: 2rem;
+  background: transparent;
+  color: #000;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+.ch__next:hover { color: rgb(0 0 0 / 0.7); }
+.ch__next:disabled { opacity: 0; pointer-events: none; }
+.ch__next-dot { display: flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; border-radius: 999px; background: #fff; pointer-events: none; }
+.ch__next-dot svg { width: 1.25rem; height: 1.25rem; }
+
+/* ---------- phones (< md): 60% / 20%, 6px gap, vertical labels ---------- */
+@media (max-width: 767px) {
+  .ch { --ch-gap: 6px; --ch-w-active: 60%; --ch-w: 20%; --ch-h: 300px; padding-top: var(--header-h-mb); }
+  .ch__label span { rotate: 90deg; }
+  .ch__next { display: none; }
+}
+@media (min-width: 768px) {
+  .ch__desc { max-width: 475px; }
+}
+/* ---------- lg: side by side ---------- */
+@media (min-width: 1024px) {
+  .ch__row { flex-direction: row; align-items: flex-start; }
+  .ch__intro { width: 47.5%; padding: 5rem; }
+  .ch__title { margin-top: 0; font-size: 1.875rem; }          /* lg:text-xl */
+  .ch__desc { margin-bottom: 5rem; }
+  .ch__media { width: 52.5%; }
+}
+@media (min-width: 1536px) { .ch { --ch-h: 600px; } }          /* 2xl */
+@media (min-width: 2200px) { .ch { --ch-h: 800px; } }          /* 4xl */
+
+@media (prefers-reduced-motion: reduce) {
+  .ch__item, .ch__tint, .ch__label { transition: none; }
+}

@@ -1,0 +1,90 @@
+/* =====================================================================
+   Footer (after Wonder theme "Velour"): section gap 48px top / 36px bottom,
+   4 equal columns, uppercase tracked titles, aside row, full-width wordmark.
+   ===================================================================== */
+.ft {
+  --ft-px: 57px;
+  --ft-fg: #000;
+  --ft-muted: rgb(0 0 0 / 0.8);
+  position: relative;
+  background: #fff;
+  color: var(--ft-fg);
+  padding: 48px var(--ft-px) 36px;
+  font-family: var(--ff-body);
+}
+
+/* reveal: the footer is pinned at the bottom of the viewport underneath the whole page;
+   <main> sits above it (opaque) and slides off it as the page ends */
+.ft--reveal { z-index: 0; }
+/* the section wrapper (here and on Shopify) is exactly the footer height, so it is the wrapper that sticks */
+.shopify-section:has(> .ft--reveal) { position: sticky; bottom: 0; z-index: 0; }
+body:has(.ft--reveal) > main { position: relative; z-index: 1; background: var(--color-bg); box-shadow: 0 1px 0 var(--color-bg); }
+
+/* ---------- columns ---------- */
+.ft__body { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 32px; }
+.ft__collapse > summary { list-style: none; }
+.ft__collapse > summary::-webkit-details-marker { display: none; }
+.ft__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 30px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: default;
+}
+.ft__plus { display: none; width: 14px; height: 14px; fill: currentColor; }
+.ft__plus-x { transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1); transform-origin: 36px 36px; }
+.ft__collapse.is-open .ft__plus-x { transform: scaleY(0); }
+
+.ft__list { display: grid; gap: 9px; overflow: hidden; }
+.ft__link { font-size: 14px; line-height: 1.4; color: var(--ft-fg); }
+.ft__link span {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.35s ease;
+}
+.ft__link:hover span { background-size: 100% 1px; }
+
+.ft__text { font-size: 14px; line-height: 1.5; color: var(--ft-fg); }
+.ft__text a { text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---------- aside ---------- */
+.ft__aside {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 64px;
+}
+.ft__aside-left { display: flex; align-items: center; gap: 40px; }
+.ft__lang { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: inherit; }
+.ft__lang svg { width: 12px; height: 12px; }
+.ft__social { display: flex; align-items: center; gap: 18px; }
+.ft__social-link { display: grid; place-items: center; width: 26px; height: 26px; color: inherit; transition: opacity 0.2s ease; }
+.ft__social-link:hover { opacity: 0.6; }
+.ft__social-link svg { width: 24px; height: 24px; fill: currentColor; }
+.ft__social-link svg rect[fill="none"], .ft__social-link svg circle[fill="none"] { fill: none; }
+.ft__pay { display: flex; gap: 8px; }
+.ft__pay svg { display: block; width: 54px; height: 34px; filter: grayscale(1); }   /* monochrome, like theirs */
+
+/* ---------- wordmark ---------- */
+.ft__wordmark { margin-top: 24px; line-height: 0; }
+.ft__wordmark-svg { width: 100%; height: auto; aspect-ratio: 1000 / 155; overflow: visible; }
+.ft__wordmark-svg text { font-family: var(--ff-heading); font-size: 196px; fill: var(--ft-fg); }
+
+/* ---------- phones: accordions ---------- */
+@media (max-width: 989px) {
+  .ft { --ft-px: 20px; padding-top: 36px; }
+  .ft__body { grid-template-columns: 1fr; row-gap: 0; }
+  .ft__block { border-bottom: 1px solid rgb(0 0 0 / 0.1); }
+  .ft__block--text { border-bottom: 0; padding-top: 24px; }
+  .ft__title { margin: 0; padding: 18px 0; cursor: pointer; font-size: 15px; }
+  .ft__title--static { padding: 0 0 12px; cursor: default; }
+  .ft__plus { display: block; }
+  .ft__list { padding-bottom: 18px; }
+  .ft__aside { flex-direction: column; align-items: flex-start; margin-top: 36px; }
+  .ft__pay { flex-wrap: wrap; }
+}

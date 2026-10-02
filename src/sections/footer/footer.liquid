@@ -1,0 +1,102 @@
+{%- comment -%}
+  Footer (after Wonder theme "Velour" demo): 4 columns (3 menus + about text),
+  aside row (language, social, payment icons), giant full-width wordmark.
+  Menus collapse into accordions on phones. Optional reveal: the footer sits
+  under the page and is uncovered as you reach the end.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+-%}
+<footer class="ft{% if s.reveal %} ft--reveal{% endif %}" data-section="footer">
+  <div class="ft__body">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'menu' -%}
+        {%- assign links = block.settings.links | newline_to_br | split: '<br />' -%}
+        <div class="ft__block">
+          <details class="ft__collapse" open data-ft-collapse>
+            <summary class="ft__title">
+              <span>{{ block.settings.title }}</span>
+              <svg class="ft__plus" viewBox="0 0 72 72" aria-hidden="true"><rect class="ft__plus-y" width="54" height="4" rx="2" y="34" x="9"/><rect class="ft__plus-x" width="4" height="54" rx="2" y="9" x="34"/></svg>
+            </summary>
+            <ul class="ft__list" role="list">
+              {%- for raw in links -%}
+                {%- assign pair = raw | strip | split: '|' -%}
+                {%- if pair.size > 1 -%}
+                  <li><a class="ft__link" href="{{ pair[1] | strip }}"><span>{{ pair[0] | strip }}</span></a></li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </details>
+        </div>
+      {%- else -%}
+        <div class="ft__block ft__block--text">
+          <p class="ft__title ft__title--static">{{ block.settings.title }}</p>
+          <div class="ft__text">{{ block.settings.text }}</div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="ft__aside">
+    <div class="ft__aside-left">
+      <button class="ft__lang" type="button" aria-label="Language">
+        {{ s.language }}
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 6 8.5l4-4" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+      </button>
+      <ul class="ft__social" role="list">
+        {%- for link in settings.social -%}
+          <li>
+            <a class="ft__social-link" href="{{ link.url }}" target="_blank" rel="noopener" aria-label="{{ link.name }} - opens in new tab">
+              {%- case link.name -%}
+                {%- when 'Instagram' -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1"/></svg>
+                {%- when 'TikTok' -%}
+                  <svg viewBox="0 0 512 512" aria-hidden="true"><path d="m480.32 128.39c-29.22 0-56.18-9.68-77.83-26.01-24.83-18.72-42.67-46.18-48.97-77.83-1.56-7.82-2.4-15.89-2.48-24.16h-83.47v228.08l-.1 124.93c0 33.4-21.75 61.72-51.9 71.68-8.75 2.89-18.2 4.26-28.04 3.72-12.56-.69-24.33-4.48-34.56-10.6-21.77-13.02-36.53-36.64-36.93-63.66-.63-42.23 33.51-76.66 75.71-76.66 8.33 0 16.33 1.36 23.820 3.83v-62.34-22.41c-7.9-1.17-15.94-1.78-24.07-1.78-46.19 0-89.39 19.2-120.27 53.79-23.34 26.14-37.34 59.49-39.5 94.46-2.83 45.94 13.98 89.61 46.58 121.83 4.79 4.73 9.82 9.12 15.08 13.17 27.95 21.51 62.12 33.17 98.11 33.17 8.13 0 16.17-.6 24.07-1.77 33.62-4.98 64.64-20.37 89.12-44.57 30.08-29.73 46.7-69.2 46.88-111.21l-.43-186.56c14.35 11.07 30.04 20.23 46.88 27.34 26.19 11.05 53.96 16.65 82.54 16.64v-60.61-22.49c.02.02-.22.02-.24.02z"/></svg>
+                {%- when 'YouTube' -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12 31 31 0 0 0 2 15.8a3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-3.8 31 31 0 0 0-.4-3.8ZM10 15.1V8.9l5.2 3.1L10 15.1Z"/></svg>
+                {%- else -%}
+                  <span>{{ link.name | slice: 0 }}</span>
+              {%- endcase -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <ul class="ft__pay" role="list" aria-label="Payment methods">
+      <li><svg viewBox="0 0 38 24" role="img" aria-label="Visa"><rect width="38" height="24" rx="3" fill="#142FBD"/><path fill="#fff" d="M18.5 16.1l.4-1.9c.8.4 1.6.6 2.4.5.6 0 1-.4.6-.9-.6-.6-2.4-1-2.4-2.6 0-1.3 1.3-2.4 3-2.4.8 0 1.6.2 2.2.4l-.4 1.8c-1-.5-2.6-.6-2.6.1 0 .8 2.9 1 2.9 3 0 1.5-1.4 2.6-3.4 2.6-1 0-2-.2-2.7-.6zM14.8 16.4l1.7-8.4h2.1l-1.7 8.4zM5 8.2c0-.1.2-.2.3-.2h3.6c.5 0 .9.3 1 .8l1 4.9 2.4-5.7h2.3L12 16.3h-2.3L8 9.6c-.8-.6-2-1-3-1.2zM29.6 10.2c-.4 1.1-.8 2.1-1.2 3.2h1.9c-.2-1.1-.4-2.1-.7-3.2zm3 6.2h-2l-.3-1.3h-2.6l-.5 1.3h-2.2l3.1-7.5c.2-.5.5-.9 1.1-.9h1.7z"/></svg></li>
+      <li><svg viewBox="0 0 38 24" role="img" aria-label="Mastercard"><rect width="38" height="24" rx="3" fill="#232323"/><circle cx="14.6" cy="11.6" r="7.6" fill="#EB001B"/><circle cx="23.4" cy="11.6" r="7.6" fill="#F79E1B"/><path d="M22.3 11.6c0-2.6-1.3-4.9-3.3-6.2-2 1.4-3.3 3.7-3.3 6.2s1.3 4.9 3.3 6.2c2-1.3 3.3-3.6 3.3-6.2z" fill="#FF5F00"/></svg></li>
+      <li><svg viewBox="0 0 38 24" role="img" aria-label="American Express"><rect width="38" height="24" rx="3" fill="#0071CE"/><text x="19" y="11" fill="#fff" font-family="Arial" font-weight="700" font-size="7" text-anchor="middle">AM</text><text x="19" y="18.5" fill="#fff" font-family="Arial" font-weight="700" font-size="7" text-anchor="middle">EX</text></svg></li>
+      <li><svg viewBox="0 0 38 24" role="img" aria-label="PayPal"><rect width="38" height="24" rx="3" fill="#fff" stroke="#000" stroke-opacity=".07"/><path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"/><path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4l.4-2.5c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z"/></svg></li>
+      <li><svg viewBox="0 0 38 24" role="img" aria-label="Apple Pay"><rect width="38" height="24" rx="3" fill="#000"/><text x="19" y="15.5" fill="#fff" font-family="Arial" font-weight="700" font-size="8" text-anchor="middle">Pay</text></svg></li>
+    </ul>
+  </div>
+
+  <div class="ft__wordmark" aria-label="{{ s.wordmark }}">
+    <svg class="ft__wordmark-svg" viewBox="0 0 1000 155" preserveAspectRatio="none" aria-hidden="true">
+      <text x="0" y="148" textLength="1000" lengthAdjust="spacingAndGlyphs">{{ s.wordmark }}</text>
+    </svg>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "div",
+  "class": "section-footer",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Big wordmark", "default": "ROMAI" },
+    { "type": "text", "id": "language", "label": "Language label", "default": "EN" },
+    { "type": "checkbox", "id": "reveal", "label": "Reveal footer from under the page", "default": true }
+  ],
+  "blocks": [
+    { "type": "menu", "name": "Menu", "limit": 3, "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "links", "label": "Links (one per line: Label|/url). On Shopify use a link_list." }
+    ] },
+    { "type": "text", "name": "Text", "limit": 1, "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "richtext", "id": "text", "label": "Text" }
+    ] }
+  ]
+}
+{% endschema %}

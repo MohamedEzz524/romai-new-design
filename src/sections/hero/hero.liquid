@@ -1,0 +1,140 @@
+{%- liquid
+  assign s = section.settings
+  assign total = section.blocks.size
+-%}
+<section class="hero scheme-dark" data-section="hero" aria-label="{{ s.heading | strip_html | escape }}">
+
+  {%- comment -%} WebGL layer: depth-map parallax background + pentagon prism {%- endcomment -%}
+  <canvas class="hero__canvas" aria-hidden="true"></canvas>
+
+  {%- comment -%} Static poster shown until WebGL is ready (and as the no-JS / reduced-capability fallback) {%- endcomment -%}
+  <picture class="hero__poster" aria-hidden="true">
+    <source media="(max-aspect-ratio: 9/10)" srcset="{{ s.bg_mobile }}">
+    <img src="{{ s.bg_desktop }}" alt="" fetchpriority="high" decoding="async">
+  </picture>
+
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  {%- comment -%} Corner brackets framing the prism + image counter {%- endcomment -%}
+  <div class="hero__frame" aria-hidden="true">
+    <i></i><i></i><i></i><i></i>
+    <span class="hero__counter">
+      <b data-hero-counter>01</b>
+      <span class="hero__counter-sep">/</span>
+      <span>{% if total < 10 %}0{% endif %}{{ total }}</span>
+    </span>
+  </div>
+
+  {%- if s.show_content -%}
+  <div class="hero__content container">
+    <div class="hero__meta">
+      <span>{{ s.meta_left }}</span>
+      <span>{{ s.meta_right }}</span>
+    </div>
+
+    <div class="hero__bottom">
+      {%- if s.eyebrow != blank -%}
+        <p class="hero__eyebrow eyebrow">{{ s.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="hero__title">{{ s.heading }}</h1>
+      {%- if s.text != blank -%}
+        <p class="hero__text">{{ s.text }}</p>
+      {%- endif -%}
+      {%- if s.cta_label != blank or s.cta2_label != blank -%}
+        <div class="hero__actions">
+          {%- if s.cta_label != blank -%}
+            <a class="btn" href="{{ s.cta_url }}">{{ s.cta_label }}</a>
+          {%- endif -%}
+          {%- if s.cta2_label != blank -%}
+            <a class="btn btn--secondary" href="{{ s.cta2_url }}">{{ s.cta2_label }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>{{ s.scroll_label }}</span>
+      <i></i>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <script type="application/json" data-hero-config>
+  {
+    "images": [
+      {%- for block in section.blocks -%}
+        { "src": {{ block.settings.image | json }}, "alt": {{ block.settings.alt | json }} }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ],
+    "background": {
+      "desktop": { "image": "{{ s.bg_desktop }}", "depth": "{{ s.bg_desktop_depth }}" },
+      "mobile":  { "image": "{{ s.bg_mobile }}",  "depth": "{{ s.bg_mobile_depth }}" }
+    },
+    "imageStyle": "{{ s.image_style | default: 'pentagon' }}",
+    "spinSpeed": {{ s.spin_speed | default: 0.9 }},
+    "glassSize": {{ s.glass_size | default: 1.45 }},
+    "refraction": {{ s.refraction | default: 0 }},
+    "lift": 0.32,
+    "intervalMs": {{ s.interval_ms | default: 2600 }},
+    "parallaxStrength": {{ s.parallax_strength | default: 0.08 }},
+    "wipeBand": {{ s.wipe_band | default: 0.22 }},
+    "wipeStretch": {{ s.wipe_stretch | default: 0.9 }},
+    "tilt": {{ s.tilt | default: 0.35 }}
+  }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Hero — Pentagon",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    { "type": "header", "content": "Copy" },
+    { "type": "checkbox", "id": "show_content", "label": "Show copy and buttons", "default": true },
+    { "type": "text", "id": "meta_left", "label": "Top-left meta", "default": "Autumn / Winter 2026" },
+    { "type": "text", "id": "meta_right", "label": "Top-right meta", "default": "Residual Heat — Capsule 01" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "New season" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Built for the cold. Worn in the city." },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "cta_label", "label": "Primary button label", "default": "Shop new arrivals" },
+    { "type": "url", "id": "cta_url", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "Explore the lookbook" },
+    { "type": "url", "id": "cta2_url", "label": "Secondary button link" },
+    { "type": "text", "id": "scroll_label", "label": "Scroll label", "default": "Scroll" },
+
+    { "type": "header", "content": "Background (depth map parallax)" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Desktop image" },
+    { "type": "image_picker", "id": "bg_desktop_depth", "label": "Desktop depth map (white = near)" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Mobile image" },
+    { "type": "image_picker", "id": "bg_mobile_depth", "label": "Mobile depth map (white = near)" },
+
+    { "type": "header", "content": "Centre image" },
+    { "type": "select", "id": "image_style", "label": "Image style", "default": "pentagon", "options": [
+      { "value": "pentagon", "label": "Pentagon-masked photo" },
+      { "value": "cutout", "label": "Transparent cutout (product PNG)" }
+    ] },
+    { "type": "header", "content": "Motion" },
+    { "type": "range", "id": "spin_speed", "label": "Glass tumble speed", "min": 0, "max": 2, "step": 0.05, "default": 0.9 },
+    { "type": "range", "id": "glass_size", "label": "Glass size (relative to the image)", "min": 0.8, "max": 2.2, "step": 0.02, "default": 1.45 },
+    { "type": "range", "id": "refraction", "label": "Glass refraction strength", "min": 0, "max": 0.3, "step": 0.005, "default": 0 },
+    { "type": "range", "id": "interval_ms", "label": "Time between image changes (ms)", "min": 2000, "max": 10000, "step": 200, "default": 2600 },
+    { "type": "range", "id": "parallax_strength", "label": "Background parallax strength", "min": 0, "max": 0.16, "step": 0.005, "default": 0.08 },
+    { "type": "range", "id": "wipe_band", "label": "Liquid band width (fraction of image height)", "min": 0.05, "max": 0.6, "step": 0.01, "default": 0.22 },
+    { "type": "range", "id": "wipe_stretch", "label": "Liquid pull strength", "min": 0, "max": 2, "step": 0.05, "default": 0.9 },
+    { "type": "range", "id": "tilt", "label": "Mouse tilt", "min": 0, "max": 1, "step": 0.05, "default": 0.35 }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 8,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Hero — Pentagon" }]
+}
+{% endschema %}

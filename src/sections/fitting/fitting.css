@@ -1,0 +1,395 @@
+/* =====================================================================
+   Fitting: rebuild of ai-model.jp "customize" body
+   (fitting stack -> fit2Sub transition -> subdivide grid -> walk frames).
+   Values are theirs, 1:1. They size everything in `rem` with
+   html { font-size: 100vw/360 } (phones) and 100vw/1440 (>= 600px);
+   here that unit is --u, scoped to the section, so N rem == calc(N * var(--u)).
+   Pin: theirs is a GSAP pin of .customize__body for 2 x 100vh; here the body is
+   position:sticky inside .customize__pin with a 2 x innerHeight spacer after it.
+   ===================================================================== */
+.fitting-section {
+  --u: calc(100vw / 360);
+  --fit-bg: #f2f3f5;
+  --fit-ink: #272727;
+  --fit-ff-name: 'Inter', 'Helvetica Neue', Arial, sans-serif;   /* theirs: "SK Goldilocks" */
+  --fit-ff-card: var(--ff-display, 'Inter', sans-serif);         /* theirs: "Moniqa" (condensed display); SeroThunder is the closest condensed face we ship */
+  position: relative;
+  background-color: var(--fit-bg);
+  color: var(--fit-ink);
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section { --u: calc(100vw / 1440); }
+}
+
+.fitting-section .customize { position: relative; }
+.fitting-section .customize__pin { position: relative; }
+.fitting-section .customize__body {
+  position: sticky;
+  top: 0;
+}
+.fitting-section .customize__pinSpace { height: 200vh; }  /* JS: 2 x innerHeight */
+
+.fitting-section .customize__fixed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fitting-section .customize__inner {
+  pointer-events: none;
+  position: relative;
+  width: calc(100% - 48 * var(--u));
+  height: calc(100vh - 128 * var(--u));
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .customize__inner {
+    width: calc(100% - 338 * var(--u));
+    height: calc(100vh - 128 * var(--u));
+  }
+}
+.fitting-section .customize__fitting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+.fitting-section .customize__transition {
+  pointer-events: none;
+  height: 100vh;
+  padding: calc(64 * var(--u)) calc(24 * var(--u));
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .customize__transition { padding: calc(64 * var(--u)) calc(169 * var(--u)); }
+}
+.fitting-section .customize__subdivide { padding: calc(8 * var(--u)) calc(24 * var(--u)) 0; }
+@media only screen and (min-width: 600px) {
+  .fitting-section .customize__subdivide { padding: calc(32 * var(--u)) calc(169 * var(--u)); }
+}
+
+/* ---------- fitting stack ---------- */
+.fitting-section .fitting { position: relative; width: 100%; height: 100%; }
+.fitting-section .fitting__list {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.fitting-section .fitting__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.fitting-section .fitting__item img,
+.fitting-section .fit2Sub__item img {
+  display: inline;
+  max-width: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.fitting-section .fitting__item:nth-child(1) { z-index: 4; }
+.fitting-section .fitting__item:nth-child(2) { z-index: 3; }
+.fitting-section .fitting__item:nth-child(3) { z-index: 2; }
+.fitting-section .fitting__item:nth-child(4) { z-index: 1; }
+.fitting-section .fitting__param {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: calc(256 * var(--u));
+  transform: translateY(100%);
+  transition: opacity 0.1s linear;
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .fitting__param { width: calc(358 * var(--u)); }
+}
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  .fitting-section .fitting__param { width: 60%; }
+}
+.fitting-section .fitting__line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(1 * var(--u));
+  background-color: #fff;
+}
+.fitting-section .fitting__name {
+  position: absolute;
+  top: calc(13 * var(--u));
+  left: 0;
+  width: 100%;
+  font-family: var(--fit-ff-name);
+  font-style: normal;
+  font-weight: normal;
+  font-size: calc(22 * var(--u));
+  line-height: 90%;
+  letter-spacing: -0.01em;
+  font-feature-settings: "salt" on;
+  color: #fff;
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .fitting__name { font-size: calc(42 * var(--u)); }
+}
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  .fitting-section .fitting__name { font-size: calc(62 * var(--u)); }
+}
+.fitting-section .fitting__progress {
+  position: absolute;
+  top: min(13 * var(--u), 13px);
+  right: 0;
+  transform: rotateZ(-90deg) translate(0, calc(-11 * var(--u)));
+  transform-origin: 100% 0%;
+  font-family: Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: min(13 * var(--u), 13px);
+  line-height: 1;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  color: #fff;
+}
+.fitting-section .fitting__param.off { opacity: 0; }
+
+/* ---------- fit2Sub (transition image) ---------- */
+.fitting-section .fit2Sub { position: relative; width: 100%; height: 100%; }
+.fitting-section .fit2Sub__item { width: 100%; height: 100%; overflow: hidden; }
+.fitting-section .fit2Sub__item img { transform-origin: 50% -20%; }
+
+/* ---------- subdivide grid ---------- */
+.fitting-section .subdivide { position: relative; width: 100%; height: 100%; }
+.fitting-section .subdivide__walk { position: absolute; top: 0; left: 0; width: 100%; }
+.fitting-section .subdivide__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc(24 * var(--u));
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .subdivide__row { margin-bottom: calc(72 * var(--u)); }
+}
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  .fitting-section .subdivide__row { margin-bottom: calc(24 * var(--u)); }
+}
+.fitting-section .subdivide__item,
+.fitting-section .walk__left,
+.fitting-section .walk__center,
+.fitting-section .walk__right {
+  position: relative;
+  flex: 0 1 auto;
+  overflow: hidden;
+  border: 3px solid var(--fit-bg);
+  width: calc(101 * var(--u));
+  height: calc(234 * var(--u));
+}
+.fitting-section .walk__left,
+.fitting-section .walk__center,
+.fitting-section .walk__right { border-color: #fff; }
+@media only screen and (min-width: 600px) {
+  .fitting-section .subdivide__item,
+  .fitting-section .walk__left,
+  .fitting-section .walk__center,
+  .fitting-section .walk__right {
+    width: calc(328 * var(--u));
+    height: calc(218.454985 * var(--u));
+  }
+}
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  .fitting-section .subdivide__item,
+  .fitting-section .walk__left,
+  .fitting-section .walk__center,
+  .fitting-section .walk__right {
+    width: calc(328 * var(--u));
+    height: calc(759.9207920792 * var(--u));
+  }
+}
+
+.fitting-section .subdivideCard { position: relative; width: 100%; height: 100%; }
+.fitting-section .subdivideCard picture { display: contents; }
+.fitting-section .subdivideCard__img {
+  display: inline;
+  max-width: none;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+.fitting-section .subdivideCard__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: var(--fit-ff-card);
+  font-size: calc(32 * var(--u));
+  font-weight: normal;
+  line-height: 90%;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #fff;
+  padding-bottom: calc(9 * var(--u));
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .subdivideCard__text { align-items: center; font-size: calc(32 * var(--u)); padding-bottom: 0; }
+}
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  .fitting-section .subdivideCard__text { font-size: calc(64 * var(--u)); }
+}
+.fitting-section .subdivideCard__params {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  margin-bottom: calc(44 * var(--u));
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .subdivideCard__params {
+    width: auto;
+    text-align: left;
+    margin-right: calc(16 * var(--u));
+    margin-bottom: calc(12 * var(--u));
+  }
+}
+.fitting-section .subdivideCard__bar {
+  display: inline-block;
+  width: calc(79 * var(--u));
+  height: auto;
+  fill: #f2f3f5;
+}
+@media only screen and (min-width: 600px) {
+  .fitting-section .subdivideCard__bar { width: calc(139 * var(--u)); }
+}
+.fitting-section .subdivideCard__overlay {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #272727;
+  transform: scaleX(0);
+}
+.fitting-section .subdivideCard--origin .subdivideCard__text { color: #fff; }
+.fitting-section .subdivideCard__rectClip {
+  transform: translate(-100%, 0%);
+  transition: transform 0.4s 0.3s linear;
+}
+.fitting-section .subdivide__row .subdivideCard .subdivideCard__img { animation: fitting-card-img-off 0.4s forwards; }
+.fitting-section .subdivide__row .subdivideCard .subdivideCard__text { animation: fitting-card-text-off 0.4s forwards; }
+.fitting-section .subdivide__row.on .subdivideCard .subdivideCard__img { animation: fitting-card-img-on 0.1s 0.4s forwards; }
+.fitting-section .subdivide__row.on .subdivideCard .subdivideCard__overlay {
+  transform-origin: 0% 50%;
+  animation: fitting-card-overlay-on 0.56s cubic-bezier(1, 0, 0, 1) forwards;
+}
+.fitting-section .subdivide__row.on .subdivideCard .subdivideCard__text {
+  animation: fitting-card-img-on 0.1s 0.4s;
+  animation-iteration-count: 3;
+}
+.fitting-section .subdivide__row.on .subdivideCard .subdivideCard__rectClip { transform: translate(0%, 0%); }
+
+@keyframes fitting-card-img-on { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes fitting-card-img-off { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes fitting-card-overlay-on {
+  0%    { transform-origin: 0% 50%;   transform: scaleX(0); }
+  50%   { transform-origin: 0% 50%;   transform: scaleX(1); }
+  50.1% { transform-origin: 100% 50%; transform: scaleX(1); }
+  100%  { transform-origin: 100% 50%; transform: scaleX(0); }
+}
+@keyframes fitting-card-text-off { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- walk (the three white frames that step down the rows) ---------- */
+.fitting-section .walk { display: flex; justify-content: space-between; }
+.fitting-section .walk__card { position: relative; width: 100%; height: 100%; }
+.fitting-section .walk__img picture { display: contents; }
+.fitting-section .walk__img img { display: inline; max-width: none; width: 100%; height: 100%; }
+.fitting-section .walk__left .walk__img,
+.fitting-section .walk__right .walk__img { opacity: 0; transform: translateY(-100%) scale(1.2); }
+.fitting-section .walk__center .walk__img { opacity: 0; }
+.fitting-section .walk .walk__center .walk__img { animation: fitting-walk-img-leaveBack 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
+.fitting-section .walk.on0 .walk__center .walk__img { animation: fitting-walk-img-show 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
+.fitting-section .walk.on1 { animation: fitting-walk-move1-sp 0.3s ease-in forwards; }
+.fitting-section .walk.on1 .walk__left .walk__img,
+.fitting-section .walk.on1 .walk__center .walk__img,
+.fitting-section .walk.on1 .walk__right .walk__img { animation: fitting-walk-img-show 0s forwards; }
+.fitting-section .walk.on1 .walk__left img,
+.fitting-section .walk.on1 .walk__center img,
+.fitting-section .walk.on1 .walk__right img { animation: fitting-walk-img-alpha1 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
+.fitting-section .walk.on2 { animation: fitting-walk-move2-sp 0.3s ease-in forwards; }
+.fitting-section .walk.on2 .walk__left img,
+.fitting-section .walk.on2 .walk__center img,
+.fitting-section .walk.on2 .walk__right img { animation: fitting-walk-img-alpha2 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
+@media only screen and (min-width: 600px) {
+  .fitting-section .walk.on1 { animation: fitting-walk-move1-pc 0.3s ease-in forwards; }
+  .fitting-section .walk.on2 { animation: fitting-walk-move2-pc 0.3s ease-in forwards; }
+}
+@media only screen and (min-width: 600px) and (orientation: portrait) {
+  .fitting-section .walk.on1 { animation: fitting-walk-move1-sp 0.3s ease-in forwards; }
+  .fitting-section .walk.on2 { animation: fitting-walk-move2-sp 0.3s ease-in forwards; }
+}
+
+@keyframes fitting-walk-img-show {
+  0%   { opacity: 0; transform: translateY(-100%) scale(1.2); }
+  100% { opacity: 1; transform: translateY(0%) scale(1); }
+}
+@keyframes fitting-walk-move1-pc {
+  from { transform: translateY(0%) translateY(0); }
+  to   { transform: translateY(100%) translateY(calc(72 * var(--u))); }
+}
+@keyframes fitting-walk-move2-pc {
+  from { transform: translateY(100%) translateY(calc(72 * var(--u))); }
+  to   { transform: translateY(200%) translateY(calc(144 * var(--u))); }
+}
+@keyframes fitting-walk-move1-sp {
+  from { transform: translateY(0%) translateY(0); }
+  to   { transform: translateY(100%) translateY(calc(24 * var(--u))); }
+}
+@keyframes fitting-walk-move2-sp {
+  from { transform: translateY(100%) translateY(calc(24 * var(--u))); }
+  to   { transform: translateY(200%) translateY(calc(48 * var(--u))); }
+}
+@keyframes fitting-walk-img-alpha1 { 0% { opacity: 0; } 50% { opacity: 0.1; } 100% { opacity: 0; } }
+@keyframes fitting-walk-img-alpha2 { 0% { opacity: 0; } 50% { opacity: 0.1; } 100% { opacity: 0; } }
+@keyframes fitting-walk-img-leaveBack { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+/* ---------- no JS / reduced motion: a static layout ----------
+   No pin; the fitting stack is dropped so the transition image shows in its box;
+   every card shows its photo, label and bar; the walk frames are hidden. */
+.no-js .fitting-section .customize__body,
+.fitting-section.is-static .customize__body { position: relative; }
+.no-js .fitting-section .customize__pinSpace,
+.fitting-section.is-static .customize__pinSpace { display: none; }
+.no-js .fitting-section .customize__fixed,
+.fitting-section.is-static .customize__fixed { display: none; }
+.no-js .fitting-section .customize__transition,
+.fitting-section.is-static .customize__transition { height: auto; }
+.no-js .fitting-section .fit2Sub__item,
+.fitting-section.is-static .fit2Sub__item { aspect-ratio: 1033 / 688; height: auto; }
+.no-js .fitting-section .subdivide__walk,
+.fitting-section.is-static .subdivide__walk { display: none; }
+.no-js .fitting-section .subdivideCard__img,
+.no-js .fitting-section .subdivideCard__text,
+.fitting-section.is-static .subdivideCard__img,
+.fitting-section.is-static .subdivideCard__text { animation: none !important; opacity: 1; }
+.no-js .fitting-section .subdivideCard__overlay,
+.fitting-section.is-static .subdivideCard__overlay { animation: none !important; transform: scaleX(0); }
+.no-js .fitting-section .subdivideCard__rectClip,
+.fitting-section.is-static .subdivideCard__rectClip { transform: none; transition: none; }

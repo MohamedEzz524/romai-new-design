@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "wordmark": "ROMAI",
+    "language": "EN",
+    "reveal": true
+  },
+  "blocks": [
+    { "type": "menu", "settings": { "title": "Products", "links": "New Arrivals|/collection.html?c=new-arrivals\nJackets|/collection.html?c=jackets\nOuterwear|/collection.html?c=outerwear\nBombers|/collection.html?c=bombers\nSweaters|/collection.html?c=sweater\nAccessories|/collection.html?c=accessories" } },
+    { "type": "menu", "settings": { "title": "Service", "links": "FAQ|/faq.html\nContact|/contact.html\nShipping & Returns|/shipping.html\nSizing Chart|/sizing.html\nFind a Store|/find-a-store.html" } },
+    { "type": "menu", "settings": { "title": "Information", "links": "About Us|/about.html\nLookbook|/lookbook.html\nPrivacy Policy|/privacy.html\nLegal Area|/legal.html" } },
+    { "type": "text", "settings": { "title": "About us", "text": "Romai builds outerwear for the cold and the city: thermal fills, glossy shells and heavyweight knits, made to outlast the season. Read our <a href=\"/about.html\">story</a> to see how every piece comes together." } }
+  ]
+}

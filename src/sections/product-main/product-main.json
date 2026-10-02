@@ -1,0 +1,158 @@
+{
+  "settings": {
+    "handle": "freya-pant",
+    "title": "FREYA LEATHER PANT",
+    "product_type": "Pants",
+    "price": 850,
+    "currency": "EUR",
+    "option_name": "Taille",
+    "selected_variant": 1,
+    "description": "<p>These flared leather-look pants redefine urban elegance, combining the timeless appeal of denim with the unmatched suppleness of premium leather. Ultra-light and exceptionally comfortable, they offer effortless movement and a perfect fit.</p><p>Designed for both style and function, they feature discreet pockets and a sleek metallic logo for a refined finish. Their deep blue hue adds a versatile, modern edge, making them an essential for any wardrobe.</p><ul><li>stretchable</li><li>leather</li><li>made in France</li></ul><p>The model is 172 and wears a size S.</p>",
+    "materials": "75 % leather 25 % polyester",
+    "shipping": "Fast, tracked and secure shipping.",
+    "label_img": "Img",
+    "label_details": "Details",
+    "label_materials": "Materials",
+    "label_shipping": "Shipping",
+    "label_close": "Close",
+    "label_add": "Add to cart",
+    "label_add_short": "Add",
+    "label_oos": "Out of stock",
+    "label_added": "Size {size} added",
+    "related_label": "Products",
+    "related_index": 6,
+    "related_total": 14,
+    "color_name": "Couleur"
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/product/freya-pant-1.jpg",
+        "thumb": "/assets/product/freya-pant-1-thumb.jpg",
+        "alt": "FREYA LEATHER PANT",
+        "width": 2000,
+        "height": 3000
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/product/freya-pant-2.jpg",
+        "thumb": "/assets/product/freya-pant-2-thumb.jpg",
+        "alt": "FREYA LEATHER PANT",
+        "width": 2000,
+        "height": 3000
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/product/freya-pant-3.jpg",
+        "thumb": "/assets/product/freya-pant-3-thumb.jpg",
+        "alt": "FREYA LEATHER PANT",
+        "width": 2000,
+        "height": 3000
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/product/freya-pant-4.jpg",
+        "thumb": "/assets/product/freya-pant-4-thumb.jpg",
+        "alt": "FREYA LEATHER PANT",
+        "width": 2000,
+        "height": 3000
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/product/freya-pant-5.jpg",
+        "thumb": "/assets/product/freya-pant-5-thumb.jpg",
+        "alt": "FREYA LEATHER PANT",
+        "width": 2000,
+        "height": 3000
+      }
+    },
+    {
+      "type": "color",
+      "settings": {
+        "name": "Denim blue",
+        "hex": "#6F8FC4",
+        "available": true
+      }
+    },
+    {
+      "type": "color",
+      "settings": {
+        "name": "Black",
+        "hex": "#141414",
+        "available": true
+      }
+    },
+    {
+      "type": "color",
+      "settings": {
+        "name": "Sable",
+        "hex": "#C8B59A",
+        "available": false
+      }
+    },
+    {
+      "type": "variant",
+      "settings": {
+        "value": "S",
+        "available": false
+      }
+    },
+    {
+      "type": "variant",
+      "settings": {
+        "value": "M",
+        "available": true
+      }
+    },
+    {
+      "type": "variant",
+      "settings": {
+        "value": "L",
+        "available": true
+      }
+    },
+    {
+      "type": "variant",
+      "settings": {
+        "value": "XL",
+        "available": true
+      }
+    },
+    {
+      "type": "sibling",
+      "settings": {
+        "title": "FREYA PUFFER LEATHER JACKET",
+        "url": "/product.html?p=freya-puffer-jacket",
+        "thumb": "/assets/product/freya-puffer-jacket-thumb.jpg",
+        "current": false
+      }
+    },
+    {
+      "type": "sibling",
+      "settings": {
+        "title": "FREYA LEATHER PANT",
+        "url": "/product.html",
+        "thumb": "/assets/product/freya-pant-1-thumb.jpg",
+        "current": true
+      }
+    },
+    {
+      "type": "sibling",
+      "settings": {
+        "title": "NIKITA BODY sable",
+        "url": "/product.html?p=nikita-body",
+        "thumb": "/assets/product/nikita-body-sable-thumb.jpg",
+        "current": false
+      }
+    }
+  ]
+}

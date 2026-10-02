@@ -1,0 +1,23 @@
+[
+  { "handle": "new-arrivals",  "title": "New Arrivals",  "image": "/branding/collections/new-arrivals.png",  "products_count": 24, "description": "The latest drops, straight from the studio." },
+  { "handle": "best-sellers",  "title": "Best Sellers",  "image": "/branding/collections/best-sellers.png",  "products_count": 18, "description": "The pieces everyone keeps coming back to." },
+  { "handle": "men",           "title": "Men",           "image": "/branding/collections/men.png",           "products_count": 64, "description": "Outerwear and layers built for the cold." },
+  { "handle": "women",         "title": "Women",         "image": "/branding/collections/women.png",         "products_count": 58, "description": "Statement silhouettes with serious warmth." },
+  { "handle": "jackets",       "title": "Jackets",       "image": "/branding/collections/jackets.png",       "products_count": 32, "description": "Puffers, parkas and shells." },
+  { "handle": "outerwear",     "title": "Outerwear",     "image": "/branding/collections/outerwear.png",     "products_count": 40, "description": "Your first layer against the city." },
+  { "handle": "bombers",       "title": "Bombers",       "image": "/branding/collections/bombers.png",       "products_count": 12, "description": "Flight-inspired cuts, reworked." },
+  { "handle": "tops",          "title": "Tops",          "image": "/branding/collections/tops.png",          "products_count": 28, "description": "Heavyweight tees and knits." },
+  { "handle": "tees",          "title": "Tees",          "image": "/branding/collections/tees.png",          "products_count": 20, "description": "Oversized, heavyweight, garment-dyed." },
+  { "handle": "sweater",       "title": "Sweaters",      "image": "/branding/collections/sweater.png",       "products_count": 14, "description": "Chunky knits for the deep freeze." },
+  { "handle": "bottoms",       "title": "Bottoms",       "image": "/branding/collections/bottoms.png",       "products_count": 22, "description": "Cargo, utility and relaxed fits." },
+  { "handle": "pants",         "title": "Pants",         "image": "/branding/collections/pants.png",         "products_count": 16, "description": "Technical pants with room to move." },
+  { "handle": "shorts",        "title": "Shorts",        "image": "/branding/collections/shorts.png",        "products_count": 8,  "description": "Off-season essentials." },
+  { "handle": "headwear",      "title": "Headwear",      "image": "/branding/collections/headwear.png",      "products_count": 10, "description": "Beanies, caps and balaclavas." },
+  { "handle": "sunglasses",    "title": "Sunglasses",    "image": "/branding/collections/sunglasses.png",    "products_count": 6,  "description": "Snow-glare ready." },
+  { "handle": "accessories",   "title": "Accessories",   "image": "/branding/collections/accessories.png",   "products_count": 26, "description": "Gloves, scarves, bags and more." },
+  { "handle": "residual-heat", "title": "Residual Heat", "image": "/branding/collections/residual-heat.png", "products_count": 9,  "description": "Capsule 01. Thermal layering, reimagined." },
+  { "handle": "echoes",        "title": "Echoes",        "image": "/branding/collections/echoes.png",        "products_count": 11, "description": "Capsule 02. Reflective details for the night." },
+  { "handle": "bear-smart",    "title": "Bear Smart",    "image": "/branding/collections/bear-smart.png",    "products_count": 7,  "description": "Capsule 03. Oversized, insulated, unbothered." },
+  { "handle": "urban-gear",    "title": "Urban Gear",    "image": "/branding/collections/urban gear.png",    "products_count": 15, "description": "Utility pieces for the daily commute." },
+  { "handle": "flash-deals",   "title": "Flash Deals",   "image": "/branding/collections/flash-deals.png",   "products_count": 13, "description": "Limited time. Limited stock." }
+]

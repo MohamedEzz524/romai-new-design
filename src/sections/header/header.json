@@ -1,0 +1,74 @@
+{
+  "settings": {
+    "solid_scheme": "light",
+    "transparent_on_top": true,
+    "search_title": "Search",
+    "search_placeholder": "Type to search...",
+    "search_pills": "Jackets, Outerwear, Bombers, Headwear, Sweaters, Accessories",
+    "cart_title": "Cart",
+    "cart_empty_title": "Your cart is empty",
+    "cart_login_prefix": "Have an account?",
+    "cart_login_label": "Log in",
+    "cart_login_suffix": "to check out faster.",
+    "cart_login_url": "/account.html",
+    "cart_empty_cta": "Continue shopping",
+    "cart_empty_url": "/collection.html?c=new-arrivals",
+    "cart_discount_label": "Discount",
+    "cart_discount_placeholder": "Discount code",
+    "cart_note": "Duties and taxes included. Shipping is calculated at checkout.",
+    "cart_cta": "Check out",
+    "currency_label": "USD",
+    "enable_cart_drawer": true
+  },
+  "blocks": [
+    {
+      "type": "mega",
+      "settings": {
+        "title": "Shop",
+        "side": "left",
+        "description": "Outerwear and layers built for the cold, cut for the city. Every piece engineered to outlast the season.",
+        "collections": "new-arrivals, best-sellers, jackets, outerwear, bombers, sweater, bottoms, headwear, accessories"
+      }
+    },
+    {
+      "type": "link",
+      "settings": {
+        "title": "New Arrivals",
+        "url": "/collection.html?c=new-arrivals",
+        "side": "left"
+      }
+    },
+    {
+      "type": "link",
+      "settings": {
+        "title": "Collections",
+        "url": "/collections.html",
+        "side": "left"
+      }
+    },
+    {
+      "type": "link",
+      "settings": {
+        "title": "Lookbook",
+        "url": "/lookbook.html",
+        "side": "left"
+      }
+    },
+    {
+      "type": "link",
+      "settings": {
+        "title": "About",
+        "url": "/about.html",
+        "side": "right"
+      }
+    },
+    {
+      "type": "link",
+      "settings": {
+        "title": "Find a store",
+        "url": "/find-a-store.html",
+        "side": "right"
+      }
+    }
+  ]
+}

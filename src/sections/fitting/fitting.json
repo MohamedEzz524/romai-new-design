@@ -1,0 +1,118 @@
+{
+  "settings": {
+    "label": "Customize",
+    "fit2sub_image": "/assets/fitting/fit2Sub.jpg",
+    "origin_card": 2,
+    "walk_image_pc": "/assets/fitting/subdivide_0_pc.jpg",
+    "walk_image_sp": "/assets/fitting/subdivide_0_sp.jpg"
+  },
+  "blocks": [
+    {
+      "type": "item",
+      "settings": {
+        "image": "/assets/fitting/fitting_0.jpg",
+        "name": "SHIRT"
+      }
+    },
+    {
+      "type": "item",
+      "settings": {
+        "image": "/assets/fitting/fitting_1.jpg",
+        "name": "TROUSERS"
+      }
+    },
+    {
+      "type": "item",
+      "settings": {
+        "image": "/assets/fitting/fitting_2.jpg",
+        "name": "JACKET"
+      }
+    },
+    {
+      "type": "item",
+      "settings": {
+        "image": "/assets/fitting/fitting_3.jpg",
+        "name": "MODEL"
+      }
+    },
+    {
+      "type": "item",
+      "settings": {
+        "image": "/assets/fitting/fitting_4.jpg",
+        "name": "OVERCOAT"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_1_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_1_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_0_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_0_sp.jpg",
+        "label": "ORIGIN"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_2_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_2_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_3_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_3_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_4_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_4_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_5_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_5_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_6_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_6_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_7_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_7_sp.jpg",
+        "label": "MODIFIED"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image_pc": "/assets/fitting/subdivide_8_pc.jpg",
+        "image_sp": "/assets/fitting/subdivide_8_sp.jpg",
+        "label": "MODIFIED"
+      }
+    }
+  ]
+}

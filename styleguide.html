@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ settings.shop_name }} — Style guide</title>
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="/src/js/main.js"></script>
+  <style>
+    .sg { padding-block: var(--sp-16); }
+    .sg h2.sg-title { margin-bottom: var(--sp-8); padding-bottom: var(--sp-3); border-bottom: 1px solid var(--color-line); }
+    .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--sp-3); }
+    .sg-swatch { border: 1px solid var(--color-line); border-radius: var(--r-md); overflow: hidden; }
+    .sg-swatch i { display: block; height: 72px; }
+    .sg-swatch span { display: block; padding: var(--sp-2) var(--sp-3); font-size: var(--fs-xs); font-family: var(--ff-mono); color: var(--color-fg-2); }
+    .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); }
+    .sg-type > * + * { margin-top: var(--sp-5); }
+    .sg-schemes { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .sg-scheme { padding: var(--sp-8); border-radius: var(--r-lg); }
+    .sg-cards { display: grid; gap: var(--grid-gap); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .sg-card .media { border-radius: var(--r-md); }
+    .sg-card .meta { padding-top: var(--sp-3); }
+    .sg-collections { display: grid; gap: var(--grid-gap); grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .sg-collections figure .media { border-radius: var(--r-md); }
+    .sg-collections figcaption { padding-top: var(--sp-2); font-size: var(--fs-sm); }
+  </style>
+</head>
+<body class="template-{{ template }}">
+<main class="container">
+
+  <section class="sg">
+    <p class="eyebrow">Style guide</p>
+    <h1 class="display">{{ settings.shop_name }}</h1>
+    <p class="lead" style="max-width: 48ch; margin-top: var(--sp-4)">{{ settings.tagline }} Design tokens, type, buttons and mock data used by every section.</p>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Colour</h2>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><i style="background:var(--black)"></i><span>--black</span></div>
+      <div class="sg-swatch"><i style="background:var(--black-2)"></i><span>--black-2</span></div>
+      <div class="sg-swatch"><i style="background:var(--black-3)"></i><span>--black-3</span></div>
+      <div class="sg-swatch"><i style="background:var(--black-4)"></i><span>--black-4</span></div>
+      <div class="sg-swatch"><i style="background:var(--white)"></i><span>--white</span></div>
+      <div class="sg-swatch"><i style="background:var(--cream)"></i><span>--cream</span></div>
+      <div class="sg-swatch"><i style="background:var(--sand)"></i><span>--sand</span></div>
+      <div class="sg-swatch"><i style="background:var(--amber)"></i><span>--amber</span></div>
+      <div class="sg-swatch"><i style="background:var(--amber-2)"></i><span>--amber-2</span></div>
+      <div class="sg-swatch"><i style="background:var(--amber-3)"></i><span>--amber-3</span></div>
+      <div class="sg-swatch"><i style="background:var(--color-success)"></i><span>success</span></div>
+      <div class="sg-swatch"><i style="background:var(--color-error)"></i><span>error</span></div>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Typography</h2>
+    <div class="sg-type">
+      <p class="display">Display / SeroThunder</p>
+      <h1 class="h1">H1 — Burberry House serif heading</h1>
+      <h2 class="h2">H2 — Built for the cold, worn in the city</h2>
+      <h3 class="h3">H3 — Residual Heat Capsule</h3>
+      <h4 class="h4">H4 — Inter semibold subheading</h4>
+      <p class="eyebrow">Eyebrow — new arrivals</p>
+      <p class="lead">Lead — Thermal down fill, high-gloss shell and a detachable faux-fur hood. Our warmest piece to date.</p>
+      <p class="body">Body — Reflective piping, ribbed collar and a water-repellent nylon shell. Six-pocket cargo in a heavyweight ripstop with an articulated knee.</p>
+      <p class="small">Small — Free worldwide shipping on orders over $200</p>
+      <p class="caption">Caption — SKU RM-1001-BLK</p>
+      <p><a href="#" class="link">Text link — Shop the drop</a></p>
+      <p class="body">Inline copy with a <a href="#" class="link--quiet">quiet link</a> inside a sentence.</p>
+      <div class="sg-row"><button class="chip">Jackets</button><button class="chip is-active">Outerwear</button><button class="chip">Headwear</button></div>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Buttons</h2>
+    <div class="sg-row">
+      <a class="btn" href="#">Primary</a>
+      <a class="btn btn--secondary" href="#">Secondary</a>
+      <a class="btn btn--accent" href="#">Accent</a>
+      <a class="btn btn--ghost" href="#">Ghost</a>
+      <a class="btn btn--sm" href="#">Small</a>
+      <a class="btn btn--lg" href="#">Large</a>
+      <a class="btn btn--block" style="max-width:220px" href="#">Block</a>
+      <button class="btn btn--icon" aria-label="Cart">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      </button>
+      <button class="btn" disabled>Disabled</button>
+    </div>
+    <div class="sg-row" style="margin-top: var(--sp-4)">
+      <span class="badge">New</span>
+      <span class="badge badge--accent">Sale</span>
+      <span class="badge badge--outline">Limited</span>
+      <span class="badge badge--muted">Sold out</span>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Colour schemes</h2>
+    <div class="sg-schemes">
+      <div class="sg-scheme scheme-dark">
+        <p class="eyebrow">scheme-dark</p>
+        <h3 class="h3">Default on black</h3>
+        <p class="body" style="margin: var(--sp-3) 0 var(--sp-5)">Body copy at 72% white. Lines at 12%.</p>
+        <div class="sg-row"><a class="btn" href="#">Primary</a><a class="btn btn--secondary" href="#">Secondary</a></div>
+      </div>
+      <div class="sg-scheme scheme-light">
+        <p class="eyebrow">scheme-light</p>
+        <h3 class="h3">Cream editorial</h3>
+        <p class="body" style="margin: var(--sp-3) 0 var(--sp-5)">Used for storytelling and lookbook moments.</p>
+        <div class="sg-row"><a class="btn" href="#">Primary</a><a class="btn btn--secondary" href="#">Secondary</a></div>
+      </div>
+      <div class="sg-scheme scheme-accent">
+        <p class="eyebrow">scheme-accent</p>
+        <h3 class="h3">Amber statement</h3>
+        <p class="body" style="margin: var(--sp-3) 0 var(--sp-5)">Promo bars, flash deals, big moments.</p>
+        <div class="sg-row"><a class="btn" href="#">Primary</a><a class="btn btn--secondary" href="#">Secondary</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Mock products ({{ products.size }})</h2>
+    <div class="sg-cards">
+      {% for product in products %}
+        <article class="sg-card" data-reveal data-reveal-delay="{{ forloop.index0 | times: 60 }}">
+          <div class="media media--portrait">
+            <img src="{{ product.featured_image }}" alt="{{ product.title }}" loading="lazy">
+          </div>
+          <div class="meta">
+            {% if product.badge %}<span class="badge {% if product.badge == 'Sale' %}badge--accent{% elsif product.available == false %}badge--muted{% endif %}">{{ product.badge }}</span>{% endif %}
+            <h3 class="h6" style="margin-top: var(--sp-2)">{{ product.title }}</h3>
+            <p class="small">
+              {% if product.compare_at_price %}<s>{{ product.compare_at_price | money }}</s> <span class="accent">{{ product.price | money }}</span>
+              {% else %}{{ product.price | money }}{% endif %}
+            </p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Mock collections ({{ collections.size }})</h2>
+    <div class="sg-collections">
+      {% for collection in collections %}
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="{{ collection.image }}" alt="{{ collection.title }}" loading="lazy"></div>
+          <figcaption>{{ collection.title }} <span class="muted">({{ collection.products_count }})</span></figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{
+  "settings": {
+    "show_content": false,
+    "meta_left": "Autumn / Winter 2026",
+    "meta_right": "Residual Heat — Capsule 01",
+    "eyebrow": "New season",
+    "heading": "Built for the cold. Worn in the city.",
+    "text": "Thermal layering, glossy shells and heavyweight knits. Outerwear engineered to outlast the season.",
+    "cta_label": "Shop new arrivals",
+    "cta_url": "/collection.html?c=new-arrivals",
+    "cta2_label": "Explore the lookbook",
+    "cta2_url": "/lookbook.html",
+    "scroll_label": "Scroll",
+    "bg_desktop": "/assets/hero/bg-desktop.webp",
+    "bg_desktop_depth": "/assets/hero/bg-desktop-depth.webp",
+    "bg_mobile": "/assets/hero/bg-mobile.webp",
+    "bg_mobile_depth": "/assets/hero/bg-mobile-depth.webp",
+    "image_style": "cutout",
+    "spin_speed": 0.9,
+    "glass_size": 1.45,
+    "refraction": 0,
+    "interval_ms": 2600,
+    "parallax_strength": 0.08,
+    "tilt": 0.35,
+    "wipe_band": 0.22,
+    "wipe_stretch": 0.9
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/hero/product-1.webp",
+        "alt": "Black Panel Jacket"
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/hero/product-2.webp",
+        "alt": "Multi-Color Utility Jacket, black"
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/hero/product-3.webp",
+        "alt": "Oversized Logo Sweater, black"
+      }
+    },
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/hero/product-4.webp",
+        "alt": "Orange Statement Logo Tee"
+      }
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{%- liquid
+  assign s = section.settings
+  if s.enabled == false
+    assign skip = true
+  endif
+-%}
+{%- unless skip -%}
+{%- comment -%} Critical styles inline: the preloader must be correct on the very first paint, before any stylesheet loads {%- endcomment -%}
+<style>
+  html.no-js, html.is-preloading { background: #000; }
+  .preloader { position: fixed; inset: 0; z-index: 100000; display: grid; place-items: center; background: #000; overflow: hidden; }
+  .preloader__logo { position: relative; width: var(--preloader-logo-w, 220px); aspect-ratio: 151 / 136; }
+  .preloader__logo svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+  .preloader__fill { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+</style>
+<script>document.documentElement.classList.add("is-preloading")</script>
+<noscript><style>.preloader { display: none !important; } html { background: #0B0B0B; }</style></noscript>
+<div
+  class="preloader"
+  data-section="preloader"
+  data-preloader
+  style="--preloader-color: {{ s.color | default: '#FFBF00' }}; --preloader-logo-w: {{ s.logo_width | default: 220 }}px;"
+  aria-hidden="true"
+>
+  {%- comment -%} the mark, one layer per shape so each can fly in on its own 3D path {%- endcomment -%}
+  <div class="preloader__stage">
+    <div class="preloader__logo">
+      {% render 'logo-letters' %}
+    </div>
+  </div>
+
+  {%- comment -%} the pentagon fill: drawn in screen pixels so it can morph into the full viewport {%- endcomment -%}
+  <svg class="preloader__fill" preserveAspectRatio="none" aria-hidden="true">
+    <path class="preloader__fill-path" d=""/>
+  </svg>
+
+  <script type="application/json" data-preloader-config>
+  {
+    "showOnce": {{ s.show_once | default: false }},
+    "letterStagger": {{ s.letter_stagger | default: 90 }},
+    "letterDuration": {{ s.letter_duration | default: 1100 }},
+    "holdAfterLogo": {{ s.hold_after_logo | default: 350 }},
+    "fillDuration": {{ s.fill_duration | default: 550 }},
+    "morphDuration": {{ s.morph_duration | default: 900 }},
+    "exitDuration": {{ s.exit_duration | default: 1000 }},
+    "pentagon": [[75.6, -0.2], [150.9, 57], [122.2, 135.8], [29.7, 135.8], [-0.3, 59.3]],
+    "viewBox": [151, 136]
+  }
+  </script>
+</div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Preloader",
+  "tag": "div",
+  "class": "section-preloader",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable preloader", "default": true },
+    { "type": "checkbox", "id": "show_once", "label": "Show once per browser session", "default": false },
+    { "type": "color", "id": "color", "label": "Logo and fill colour", "default": "#FFBF00" },
+    { "type": "range", "id": "logo_width", "label": "Logo width (px)", "min": 120, "max": 480, "step": 10, "default": 220 },
+    { "type": "header", "content": "Timing (ms)" },
+    { "type": "range", "id": "letter_stagger", "label": "Delay between letters", "min": 40, "max": 400, "step": 10, "default": 90 },
+    { "type": "range", "id": "letter_duration", "label": "Letter fly-in", "min": 400, "max": 2000, "step": 50, "default": 1100 },
+    { "type": "range", "id": "hold_after_logo", "label": "Hold the finished logo", "min": 0, "max": 2000, "step": 50, "default": 350 },
+    { "type": "range", "id": "fill_duration", "label": "Pentagon fill fade", "min": 200, "max": 1500, "step": 50, "default": 550 },
+    { "type": "range", "id": "morph_duration", "label": "Morph to full screen", "min": 400, "max": 2000, "step": 50, "default": 900 },
+    { "type": "range", "id": "exit_duration", "label": "Slide out", "min": 400, "max": 2000, "step": 50, "default": 1000 }
+  ]
+}
+{% endschema %}

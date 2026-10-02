@@ -1,0 +1,11 @@
+{
+  "settings": {
+    "scheme": "light",
+    "tilt": 10
+  },
+  "blocks": [
+    { "type": "variant", "settings": { "name": "Capsule 01", "url": "/collection.html?c=residual-heat", "image_1": "/assets/strip/v1-s1.webp", "image_2": "/assets/strip/v1-s2.webp", "image_3": "/assets/strip/v1-s3.webp" } },
+    { "type": "variant", "settings": { "name": "Capsule 02", "url": "/collection.html?c=echoes", "image_1": "/assets/strip/v2-s1.webp", "image_2": "/assets/strip/v2-s2.webp", "image_3": "/assets/strip/v2-s3.webp" } },
+    { "type": "variant", "settings": { "name": "Capsule 03", "url": "/collection.html?c=bear-smart", "image_1": "/assets/strip/v3-s1.webp", "image_2": "/assets/strip/v3-s2.webp", "image_3": "/assets/strip/v3-s3.webp" } }
+  ]
+}

@@ -1,0 +1,132 @@
+{%- comment -%}
+  Fitting: rebuild of ai-model.jp "customize" body (fitting -> fit2Sub -> subdivide -> walk).
+  Markup mirrors theirs (same BEM names), scoped under .fitting-section.
+  Images: fitting stack (blocks "item"), transition image, 9 cards (blocks "card", rows of 3),
+  walk frames (origin image by default).
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign origin = s.origin_card | default: 2
+  assign walk_pc = s.walk_image_pc | default: s.fit2sub_image
+  assign walk_sp = s.walk_image_sp | default: walk_pc
+-%}
+{%- capture bar_d -%}M7.89109 4.50244L9.59812 4.50244L4.36472 21H2.65769L7.89109 4.50244ZM15.6725 4.50244H17.3795L12.1461 21L10.4391 21L15.6725 4.50244ZM23.4538 4.50244L25.1609 4.50244L19.9275 21H18.2204L23.4538 4.50244ZM31.2352 4.50244H32.9422L27.7088 21H26.0018L31.2352 4.50244ZM39.0166 4.50244H40.7236L35.4902 21H33.7832L39.0166 4.50244ZM46.7979 4.50244L48.505 4.50244L43.2716 21H41.5645L46.7979 4.50244ZM54.5793 4.50244H56.2863L51.0529 21H49.3459L54.5793 4.50244ZM62.3607 4.50244L64.0677 4.50244L58.8343 21H57.1273L62.3607 4.50244ZM70.142 4.50244H71.8491L66.6157 21H64.9086L70.142 4.50244ZM77.9234 4.50244H79.6304L74.397 21H72.69L77.9234 4.50244ZM85.7048 4.50244H87.4118L82.1784 21H80.4714L85.7048 4.50244ZM93.4861 4.50244H95.1932L89.9598 21H88.2527L93.4861 4.50244ZM101.267 4.50244L102.975 4.50244L97.7411 21H96.0341L101.267 4.50244ZM109.049 4.50244H110.756L105.522 21H103.815L109.049 4.50244ZM116.83 4.50244H118.537L113.304 21H111.597L116.83 4.50244ZM124.612 4.50244H126.319L121.085 21H119.378L124.612 4.50244ZM132.393 4.50244H134.1L128.867 21H127.16L132.393 4.50244ZM140.174 4.50244L141.881 4.50244L136.648 21H134.941L140.174 4.50244Z{%- endcapture -%}
+<section class="fitting-section" data-section="fitting" aria-label="{{ s.label | default: 'Customize' | escape }}">
+  <div class="customize">
+    <div class="customize__pin" data-fitting-pin>
+      <div class="customize__body" data-fitting-body>
+        <div class="customize__fixed">
+          <div class="customize__inner">
+            <div class="customize__fitting">
+              <div class="fitting">
+                <div class="fitting__list">
+                  {%- for block in section.blocks -%}{%- if block.type == 'item' -%}
+                  <div class="fitting__item" data-fitting-item>
+                    <img src="{{ block.settings.image }}" alt="{{ block.settings.name | escape }}" width="1033" height="688"{% if forloop.first %} fetchpriority="low"{% endif %}>
+                  </div>
+                  {%- endif -%}{%- endfor -%}
+                  {%- for block in section.blocks -%}{%- if block.type == 'item' -%}
+                  <div class="fitting__param" data-fitting-param aria-hidden="true">
+                    <div class="fitting__line"></div>
+                    <div class="fitting__name">{{ block.settings.name }}</div>
+                    <div class="fitting__progress">
+                      <span class="fitting__bar">///////</span>&nbsp;&nbsp;:&nbsp;<span class="fitting__num" data-fitting-num>0’  000000</span>
+                    </div>
+                  </div>
+                  {%- endif -%}{%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="customize__transition">
+          <div class="fit2Sub">
+            <div class="fit2Sub__item" data-fit2sub-item>
+              <img src="{{ s.fit2sub_image }}" alt="" width="1033" height="688" data-fit2sub-img>
+            </div>
+          </div>
+        </div>
+        <div class="customize__subdivide">
+          <div class="subdivide">
+            {%- assign n = 0 -%}
+            {%- for block in section.blocks -%}{%- if block.type == 'card' -%}
+              {%- assign n = n | plus: 1 -%}
+              {%- assign col = n | minus: 1 | modulo: 3 -%}
+              {%- if col == 0 -%}<div class="subdivide__row" data-subdivide-row>{%- endif -%}
+              <div class="subdivide__item"{% if n == origin %} id="fit2Sub-target"{% endif %}>
+                <div class="subdivideCard{% if n == origin %} subdivideCard--origin{% endif %}">
+                  <picture>
+                    <source srcset="{{ block.settings.image_sp }}" media="(min-width: 600px) and (orientation: portrait)" width="102" height="234">
+                    <source srcset="{{ block.settings.image_pc }}" media="(min-width: 600px)" width="776" height="516">
+                    <img class="subdivideCard__img" src="{{ block.settings.image_sp }}" alt="" width="102" height="234" loading="lazy">
+                  </picture>
+                  {%- unless n == origin %}
+                  <div class="subdivideCard__overlay"></div>
+                  {%- endunless %}
+                  <div class="subdivideCard__text">{{ block.settings.label }}</div>
+                  {%- unless n == origin %}
+                  <div class="subdivideCard__params">
+                    <svg class="subdivideCard__bar" width="144" height="26" viewBox="0 0 144 26" aria-hidden="true">
+                      <clipPath id="{{ section.id }}-bar-clip{{ n }}">
+                        <path class="subdivideCard__rectClip" d="M7.83673 0L144 0L136.163 26H0L7.83673 0Z"/>
+                      </clipPath>
+                      <path clip-path="url(#{{ section.id }}-bar-clip{{ n }})" d="{{ bar_d }}"/>
+                    </svg>
+                  </div>
+                  {%- endunless %}
+                </div>
+              </div>
+              {%- if col == 2 or forloop.last -%}</div>{%- endif -%}
+            {%- endif -%}{%- endfor -%}
+            <div class="subdivide__walk" aria-hidden="true">
+              <div class="walk" data-subdivide-walk>
+                {%- for pos in (1..3) -%}
+                {%- if pos == 1 %}{% assign side = 'left' %}{% elsif pos == 2 %}{% assign side = 'center' %}{% else %}{% assign side = 'right' %}{% endif %}
+                <div class="walk__{{ side }}">
+                  <div class="walk__card">
+                    <div class="walk__img">
+                      <picture>
+                        <source srcset="{{ walk_sp }}" media="(min-width: 600px) and (orientation: portrait)" width="102" height="234">
+                        <source srcset="{{ walk_pc }}" media="(min-width: 600px)" width="776" height="516">
+                        <img src="{{ walk_sp }}" alt="" width="102" height="234" loading="lazy">
+                      </picture>
+                    </div>
+                  </div>
+                </div>
+                {%- endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="customize__pinSpace" data-fitting-space></div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fitting",
+  "tag": "section",
+  "class": "section-fitting",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Accessible label", "default": "Customize" },
+    { "type": "image_picker", "id": "fit2sub_image", "label": "Transition image (revealed under the fitting stack)" },
+    { "type": "range", "id": "origin_card", "label": "Origin card (1-9, receives the transition image)", "min": 1, "max": 9, "step": 1, "default": 2 },
+    { "type": "image_picker", "id": "walk_image_pc", "label": "Walk frame image (desktop)" },
+    { "type": "image_picker", "id": "walk_image_sp", "label": "Walk frame image (phone / portrait)" }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Fitting layer", "limit": 5, "settings": [
+      { "type": "image_picker", "id": "image", "label": "Image (3:2)" },
+      { "type": "text", "id": "name", "label": "Garment name", "default": "SHIRT" }
+    ] },
+    { "type": "card", "name": "Grid card", "limit": 9, "settings": [
+      { "type": "image_picker", "id": "image_pc", "label": "Image, desktop (3:2)" },
+      { "type": "image_picker", "id": "image_sp", "label": "Image, phone (tall)" },
+      { "type": "text", "id": "label", "label": "Label", "default": "MODIFIED" }
+    ] }
+  ],
+  "presets": [{ "name": "Fitting" }]
+}
+{% endschema %}

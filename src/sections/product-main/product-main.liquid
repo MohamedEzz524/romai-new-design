@@ -1,0 +1,347 @@
+{%- comment -%}
+  Product main (rebuild of becaneparis.com/products/*).
+  Stacked full-width gallery (each image zoomable) + three overlay layers that stay on
+  screen while the gallery scrolls and leave with the end of the section:
+    - bars:  top-right "Products 06 / 14" with prev / current / next thumbnails,
+             bottom-left add-to-cart bar (label + price)
+    - info:  subtitle, title with superscript price, "Img 01 / 05" thumbnail bar,
+             size options, Details / Materials / Shipping panels
+             (phones: headings + "Details +" pinned bottom, panels open as a sheet)
+  Every product field comes from section settings / blocks (product-main.json) so the
+  markup ports to a Shopify main-product section:
+    s.title -> product.title, s.product_type -> product.type,
+    s.price -> product.selected_or_first_available_variant.price | money_without_trailing_zeros,
+    image blocks -> product.media, variant blocks -> product.variants (option1 + available),
+    s.description -> product.description, s.materials -> product.metafields.custom.composition,
+    sibling blocks -> collection neighbours.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign images = section.blocks | where: 'type', 'image'
+  assign variants = section.blocks | where: 'type', 'variant'
+  assign colors = section.blocks | where: 'type', 'color'
+  assign siblings = section.blocks | where: 'type', 'sibling'
+  assign img_total = images | size
+  assign sel = s.selected_variant | default: 1
+  assign sel_index = sel | minus: 1
+  assign sel_variant = variants[sel_index]
+  assign price_label = s.price | append: ' ' | append: s.currency
+  if sel_variant.settings.available
+    assign add_label = s.label_add
+  else
+    assign add_label = s.label_oos
+  endif
+-%}
+<section
+  class="pm"
+  data-section="product-main"
+  data-handle="{{ s.handle }}"
+  data-title="{{ s.title | escape }}"
+  data-price="{{ s.price }}"
+  data-image="{{ images.first.settings.image }}"
+  data-label-add="{{ s.label_add | escape }}"
+  data-label-oos="{{ s.label_oos | escape }}"
+  data-label-added="{{ s.label_added | escape }}"
+  data-label-close="{{ s.label_close | escape }}"
+>
+  {%- comment -%} ---------- gallery ---------- {%- endcomment -%}
+  <div class="pm__gallery" data-pm-gallery>
+    {%- for block in images -%}
+      <img
+        class="pm__image{% if forloop.first %} pm__image--first{% endif %}{% if img_total > 1 %} pm__image--zoomable{% endif %}"
+        src="{{ block.settings.image | image_url: width: 1536 }}"
+        width="{{ block.settings.width }}" height="{{ block.settings.height }}"
+        alt="{{ block.settings.alt | default: s.title | escape }}"
+        loading="{% if forloop.index < 3 %}eager{% else %}lazy{% endif %}" decoding="async" draggable="false"
+        data-pm-image="{{ forloop.index0 }}"
+        {% if img_total > 1 %}role="button" tabindex="0" aria-label="Zoom image {{ forloop.index }} of {{ img_total }}"{% endif %}
+      >
+    {%- endfor -%}
+  </div>
+  {%- if img_total > 1 -%}
+    <nav class="pm-dots" data-pm-dots aria-label="Images">
+      {%- for block in images -%}
+        <button class="pm-dot{% if forloop.first %} is-current{% endif %}" type="button" data-pm-dot="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }} of {{ img_total }}"{% if forloop.first %} aria-current="true"{% endif %}></button>
+      {%- endfor -%}
+    </nav>
+  {%- endif -%}
+
+  {%- comment -%} ---------- bars: top-right siblings, bottom-left add to cart ---------- {%- endcomment -%}
+  <div class="pm-mform-bg" data-pm-mform-bg aria-hidden="true"></div>
+  <div class="pm__sticky pm__sticky--bars" data-pm-bars>
+    <div class="pm__stickyContent">
+      {%- if siblings.size > 0 -%}
+        <div class="pm-bar pm-bar--topRight">
+          <div class="pm-item" data-pm-stagger>
+            <div class="pm-item__wrapper">
+              <div class="pm-item__second">
+                <span class="pm-item__left"><span class="pm-item__content" data-pm-in><span class="pm-shuffle" data-shuffle>{{ s.related_label }}</span></span></span>
+                <span class="pm-item__suffix" data-pm-in><span class="pm-shuffle" data-shuffle>{% if s.related_index < 10 %}0{% endif %}{{ s.related_index }} / {% if s.related_total < 10 %}0{% endif %}{{ s.related_total }}</span></span>
+              </div>
+            </div>
+            <span class="pm-item__tail">
+              {%- for block in siblings -%}
+                <a class="pm-thumb{% if block.settings.current %} is-current{% endif %}" href="{{ block.settings.url }}" aria-label="{{ block.settings.title | escape }}"{% if block.settings.current %} aria-current="page"{% endif %} data-pm-in>
+                  <img class="pm-thumb__media" src="{{ block.settings.thumb }}" alt="{{ block.settings.title | escape }}" width="24" height="24" loading="eager">
+                </a>
+              {%- endfor -%}
+            </span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="pm-bar pm-bar--bottomLeft">
+        <button class="pm-item pm-item--button pm-item--reversed" type="button" data-pm-add data-pm-stagger>
+          <span class="pm-item__wrapper">
+            <span class="pm-item__second">
+              <span class="pm-item__left"><span class="pm-item__content" data-pm-in><span class="pm-shuffle" data-shuffle data-pm-add-label>{{ add_label }}</span></span></span>
+              <span class="pm-item__suffix pm-item__suffix--price" data-pm-in data-pm-add-price><span class="pm-shuffle" data-shuffle>{{ price_label }}</span></span>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ---------- page info ---------- {%- endcomment -%}
+  <div class="pm__sticky pm__sticky--info">
+    <div class="pm__stickyContent">
+      <div class="pm-info" data-pm-info>
+        <div class="pm-overlay" data-pm-overlay aria-hidden="true"></div>
+        <div class="pm-info__wrapper">
+          <div class="pm-info__top">
+            <div class="pm-headings">
+              <div class="pm-headings__subtitle"><h5 class="pm-headings__in" data-pm-head>{{ s.product_type }}</h5></div>
+              <div class="pm-headings__title">
+                <h1 class="pm-headings__in" data-pm-head>{{ s.title }}<sup class="pm-price">{{ price_label }}</sup></h1>
+              </div>
+            </div>
+            <button class="pm-info__detailsButton" type="button" aria-expanded="false" aria-controls="pm-inner" data-pm-details>
+              <span class="pm-shuffle" data-shuffle data-pm-details-label>{{ s.label_details }} +</span>
+            </button>
+          </div>
+          {%- comment -%} phones: options always visible above the add-to-cart bar {%- endcomment -%}
+          <div class="pm-mform" data-pm-mform>
+            {%- if colors.size > 0 -%}
+              <div class="pm-mform__row">
+                <span class="pm-mform__label">{{ s.color_name | default: 'Couleur' }}</span>
+                <span class="pm-swatches pm-swatches--color" role="radiogroup" aria-label="{{ s.color_name | default: 'Couleur' }}">
+                  {%- for c in colors -%}
+                    <button class="pm-color{% if forloop.first %} is-active{% endif %}{% unless c.settings.available %} is-oos{% endunless %}" type="button" role="radio"
+                      aria-checked="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ c.settings.name | escape }}"
+                      data-pm-color="{{ c.settings.name | escape }}" style="--swatch: {{ c.settings.hex }}"></button>
+                  {%- endfor -%}
+                </span>
+                <span class="pm-color-name" data-pm-color-name>{{ colors.first.settings.name }}</span>
+              </div>
+            {%- endif -%}
+            {%- if variants.size > 1 -%}
+              <div class="pm-mform__row">
+                <span class="pm-mform__label">{{ s.option_name }}</span>
+                <span class="pm-options pm-swatches" role="radiogroup" aria-label="{{ s.option_name }}">
+                  {%- for block in variants -%}
+                    <button class="pm-option{% if forloop.index == sel %} is-active{% endif %}{% unless block.settings.available %} is-oos{% endunless %}" type="button" role="radio"
+                      aria-checked="{% if forloop.index == sel %}true{% else %}false{% endif %}"
+                      data-pm-option="{{ block.settings.value }}" data-available="{{ block.settings.available }}">{{ block.settings.value }}</button>
+                  {%- endfor -%}
+                </span>
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if img_total > 0 -%}
+            <div class="pm-info__bar">
+              <div class="pm-info__innerBar">
+                <div class="pm-item pm-item--img" data-pm-stagger>
+                  <div class="pm-item__wrapper">
+                    <div class="pm-item__second">
+                      <span class="pm-item__left"><span class="pm-item__content" data-pm-in><span class="pm-shuffle" data-shuffle>{{ s.label_img }}</span></span></span>
+                      <span class="pm-item__suffix" data-pm-in><span class="pm-shuffle" data-shuffle data-pm-count>01 / {% if img_total < 10 %}0{% endif %}{{ img_total }}</span></span>
+                    </div>
+                  </div>
+                  <span class="pm-item__tail">
+                    {%- for block in images -%}
+                      <button class="pm-thumb{% if forloop.first %} is-current{% endif %}" type="button" aria-label="{{ s.title | escape }}, image {{ forloop.index }}" data-pm-thumb="{{ forloop.index0 }}" data-pm-in>
+                        <img class="pm-thumb__media" src="{{ block.settings.thumb }}" alt="" width="24" height="24" loading="eager">
+                      </button>
+                    {%- endfor -%}
+                  </span>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <div class="pm-info__inner" id="pm-inner" data-pm-inner data-lenis-prevent>
+            <div class="pm-info__content">
+              {%- if colors.size > 0 -%}
+                <div class="pm-line pm-line--option pm-line--color">
+                  <span class="pm-line__label" data-pm-in>{{ s.color_name | default: 'Couleur' }}</span>
+                  <span class="pm-line__content">
+                    <span class="pm-swatches pm-swatches--color" role="radiogroup" aria-label="{{ s.color_name | default: 'Couleur' }}">
+                      {%- for c in colors -%}
+                        <button
+                          class="pm-color{% if forloop.first %} is-active{% endif %}{% unless c.settings.available %} is-oos{% endunless %}"
+                          type="button" role="radio" aria-checked="{% if forloop.first %}true{% else %}false{% endif %}"
+                          aria-label="{{ c.settings.name | escape }}" title="{{ c.settings.name | escape }}"
+                          data-pm-color="{{ c.settings.name | escape }}" data-pm-in
+                          style="--swatch: {{ c.settings.hex }}"
+                        ></button>
+                      {%- endfor -%}
+                    </span>
+                    <span class="pm-color-name" data-pm-color-name>{{ colors.first.settings.name }}</span>
+                  </span>
+                </div>
+              {%- endif -%}
+              {%- if variants.size > 1 -%}
+                <div class="pm-line pm-line--option">
+                  <span class="pm-line__label" data-pm-in>{{ s.option_name }}</span>
+                  <span class="pm-line__content">
+                    <span class="pm-options pm-swatches" role="radiogroup" aria-label="{{ s.option_name }}">
+                      {%- for block in variants -%}
+                        <button
+                          class="pm-option{% if forloop.index == sel %} is-active{% endif %}{% unless block.settings.available %} is-oos{% endunless %}"
+                          type="button" role="radio" aria-checked="{% if forloop.index == sel %}true{% else %}false{% endif %}"
+                          data-pm-option="{{ block.settings.value }}" data-available="{{ block.settings.available }}" data-pm-in
+                        >{{ block.settings.value }}</button>
+                      {%- endfor -%}
+                    </span>
+                  </span>
+                </div>
+              {%- endif -%}
+
+              <div class="pm-panels" data-pm-panels>
+                {%- if s.description != blank -%}
+                  <button class="pm-panel" type="button" aria-expanded="false" data-pm-panel data-label="{{ s.label_details | escape }}" data-pm-in><span class="pm-shuffle" data-shuffle>{{ s.label_details }}</span></button>
+                  <div class="pm-panel__content pm-panel__content--rich">{{ s.description }}</div>
+                {%- endif -%}
+                {%- if s.materials != blank -%}
+                  <button class="pm-panel" type="button" aria-expanded="false" data-pm-panel data-label="{{ s.label_materials | escape }}" data-pm-in><span class="pm-shuffle" data-shuffle>{{ s.label_materials }}</span></button>
+                  <div class="pm-panel__content">{{ s.materials | newline_to_br }}</div>
+                {%- endif -%}
+                {%- if s.shipping != blank -%}
+                  <button class="pm-panel" type="button" aria-expanded="false" data-pm-panel data-label="{{ s.label_shipping | escape }}" data-pm-in><span class="pm-shuffle" data-shuffle>{{ s.label_shipping }}</span></button>
+                  <div class="pm-panel__content">{{ s.shipping }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ---------- zoom (desktop) ---------- {%- endcomment -%}
+  {%- if img_total > 1 -%}
+    <div class="pm-zoomOverlay" data-pm-zoom-overlay aria-hidden="true"></div>
+    <div class="pm-zoom" role="dialog" aria-modal="true" aria-label="{{ s.title | escape }} images" data-pm-zoom data-lenis-prevent hidden>
+      <div class="pm-zoom__bar">
+        <div class="pm-zoom__thumbs">
+          {%- for block in images -%}
+            <button class="pm-thumb" type="button" aria-label="Image {{ forloop.index }}" data-pm-zoom-thumb="{{ forloop.index0 }}">
+              <img class="pm-thumb__media" src="{{ block.settings.thumb }}" alt="" width="24" height="24">
+            </button>
+          {%- endfor -%}
+        </div>
+        <div class="pm-zoom__count"><span class="pm-shuffle" data-shuffle>{{ s.label_img }}</span><span class="pm-zoom__suffix"><span class="pm-shuffle" data-shuffle data-pm-zoom-count>01 / {% if img_total < 10 %}0{% endif %}{{ img_total }}</span></span></div>
+        <span class="pm-zoom__spacer"></span>
+        <button class="pm-zoom__close" type="button" data-pm-zoom-close><span class="pm-shuffle" data-shuffle>{{ s.label_close }}</span></button>
+      </div>
+      <div class="pm-zoom__inner">
+        <div class="pm-zoom__slider" data-pm-zoom-slider>
+          {%- for block in images -%}
+            <img class="pm-zoom__image" src="{{ block.settings.image }}" alt="{{ block.settings.alt | default: s.title | escape }}" width="{{ block.settings.width }}" height="{{ block.settings.height }}" loading="lazy" draggable="false">
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ---------- size picker (phones: add to cart opens it) ---------- {%- endcomment -%}
+  {%- if variants.size > 1 -%}
+    <div class="pm-sheetOverlay" data-pm-sheet-overlay aria-hidden="true"></div>
+    <div class="pm-sheet" data-pm-sheet data-lenis-prevent role="dialog" aria-label="{{ s.option_name }}" hidden>
+      <div class="pm-sheet__values">
+        {%- for block in variants -%}
+          <div class="pm-sheet__row">
+            <button class="pm-sheet__value{% unless block.settings.available %} is-oos{% endunless %}" type="button" data-pm-sheet-value="{{ block.settings.value }}"{% unless block.settings.available %} disabled{% endunless %}>
+              <span>{{ block.settings.value }}</span>
+              <span class="pm-sheet__suffix">{% if block.settings.available %}{{ s.label_add_short }}{% else %}{{ s.label_oos }}{% endif %}</span>
+            </button>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Product main",
+  "tag": "section",
+  "class": "section-product-main",
+  "settings": [
+    { "type": "text", "id": "handle", "label": "Product handle (mock: product.handle)" },
+    { "type": "text", "id": "title", "label": "Title (product.title)" },
+    { "type": "text", "id": "product_type", "label": "Subtitle (product.type)" },
+    { "type": "number", "id": "price", "label": "Price (variant.price)" },
+    { "type": "text", "id": "currency", "label": "Currency", "default": "EUR" },
+    { "type": "text", "id": "option_name", "label": "Option name", "default": "Taille" },
+    { "type": "text", "id": "color_name", "label": "Colour option name", "default": "Couleur" },
+    { "type": "number", "id": "selected_variant", "label": "Selected variant (1-based)", "default": 1 },
+    { "type": "richtext", "id": "description", "label": "Details (product.description)" },
+    { "type": "textarea", "id": "materials", "label": "Materials (metafield composition)" },
+    { "type": "text", "id": "shipping", "label": "Shipping" },
+    { "type": "header", "content": "Labels" },
+    { "type": "text", "id": "label_img", "label": "Image counter", "default": "Img" },
+    { "type": "text", "id": "label_details", "label": "Details", "default": "Details" },
+    { "type": "text", "id": "label_materials", "label": "Materials", "default": "Materials" },
+    { "type": "text", "id": "label_shipping", "label": "Shipping", "default": "Shipping" },
+    { "type": "text", "id": "label_close", "label": "Close", "default": "Close" },
+    { "type": "text", "id": "label_add", "label": "Add to cart", "default": "Add to cart" },
+    { "type": "text", "id": "label_add_short", "label": "Add (size picker)", "default": "Add" },
+    { "type": "text", "id": "label_oos", "label": "Out of stock", "default": "Out of stock" },
+    { "type": "text", "id": "label_added", "label": "Added ({size} = size)", "default": "Size {size} added" },
+    { "type": "header", "content": "Products bar" },
+    { "type": "text", "id": "related_label", "label": "Label", "default": "Products" },
+    { "type": "number", "id": "related_index", "label": "Position in collection", "default": 1 },
+    { "type": "number", "id": "related_total", "label": "Products in collection", "default": 1 }
+  ],
+  "blocks": [
+    {
+      "type": "image", "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "thumb", "label": "Thumbnail" },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        { "type": "number", "id": "width", "label": "Width" },
+        { "type": "number", "id": "height", "label": "Height" }
+      ]
+    },
+    {
+      "type": "variant", "name": "Variant",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Option value" },
+        { "type": "checkbox", "id": "available", "label": "Available", "default": true }
+      ]
+    },
+    {
+      "type": "color", "name": "Colour",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Colour name" },
+        { "type": "color", "id": "hex", "label": "Swatch colour" },
+        { "type": "checkbox", "id": "available", "label": "Available", "default": true }
+      ]
+    },
+    {
+      "type": "sibling", "name": "Products bar item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "image_picker", "id": "thumb", "label": "Thumbnail" },
+        { "type": "checkbox", "id": "current", "label": "Current product", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Product main" }]
+}
+{% endschema %}

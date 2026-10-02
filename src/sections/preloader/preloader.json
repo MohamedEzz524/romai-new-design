@@ -1,0 +1,14 @@
+{
+  "settings": {
+    "enabled": true,
+    "show_once": false,
+    "color": "#FFBF00",
+    "logo_width": 220,
+    "letter_stagger": 90,
+    "letter_duration": 1100,
+    "hold_after_logo": 350,
+    "fill_duration": 550,
+    "morph_duration": 900,
+    "exit_duration": 1000
+  }
+}

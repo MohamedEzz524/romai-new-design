@@ -1,0 +1,17 @@
+{
+  "settings": {
+    "title": "Skirts",
+    "description": "AOI skirts are developed through a considered study of materials and techniques, combined to create structured, wearable art pieces. Jewelry components and mixed materials are integrated directly into their construction. Each skirt follows its own development process, with focused attention on internal engineering, external detailing, and custom hardware. The craftsmanship and precision behind every piece reflect the standard that defines AOI.",
+    "active_handle": "skirts"
+  },
+  "blocks": [
+    { "type": "collection", "settings": { "handle": "skirts", "title": "Skirts", "url": "/collection.html?c=skirts", "image": "/assets/collection-header/skirts.webp" } },
+    { "type": "collection", "settings": { "handle": "sculptures", "title": "Sculptures", "url": "/collection.html?c=sculptures", "image": "/assets/collection-header/sculptures.webp" } },
+    { "type": "collection", "settings": { "handle": "cashmere", "title": "Cashmere", "url": "/collection.html?c=cashmere", "image": "/assets/collection-header/cashmere.webp" } },
+    { "type": "collection", "settings": { "handle": "clogs", "title": "Clogs", "url": "/collection.html?c=clogs", "image": "/assets/collection-header/clogs.webp" } },
+    { "type": "collection", "settings": { "handle": "coats", "title": "Coats", "url": "/collection.html?c=coats", "image": "/assets/collection-header/coats.webp" } },
+    { "type": "collection", "settings": { "handle": "eyewear", "title": "Eyewear", "url": "/collection.html?c=eyewear", "image": "/assets/collection-header/eyewear.webp" } },
+    { "type": "collection", "settings": { "handle": "silk-suits", "title": "Silk Suits", "url": "/collection.html?c=silk-suits", "image": "/assets/collection-header/silk-suits.webp" } },
+    { "type": "collection", "settings": { "handle": "rings", "title": "Rings", "url": "/collection.html?c=rings", "image": "/assets/collection-header/rings.webp" } }
+  ]
+}

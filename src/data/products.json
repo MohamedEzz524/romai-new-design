@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1001, "handle": "residual-heat-puffer-jacket", "title": "Residual Heat Puffer Jacket", "vendor": "ROMAI", "type": "Jackets",
+    "price": 420, "compare_at_price": null, "available": true, "tags": ["new", "outerwear"], "badge": "New",
+    "featured_image": "/branding/sample-products/section3/1.png",
+    "images": ["/branding/sample-products/section3/1.png", "/branding/Product-Romai/Test Product/1.png", "/branding/Product-Romai/Test Product/2.png"],
+    "colors": ["#0B0B0B", "#FFBF00"], "sizes": ["XS", "S", "M", "L", "XL"],
+    "description": "Thermal down fill, high-gloss shell and a detachable faux-fur hood. Our warmest piece to date."
+  },
+  {
+    "id": 1002, "handle": "echoes-bomber", "title": "Echoes Bomber", "vendor": "ROMAI", "type": "Bombers",
+    "price": 360, "compare_at_price": 450, "available": true, "tags": ["sale", "outerwear"], "badge": "Sale",
+    "featured_image": "/branding/sample-products/section3/2.png",
+    "images": ["/branding/sample-products/section3/2.png", "/branding/Product-Romai/Test Product/3.png"],
+    "colors": ["#0B0B0B", "#3A3A3A"], "sizes": ["S", "M", "L", "XL"],
+    "description": "Reflective piping, ribbed collar and a water-repellent nylon shell."
+  },
+  {
+    "id": 1003, "handle": "bear-smart-parka", "title": "Bear Smart Parka", "vendor": "ROMAI", "type": "Jackets",
+    "price": 520, "compare_at_price": null, "available": true, "tags": ["outerwear"], "badge": null,
+    "featured_image": "/branding/sample-products/section3/3.png",
+    "images": ["/branding/sample-products/section3/3.png", "/branding/Product-Romai/Test Product/4.png"],
+    "colors": ["#0B0B0B"], "sizes": ["S", "M", "L"],
+    "description": "Oversized insulated parka with storm cuffs and a two-way zip."
+  },
+  {
+    "id": 1004, "handle": "urban-gear-cargo-pants", "title": "Urban Gear Cargo Pants", "vendor": "ROMAI", "type": "Pants",
+    "price": 190, "compare_at_price": null, "available": true, "tags": ["bottoms"], "badge": null,
+    "featured_image": "/branding/sample-products/section8/1.png",
+    "images": ["/branding/sample-products/section8/1.png"],
+    "colors": ["#0B0B0B", "#5C5648"], "sizes": ["28", "30", "32", "34", "36"],
+    "description": "Six-pocket cargo in a heavyweight ripstop with an articulated knee."
+  },
+  {
+    "id": 1005, "handle": "heavyweight-logo-tee", "title": "Heavyweight Logo Tee", "vendor": "ROMAI", "type": "Tees",
+    "price": 75, "compare_at_price": null, "available": true, "tags": ["tops", "best-seller"], "badge": "Best Seller",
+    "featured_image": "/branding/sample-products/section8/2.png",
+    "images": ["/branding/sample-products/section8/2.png"],
+    "colors": ["#0B0B0B", "#FFFFFF", "#FFBF00"], "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "description": "280gsm garment-dyed cotton with the pentagon mark across the chest."
+  },
+  {
+    "id": 1006, "handle": "thermal-knit-beanie", "title": "Thermal Knit Beanie", "vendor": "ROMAI", "type": "Headwear",
+    "price": 45, "compare_at_price": null, "available": true, "tags": ["accessories"], "badge": null,
+    "featured_image": "/branding/sample-products/section8/3.png",
+    "images": ["/branding/sample-products/section8/3.png"],
+    "colors": ["#0B0B0B", "#FFBF00"], "sizes": ["One Size"],
+    "description": "Merino blend rib knit with a woven label."
+  },
+  {
+    "id": 1007, "handle": "chunky-rib-sweater", "title": "Chunky Rib Sweater", "vendor": "ROMAI", "type": "Sweaters",
+    "price": 220, "compare_at_price": null, "available": false, "tags": ["tops"], "badge": "Sold Out",
+    "featured_image": "/branding/sample-products/section8/4.png",
+    "images": ["/branding/sample-products/section8/4.png"],
+    "colors": ["#EDE6DC", "#0B0B0B"], "sizes": ["S", "M", "L"],
+    "description": "Dropped shoulder, extra-long cuffs and a wool-rich chunky rib."
+  },
+  {
+    "id": 1008, "handle": "glossy-down-vest", "title": "Glossy Down Vest", "vendor": "ROMAI", "type": "Outerwear",
+    "price": 260, "compare_at_price": 320, "available": true, "tags": ["sale", "outerwear"], "badge": "Sale",
+    "featured_image": "/branding/Product/p1.png",
+    "images": ["/branding/Product/p1.png", "/branding/Product/p2.png", "/branding/Product/p3.png"],
+    "colors": ["#0B0B0B"], "sizes": ["S", "M", "L", "XL"],
+    "description": "Lightweight down vest with a high-shine finish and hidden zip pockets."
+  }
+]

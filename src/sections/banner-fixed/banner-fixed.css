@@ -1,0 +1,114 @@
+/* =====================================================================
+   Fixed image banner
+   The image is fixed to the viewport and clipped to the section box, so the
+   page appears to scroll over a window onto it (clip-path clips fixed
+   descendants; works on iOS where background-attachment: fixed does not).
+   A frosted band with thin uppercase type sits at the centre.
+   ===================================================================== */
+.banner-fixed {
+  --banner-blur: 8px;
+  --banner-shade: 0.12;
+  position: relative;
+  height: 100svh;
+  min-height: 520px;
+  clip-path: inset(0);
+  background: var(--black);
+  color: var(--white);
+}
+.banner-fixed--tall { height: 80svh; min-height: 440px; }
+.banner-fixed--medium { height: 60svh; min-height: 360px; }
+.banner-fixed--short { height: auto; min-height: 0; max-height: none; aspect-ratio: 1640 / 700; }
+
+/* ---------- fixed media ---------- */
+.banner-fixed__media {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+.banner-fixed__media picture,
+.banner-fixed__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.banner-fixed__media img {
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.banner-fixed__shade {
+  position: absolute;
+  inset: 0;
+  background: rgb(11 11 11 / var(--banner-shade));
+}
+
+/* ---------- centre panel ---------- */
+.banner-fixed__content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+/* full-bleed strip: no container, no side padding, no max-width */
+.banner-fixed__panel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  min-height: clamp(7rem, 16vh, 11rem);
+  padding: var(--sp-6) 0;
+  text-align: center;
+  text-decoration: none;
+  color: var(--white);
+}
+/* the frost: blurred backdrop with feathered ends, kept on its own layer so the text stays crisp */
+.banner-fixed__panel-blur {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(var(--banner-blur)) saturate(118%);
+  -webkit-backdrop-filter: blur(var(--banner-blur)) saturate(118%);
+  background: rgb(255 255 255 / 0.10);
+}
+.banner-fixed--tone-dark .banner-fixed__panel-blur {
+  background: rgb(11 11 11 / 0.28);
+}
+
+.banner-fixed__caption {
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.78);
+}
+.banner-fixed__title {
+  font-family: var(--ff-body);
+  font-size: clamp(2rem, 1rem + 4.2vw, 4.75rem);
+  font-weight: var(--fw-light);
+  line-height: 1;
+  letter-spacing: 0;
+  text-indent: 0;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.2);
+}
+.banner-fixed__cta {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-2xs);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 767px) {
+  .banner-fixed:not(.banner-fixed--short) { min-height: 480px; }
+  .banner-fixed--short { aspect-ratio: 320 / 400; }
+  /* phones: the image scrolls with the section instead of staying fixed */
+  .banner-fixed { clip-path: none; overflow: hidden; }
+  .banner-fixed__media { position: absolute; }
+  .banner-fixed__panel { padding: var(--sp-5) 0; }
+}
+
+/* no backdrop-filter support: a plain translucent band */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .banner-fixed__panel-blur { background: rgb(11 11 11 / 0.45); }
+}

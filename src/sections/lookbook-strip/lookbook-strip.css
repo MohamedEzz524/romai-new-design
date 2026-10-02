@@ -1,0 +1,37 @@
+/* =====================================================================
+   Lookbook strip (rebuild of ai-model.jp "comparison")
+   Pinned section; height is set by JS (100vh + three card pitches).
+   Everything visual is drawn on the canvas.
+   ===================================================================== */
+.strip {
+  --strip-bg: #F2F3F5;
+  --strip-fg: #222;
+  position: relative;
+  height: 300vh;               /* replaced by JS with the exact pin length */
+  background: var(--strip-bg);
+}
+.strip.scheme-dark { --strip-bg: var(--black); --strip-fg: #f2f2f2; }
+
+.strip__pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.strip__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.strip__canvas.is-link { cursor: pointer; }
+
+/* fallback (no JS / reduced motion): a simple row */
+.strip__fallback { display: none; }
+.no-js .strip, .strip.is-static { height: auto; }
+.no-js .strip__pin, .strip.is-static .strip__pin { position: relative; height: auto; padding: var(--sp-16) var(--page-margin); }
+.no-js .strip__canvas, .strip.is-static .strip__canvas { display: none; }
+.no-js .strip__fallback, .strip.is-static .strip__fallback { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--grid-gap); }
+.strip__fallback a { display: grid; gap: var(--sp-3); color: var(--strip-fg); }
+.strip__fallback img { aspect-ratio: 3 / 4; object-fit: cover; width: 100%; }
+.strip__fallback span { font-family: var(--ff-heading); font-size: var(--fs-xl); text-transform: uppercase; }

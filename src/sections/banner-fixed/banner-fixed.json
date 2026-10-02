@@ -1,0 +1,14 @@
+{
+  "settings": {
+    "image": "/assets/banner/fall-desktop.webp",
+    "image_mobile": "/assets/banner/fall-mobile.webp",
+    "height": "short",
+    "shade": 0.12,
+    "caption": "",
+    "heading": "Fall '26",
+    "cta_label": "",
+    "link": "/collection.html?c=new-arrivals",
+    "panel_tone": "light",
+    "blur": 8
+  }
+}

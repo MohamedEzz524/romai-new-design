@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ settings.shop_name }} — Sections</title>
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="/src/js/main.js"></script>
+  <style>
+    .sections-spacer { height: 40vh; display: grid; place-items: center; color: var(--color-fg-3); font-size: var(--fs-xs); letter-spacing: var(--ls-wide); text-transform: uppercase; }
+  </style>
+</head>
+<body class="template-{{ template }}">
+  {% section 'header' %}
+  {% comment %} Section preview page: everything except the preloader and the WebGL hero, with spacers so fixed/scroll effects can be seen. {% endcomment %}
+  <main id="main" class="main">
+    <div class="sections-spacer">scroll ↓</div>
+    {% section 'banner-fixed' %}
+    {% section 'lookbook-strip' %}
+    {% section 'fitting' %}
+    <div class="sections-spacer">end</div>
+    {% section 'store-collage' %}
+  </main>
+  {% section 'footer' %}
+</body>
+</html>

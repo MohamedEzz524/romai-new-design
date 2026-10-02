@@ -1,0 +1,79 @@
+/* =====================================================================
+   Reveal animations (driven by src/js/reveal.js)
+   Hidden state applies only when JS runs (.js on <html>); .is-inview plays it.
+   Tunables per element: --rv-delay, --rv-duration, --rv-stagger, --rv-ease,
+   --rv-distance.
+   ===================================================================== */
+:root {
+  --rv-duration: 1100ms;
+  --rv-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --rv-ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+  --rv-distance: 2rem;
+  --rv-stagger: 35ms;
+}
+
+/* ---------- block reveals ---------- */
+.js [data-reveal]:not([data-reveal-split]) {
+  transition:
+    opacity var(--rv-duration) var(--rv-ease) var(--rv-delay, 0ms),
+    transform var(--rv-duration) var(--rv-ease) var(--rv-delay, 0ms),
+    filter var(--rv-duration) var(--rv-ease) var(--rv-delay, 0ms),
+    clip-path var(--rv-duration) var(--rv-ease-io) var(--rv-delay, 0ms);
+}
+.js [data-reveal='']:not(.is-inview),
+.js [data-reveal='up']:not(.is-inview)       { opacity: 0; transform: translate3d(0, var(--rv-distance), 0); }
+.js [data-reveal='down']:not(.is-inview)     { opacity: 0; transform: translate3d(0, calc(var(--rv-distance) * -1), 0); }
+.js [data-reveal='left']:not(.is-inview)     { opacity: 0; transform: translate3d(calc(var(--rv-distance) * -1.5), 0, 0); }
+.js [data-reveal='right']:not(.is-inview)    { opacity: 0; transform: translate3d(calc(var(--rv-distance) * 1.5), 0, 0); }
+.js [data-reveal='fade']:not(.is-inview)     { opacity: 0; }
+.js [data-reveal='scale']:not(.is-inview)    { opacity: 0; transform: scale(0.94); }
+.js [data-reveal='zoom-out']:not(.is-inview) { transform: scale(1.14); }
+.js [data-reveal='blur']:not(.is-inview)     { opacity: 0; filter: blur(14px); transform: scale(1.03); }
+/* clip reveals keep full opacity and uncover the element */
+.js [data-reveal='mask-up']:not(.is-inview)     { clip-path: inset(100% 0 0 0); }
+.js [data-reveal='wipe']:not(.is-inview)        { clip-path: inset(0 100% 0 0); }
+.js [data-reveal='wipe-center']:not(.is-inview) { clip-path: inset(0 50% 0 50%); }
+.js [data-reveal='mask-up'], .js [data-reveal='wipe'], .js [data-reveal='wipe-center'] { clip-path: inset(0 0 0 0); }
+
+/* stretch-x: grows out from the centre line (transform, so it is safe on backdrop-filter elements) */
+.js [data-reveal='stretch-x']:not(.is-inview) { transform: scaleX(0); }
+.js [data-reveal='stretch-x'] { transition-timing-function: var(--rv-ease-io); }
+
+/* stretch-y: grows taller from its centre line (transform, safe on backdrop-filter elements) */
+.js [data-reveal='stretch-y']:not(.is-inview) { transform: scaleY(0); }
+.js [data-reveal='stretch-y'] { transition-timing-function: var(--rv-ease-io); }
+
+/* trigger: no style of its own, only adds .is-inview for descendants to key off */
+.js [data-reveal='trigger'] { transition: none; }
+
+/* ---------- split text ---------- */
+[data-reveal-split] .rv-word { display: inline-block; white-space: nowrap; }
+[data-reveal-split] .rv-mask { display: inline-block; vertical-align: top; }
+[data-reveal-split] .rv-piece { display: inline-block; }
+
+.js [data-reveal-split] .rv-piece {
+  transition:
+    transform var(--rv-duration) var(--rv-ease),
+    opacity var(--rv-duration) var(--rv-ease),
+    filter var(--rv-duration) var(--rv-ease);
+  transition-delay: calc(var(--rv-delay, 0ms) + var(--i, 0) * var(--rv-stagger));
+}
+
+/* chars-up / words-up / lines-up: each piece rises out of its own mask */
+.js [data-reveal='chars-up'] .rv-mask,
+.js [data-reveal='words-up'] .rv-mask,
+.js [data-reveal='lines-up'] .rv-mask { overflow: hidden; padding-block: 0.08em; margin-block: -0.08em; }
+.js [data-reveal='chars-up']:not(.is-inview) .rv-piece,
+.js [data-reveal='words-up']:not(.is-inview) .rv-piece,
+.js [data-reveal='lines-up']:not(.is-inview) .rv-piece { transform: translate3d(0, 110%, 0) rotate(6deg); }
+
+/* chars-blur: each char drifts in from the right out of a blur */
+.js [data-reveal='chars-blur']:not(.is-inview) .rv-piece { opacity: 0; filter: blur(10px); transform: translate3d(0.35em, 0, 0); }
+
+/* chars-fade */
+.js [data-reveal='chars-fade']:not(.is-inview) .rv-piece { opacity: 0; }
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal], .js [data-reveal] .rv-piece { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+}

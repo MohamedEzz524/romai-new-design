@@ -1,0 +1,228 @@
+/* =====================================================================
+   ROMAI design tokens
+   One source of truth for colour, type, space, radius, motion, layers.
+   Maps 1:1 onto Shopify theme settings later (settings_schema.json).
+   ===================================================================== */
+:root {
+  /* ---------- Raw palette ---------- */
+  --black:    #0B0B0B;
+  --black-2:  #121212;
+  --black-3:  #1A1A1A;
+  --black-4:  #262626;
+  --white:    #FFFFFF;
+  --cream:    #FFF9F7;
+  --sand:     #EDE6DC;
+  --amber:    #FFBF00;
+  --amber-2:  #FFD24D;   /* hover / highlight */
+  --amber-3:  #CC9900;   /* pressed / on light bg */
+
+  /* ---------- Semantic colours (dark scheme is the brand default) ---------- */
+  --color-bg:            var(--black);
+  --color-bg-elev:       var(--black-2);
+  --color-bg-elev-2:     var(--black-3);
+  --color-fg:            var(--white);
+  --color-fg-2:          rgb(255 255 255 / 0.72);   /* body copy on dark */
+  --color-fg-3:          rgb(255 255 255 / 0.48);   /* captions, meta */
+  --color-line:          rgb(255 255 255 / 0.12);
+  --color-line-strong:   rgb(255 255 255 / 0.28);
+  --color-overlay:       rgb(11 11 11 / 0.55);
+  --color-accent:        var(--amber);
+  --color-accent-hover:  var(--amber-2);
+  --color-on-accent:     var(--black);
+
+  --color-success: #38A86A;
+  --color-error:   #E5484D;
+  --color-warning: #FEB238;
+  --color-info:    #00B6D7;
+
+  /* Buttons */
+  --btn-primary-bg:          var(--white);
+  --btn-primary-fg:          var(--black);
+  --btn-primary-bg-hover:    var(--amber);
+  --btn-primary-fg-hover:    var(--black);
+  --btn-secondary-bg:        transparent;
+  --btn-secondary-fg:        var(--white);
+  --btn-secondary-border:    rgb(255 255 255 / 0.28);
+  --btn-secondary-bg-hover:  var(--white);
+  --btn-secondary-fg-hover:  var(--black);
+
+  /* ---------- Typography ---------- */
+  --ff-display: 'SeroThunder', 'Inter', system-ui, sans-serif;
+  --ff-heading: 'Burberry House', Georgia, 'Times New Roman', serif;
+  --ff-body:    'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ff-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Fluid type scale (min at 360px -> max at ~1440px) */
+  --fs-2xs:     0.6875rem;                                  /* 11 */
+  --fs-xs:      0.75rem;                                    /* 12 */
+  --fs-sm:      0.875rem;                                   /* 14 */
+  --fs-base:    1rem;                                       /* 16 */
+  --fs-md:      1.125rem;                                   /* 18 */
+  --fs-lg:      clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);   /* 20-24 */
+  --fs-xl:      clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);     /* 24-36 */
+  --fs-2xl:     clamp(2rem, 1.4rem + 2.6vw, 3.5rem);        /* 32-56 */
+  --fs-3xl:     clamp(2.5rem, 1.5rem + 4.5vw, 5rem);        /* 40-80 */
+  --fs-display: clamp(3rem, 1rem + 9.5vw, 9.5rem);          /* 48-152 */
+
+  --lh-none:    1;
+  --lh-tight:   0.95;
+  --lh-snug:    1.1;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.65;
+
+  --ls-tight:   -0.02em;
+  --ls-normal:  0;
+  --ls-wide:    0.08em;
+  --ls-wider:   0.14em;
+
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    800;
+
+  /* ---------- Spacing (4pt scale) ---------- */
+  --sp-1:  0.25rem;   /* 4  */
+  --sp-2:  0.5rem;    /* 8  */
+  --sp-3:  0.75rem;   /* 12 */
+  --sp-4:  1rem;      /* 16 */
+  --sp-5:  1.25rem;   /* 20 */
+  --sp-6:  1.5rem;    /* 24 */
+  --sp-8:  2rem;      /* 32 */
+  --sp-10: 2.5rem;    /* 40 */
+  --sp-12: 3rem;      /* 48 */
+  --sp-16: 4rem;      /* 64 */
+  --sp-20: 5rem;      /* 80 */
+  --sp-24: 6rem;      /* 96 */
+  --sp-32: 8rem;      /* 128 */
+
+  /* ---------- Layout ---------- */
+  --page-margin:    clamp(1rem, 1.6vw + 0.5rem, 3rem);   /* 16 -> 48 */
+  --section-py:     clamp(3rem, 6vw, 7rem);              /* 48 -> 112 */
+  --section-py-sm:  clamp(2rem, 4vw, 4rem);
+  --grid-gap:       clamp(0.75rem, 1.4vw, 1.5rem);       /* 12 -> 24 */
+  --content-max:    1680px;
+  --content-narrow: 960px;
+  --header-h:       4.5rem;   /* 72 */
+  --header-h-mb:    3.75rem;  /* 60 */
+
+  /* ---------- Actions (buttons, chips, links) ---------- */
+  --action-h:        3rem;
+  --action-px:       2.25rem;
+  --action-radius:   0;          /* classic: square buttons */
+  --action-size:     0.72rem;
+  --action-weight:   500;
+  --action-tracking: 0.14em;
+  --chip-h:          2rem;
+  --chip-px:         1.5rem;
+  --chip-radius:     999px;
+  --chip-size:       0.68rem;
+
+  /* ---------- Radius ---------- */
+  --r-xs:   2px;
+  --r-sm:   4px;
+  --r-md:   8px;
+  --r-lg:   16px;
+  --r-xl:   24px;
+  --r-pill: 999px;
+
+  /* ---------- Motion ---------- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in:     cubic-bezier(0.55, 0, 1, 0.45);
+  --dur-fast:    150ms;
+  --dur:         300ms;
+  --dur-slow:    600ms;
+  --dur-reveal:  900ms;
+
+  /* ---------- Layers ---------- */
+  --z-below:  -1;
+  --z-base:   0;
+  --z-raised: 10;
+  --z-sticky: 50;
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-modal:  300;
+  --z-toast:  400;
+
+  /* ---------- Shadows ---------- */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 8px 24px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 24px 64px rgb(0 0 0 / 0.55);
+  --shadow-accent: 0 0 0 1px var(--amber), 0 8px 32px rgb(255 191 0 / 0.25);
+
+  color-scheme: dark;
+}
+
+/* ---------- Colour schemes (apply to any section / block) ---------- */
+.scheme-dark {
+  --color-bg:           var(--black);
+  --color-bg-elev:      var(--black-2);
+  --color-bg-elev-2:    var(--black-3);
+  --color-fg:           var(--white);
+  --color-fg-2:         rgb(255 255 255 / 0.72);
+  --color-fg-3:         rgb(255 255 255 / 0.48);
+  --color-line:         rgb(255 255 255 / 0.12);
+  --color-line-strong:  rgb(255 255 255 / 0.28);
+  --color-accent:       var(--amber);
+  --color-accent-hover: var(--amber-2);
+  --btn-primary-bg:         var(--white);
+  --btn-primary-fg:         var(--black);
+  --btn-primary-bg-hover:   var(--amber);
+  --btn-primary-fg-hover:   var(--black);
+  --btn-secondary-fg:       var(--white);
+  --btn-secondary-border:   rgb(255 255 255 / 0.28);
+  --btn-secondary-bg-hover: var(--white);
+  --btn-secondary-fg-hover: var(--black);
+  color-scheme: dark;
+}
+
+.scheme-light {
+  --color-bg:           var(--cream);
+  --color-bg-elev:      var(--white);
+  --color-bg-elev-2:    var(--sand);
+  --color-fg:           var(--black);
+  --color-fg-2:         rgb(11 11 11 / 0.72);
+  --color-fg-3:         rgb(11 11 11 / 0.5);
+  --color-line:         rgb(11 11 11 / 0.12);
+  --color-line-strong:  rgb(11 11 11 / 0.3);
+  --color-accent:       var(--amber-3);
+  --color-accent-hover: var(--amber);
+  --btn-primary-bg:         var(--black);
+  --btn-primary-fg:         var(--white);
+  --btn-primary-bg-hover:   var(--amber);
+  --btn-primary-fg-hover:   var(--black);
+  --btn-secondary-fg:       var(--black);
+  --btn-secondary-border:   rgb(11 11 11 / 0.3);
+  --btn-secondary-bg-hover: var(--black);
+  --btn-secondary-fg-hover: var(--white);
+  color-scheme: light;
+}
+
+.scheme-accent {
+  --color-bg:           var(--amber);
+  --color-bg-elev:      var(--amber-2);
+  --color-bg-elev-2:    var(--amber-3);
+  --color-fg:           var(--black);
+  --color-fg-2:         rgb(11 11 11 / 0.78);
+  --color-fg-3:         rgb(11 11 11 / 0.55);
+  --color-line:         rgb(11 11 11 / 0.15);
+  --color-line-strong:  rgb(11 11 11 / 0.35);
+  --color-accent:       var(--black);
+  --color-accent-hover: var(--black-3);
+  --btn-primary-bg:         var(--black);
+  --btn-primary-fg:         var(--white);
+  --btn-primary-bg-hover:   var(--white);
+  --btn-primary-fg-hover:   var(--black);
+  --btn-secondary-fg:       var(--black);
+  --btn-secondary-border:   rgb(11 11 11 / 0.4);
+  --btn-secondary-bg-hover: var(--black);
+  --btn-secondary-fg-hover: var(--white);
+  color-scheme: light;
+}
+
+.scheme-dark, .scheme-light, .scheme-accent {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}

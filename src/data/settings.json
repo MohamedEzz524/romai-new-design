@@ -1,0 +1,52 @@
+{
+  "shop_name": "ROMAI",
+  "tagline": "Built for the cold. Worn in the city.",
+  "currency": "USD",
+  "currency_symbol": "$",
+  "logo": "/assets/logo.png",
+  "logo_letters": "/assets/romai-logo-letters.webp",
+  "announcement": "Free worldwide shipping on orders over $200",
+  "menu_main": [
+    { "title": "New Arrivals", "url": "/collection.html?c=new-arrivals" },
+    { "title": "Men", "url": "/collection.html?c=men" },
+    { "title": "Women", "url": "/collection.html?c=women" },
+    { "title": "Outerwear", "url": "/collection.html?c=outerwear" },
+    { "title": "Collections", "url": "/collections.html" },
+    { "title": "Lookbook", "url": "/lookbook.html" },
+    { "title": "About", "url": "/about.html" }
+  ],
+  "menu_footer": [
+    {
+      "title": "Shop",
+      "links": [
+        { "title": "New Arrivals", "url": "#" },
+        { "title": "Best Sellers", "url": "#" },
+        { "title": "Jackets", "url": "#" },
+        { "title": "Accessories", "url": "#" }
+      ]
+    },
+    {
+      "title": "Help",
+      "links": [
+        { "title": "Shipping and Returns", "url": "#" },
+        { "title": "Sizing Chart", "url": "#" },
+        { "title": "FAQs", "url": "#" },
+        { "title": "Contact", "url": "#" }
+      ]
+    },
+    {
+      "title": "Company",
+      "links": [
+        { "title": "About Romai", "url": "#" },
+        { "title": "Find a Store", "url": "#" },
+        { "title": "Lookbook", "url": "#" },
+        { "title": "Privacy Policy", "url": "#" }
+      ]
+    }
+  ],
+  "social": [
+    { "name": "Instagram", "url": "https://instagram.com" },
+    { "name": "TikTok", "url": "https://tiktok.com" },
+    { "name": "YouTube", "url": "https://youtube.com" }
+  ]
+}

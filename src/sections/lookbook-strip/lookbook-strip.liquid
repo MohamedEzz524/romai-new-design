@@ -1,0 +1,58 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section
+  class="strip scheme-{{ s.scheme | default: 'light' }}"
+  data-section="lookbook-strip"
+  aria-label="Capsules"
+>
+  <div class="strip__pin">
+    <canvas class="strip__canvas" data-strip-canvas></canvas>
+
+    {%- comment -%} Accessible / no-JS fallback: the capsules as plain links {%- endcomment -%}
+    <ul class="strip__fallback" role="list">
+      {%- for block in section.blocks -%}
+        <li><a href="{{ block.settings.url }}"><img src="{{ block.settings.image_1 }}" alt="" loading="lazy"><span>{{ block.settings.name }}</span></a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <script type="application/json" data-strip-config>
+  {
+    "tilt": {{ s.tilt | default: 10 }},
+    "variants": [
+      {%- for block in section.blocks -%}
+        {
+          "name": {{ block.settings.name | json }},
+          "url": {{ block.settings.url | json }},
+          "images": [{{ block.settings.image_1 | json }}, {{ block.settings.image_2 | json }}, {{ block.settings.image_3 | json }}]
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Lookbook strip",
+  "tag": "section",
+  "class": "section-lookbook-strip",
+  "settings": [
+    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "light", "options": [
+      { "value": "light", "label": "Light" }, { "value": "dark", "label": "Dark" }
+    ] },
+    { "type": "range", "id": "tilt", "label": "Card tilt (deg)", "min": 0, "max": 16, "step": 1, "default": 10 }
+  ],
+  "blocks": [
+    { "type": "variant", "name": "Capsule", "limit": 3, "settings": [
+      { "type": "text", "id": "name", "label": "Name", "default": "Capsule 01" },
+      { "type": "url", "id": "url", "label": "Link" },
+      { "type": "image_picker", "id": "image_1", "label": "Slot 1 image (same subject across capsules)" },
+      { "type": "image_picker", "id": "image_2", "label": "Slot 2 image" },
+      { "type": "image_picker", "id": "image_3", "label": "Slot 3 image" }
+    ] }
+  ],
+  "presets": [{ "name": "Lookbook strip" }]
+}
+{% endschema %}
