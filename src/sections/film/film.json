@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "label": "07. Romai film",
+    "heading": "A Vision in Motion",
+    "text": "Experience the essence of <strong>Romai</strong> through film. Our <strong>cinematic</strong> journey brings to life the bold, artistic spirit behind each collection. <strong>Watch</strong> as our designs move, <strong>inspire,</strong> and tell stories of individuality, strength, and rebellion.",
+    "video": "/assets/film/film.mp4",
+    "poster": "/assets/film/poster.webp",
+    "link": "/lookbook.html",
+    "cursor_text": "Discover",
+    "scroll_tip": "<strong>Tip:</strong> scroll to dive",
+    "scroll_length": 2.7
+  }
+}

@@ -1,0 +1,133 @@
+/* =====================================================================
+   Film (vision in motion), ported from the Romai theme section
+   "custom-sero-film". Scale unit --sr follows the original:
+   360 design px on phones, 768 on tablets, 1440 on desktop.
+   The pentagon mask grows from 30% to 440% of the width while the
+   film is pinned, and the video eases from 1.2x to 1x over the first 30%.
+   ===================================================================== */
+.film {
+  --sr: 2.6666667vw;
+  --film-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='95.106' viewBox='0 0 100 95.106'%3E%3Cpath fill='%23000' d='M50 0 100 36.327 80.902 95.106H19.098L0 36.327z'/%3E%3C/svg%3E");
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: calc(12.6 * var(--sr));
+  background: var(--black);
+  color: #fff;
+  overflow: clip;
+}
+@media (min-width: 768px) { .film { --sr: 1.3020833vw; padding-top: calc(10 * var(--sr)); } }
+@media (min-width: 1024px) { .film { --sr: 0.6944444vw; padding-top: calc(18 * var(--sr)); } }
+
+.film__head { position: relative; z-index: 2; padding: 0 calc(1.6 * var(--sr)); }
+@media (min-width: 768px) { .film__head { padding: 0 calc(3.2 * var(--sr)); } }
+@media (min-width: 1024px) { .film__head { padding: 0 calc(3.5 * var(--sr)); } }
+
+.film__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: calc(3.9 * var(--sr)); }
+@media (min-width: 1024px) { .film__top { margin-bottom: calc(-4 * var(--sr)); } }
+.film__label {
+  margin: 0;
+  color: var(--amber);
+  font-family: var(--ff-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.film__icons { display: flex; }
+.film__icons img {
+  display: block;
+  width: max(32px, calc(3.2 * var(--sr)));
+  height: max(32px, calc(3.2 * var(--sr)));
+  border-radius: 50%;
+  filter: invert(1);
+}
+
+.film__heading {
+  margin: 0;
+  font-family: var(--ff-heading);
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-transform: uppercase;
+}
+@media (max-width: 767px) { .film__heading { font-size: 3rem; } }
+.film__dot { display: inline-block; width: 0.45em; height: 0.45em; margin-left: 0.05em; vertical-align: baseline; }
+
+.film__text {
+  margin: calc(1.6 * var(--sr)) auto 0;
+  font-family: var(--ff-body);
+  font-size: calc(1.2 * var(--sr));
+  font-weight: 600;
+  line-height: calc(1.2 * var(--sr));
+  letter-spacing: calc(-0.04 * var(--sr));
+  text-align: center;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) { .film__text { width: calc(66.9 * var(--sr)); } }
+.film__text strong, .film__tip strong { color: var(--amber); font-weight: inherit; }
+
+/* pinned stage */
+.film__track { position: relative; height: calc(100vh * var(--film-len, 2.7)); margin-top: -25vh; }
+.film__pin { position: sticky; top: 0; height: 100vh; height: 100svh; }
+.film__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  -webkit-mask: var(--film-mask) 50% 50% / var(--maskW, 30%) no-repeat;
+          mask: var(--film-mask) 50% 50% / var(--maskW, 30%) no-repeat;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.film.is-ready .film__stage, .no-js .film__stage { opacity: 1; }
+.film__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(var(--film-zoom, 1.2));
+  transform-origin: 50% 50%;
+}
+
+.film__tip {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  z-index: 0;
+  margin: 0;
+  translate: -50% 0;
+  font-family: var(--ff-body);
+  font-size: max(11px, calc(0.9 * var(--sr)));
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* "[ DISCOVER ]" follows the pointer inside the pentagon (desktop) */
+.film__cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: #fff;
+  font-family: var(--ff-heading);
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.film__cursor b { font-weight: 300; }
+.film__cursor.is-visible { opacity: 1; }
+@media (max-width: 1023px) { .film__cursor { display: none; } }
