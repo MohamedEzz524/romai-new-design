@@ -1,0 +1,15 @@
+{
+  "settings": {
+    "link": "/about.html",
+    "bg_image": "/assets/bold/bg.webp",
+    "overlay_image": "/assets/bold/overlay.webp",
+    "main_image": "/assets/bold/model.webp",
+    "top_title": "Space",
+    "top_title_note": "transformation",
+    "top_text": "our pieces are built to <strong>LAST</strong>, not to be<i>REPLACED.</i>",
+    "cursor_text": "Who we are",
+    "bottom_title": "Freedom",
+    "bottom_title_note": "creative",
+    "bottom_text": "<strong>ROMAI</strong>&nbsp;is about wearing what empowers you – what mirrors your <strong>emotions,</strong> your <strong>energy,</strong> your <strong>essence.</strong>"
+  }
+}
