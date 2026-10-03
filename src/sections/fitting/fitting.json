@@ -1,7 +1,7 @@
 {
   "settings": {
     "label": "Customize",
-    "fit2sub_image": "/assets/fitting/fit2Sub.jpg",
+    "fit2sub_image": "/assets/fitting/fit2Sub.webp",
     "origin_card": 2,
     "walk_image_pc": "/assets/fitting/subdivide_0_pc.jpg",
     "walk_image_sp": "/assets/fitting/subdivide_0_sp.jpg"
@@ -10,35 +10,35 @@
     {
       "type": "item",
       "settings": {
-        "image": "/assets/fitting/fitting_0.jpg",
+        "image": "/assets/fitting/fitting_0.webp",
         "name": "SHIRT"
       }
     },
     {
       "type": "item",
       "settings": {
-        "image": "/assets/fitting/fitting_1.jpg",
+        "image": "/assets/fitting/fitting_1.webp",
         "name": "TROUSERS"
       }
     },
     {
       "type": "item",
       "settings": {
-        "image": "/assets/fitting/fitting_2.jpg",
+        "image": "/assets/fitting/fitting_2.webp",
         "name": "JACKET"
       }
     },
     {
       "type": "item",
       "settings": {
-        "image": "/assets/fitting/fitting_3.jpg",
+        "image": "/assets/fitting/fitting_3.webp",
         "name": "MODEL"
       }
     },
     {
       "type": "item",
       "settings": {
-        "image": "/assets/fitting/fitting_4.jpg",
+        "image": "/assets/fitting/fitting_4.webp",
         "name": "OVERCOAT"
       }
     },

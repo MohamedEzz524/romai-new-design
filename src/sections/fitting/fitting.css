@@ -332,6 +332,11 @@
 .fitting-section .walk .walk__center .walk__img { animation: fitting-walk-img-leaveBack 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
 .fitting-section .walk.on0 .walk__center .walk__img { animation: fitting-walk-img-show 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) forwards; }
 .fitting-section .walk.on1 { animation: fitting-walk-move1-sp 0.3s ease-in forwards; }
+/* once the frames walk down the rows their photos fade out (alpha1 / alpha2) and only the
+   ivory outline should remain over the cards: drop the solid fill they need on row 0 */
+.fitting-section .walk.on1 .walk__left,
+.fitting-section .walk.on1 .walk__center,
+.fitting-section .walk.on1 .walk__right { background-color: transparent; }
 .fitting-section .walk.on1 .walk__left .walk__img,
 .fitting-section .walk.on1 .walk__center .walk__img,
 .fitting-section .walk.on1 .walk__right .walk__img { animation: fitting-walk-img-show 0s forwards; }
