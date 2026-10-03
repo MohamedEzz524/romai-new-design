@@ -188,5 +188,3 @@
   .js .store-collage__grid .store-collage__card::after { animation: none; }
 }
 
-/* light street-map image on the dark brand: invert to a dark map, keep it neutral */
-.store-collage__img--map { filter: invert(1) grayscale(1) brightness(0.82) contrast(1.1); }

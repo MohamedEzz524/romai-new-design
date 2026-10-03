@@ -41,7 +41,6 @@
   width: max(32px, calc(3.2 * var(--sr)));
   height: max(32px, calc(3.2 * var(--sr)));
   border-radius: 50%;
-  filter: invert(1);
 }
 
 .film__heading {

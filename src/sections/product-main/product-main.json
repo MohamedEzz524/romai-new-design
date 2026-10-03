@@ -28,8 +28,8 @@
     {
       "type": "image",
       "settings": {
-        "image": "/assets/product/freya-pant-1.jpg",
-        "thumb": "/assets/product/freya-pant-1-thumb.jpg",
+        "image": "/assets/product/freya-pant-1.webp",
+        "thumb": "/assets/product/freya-pant-1-thumb.webp",
         "alt": "FREYA LEATHER PANT",
         "width": 2000,
         "height": 3000
@@ -38,8 +38,8 @@
     {
       "type": "image",
       "settings": {
-        "image": "/assets/product/freya-pant-2.jpg",
-        "thumb": "/assets/product/freya-pant-2-thumb.jpg",
+        "image": "/assets/product/freya-pant-2.webp",
+        "thumb": "/assets/product/freya-pant-2-thumb.webp",
         "alt": "FREYA LEATHER PANT",
         "width": 2000,
         "height": 3000
@@ -48,8 +48,8 @@
     {
       "type": "image",
       "settings": {
-        "image": "/assets/product/freya-pant-3.jpg",
-        "thumb": "/assets/product/freya-pant-3-thumb.jpg",
+        "image": "/assets/product/freya-pant-3.webp",
+        "thumb": "/assets/product/freya-pant-3-thumb.webp",
         "alt": "FREYA LEATHER PANT",
         "width": 2000,
         "height": 3000
@@ -58,8 +58,8 @@
     {
       "type": "image",
       "settings": {
-        "image": "/assets/product/freya-pant-4.jpg",
-        "thumb": "/assets/product/freya-pant-4-thumb.jpg",
+        "image": "/assets/product/freya-pant-4.webp",
+        "thumb": "/assets/product/freya-pant-4-thumb.webp",
         "alt": "FREYA LEATHER PANT",
         "width": 2000,
         "height": 3000
@@ -68,8 +68,8 @@
     {
       "type": "image",
       "settings": {
-        "image": "/assets/product/freya-pant-5.jpg",
-        "thumb": "/assets/product/freya-pant-5-thumb.jpg",
+        "image": "/assets/product/freya-pant-5.webp",
+        "thumb": "/assets/product/freya-pant-5-thumb.webp",
         "alt": "FREYA LEATHER PANT",
         "width": 2000,
         "height": 3000
@@ -132,7 +132,7 @@
       "settings": {
         "title": "FREYA PUFFER LEATHER JACKET",
         "url": "/product.html?p=freya-puffer-jacket",
-        "thumb": "/assets/product/freya-puffer-jacket-thumb.jpg",
+        "thumb": "/assets/product/freya-puffer-jacket-thumb.webp",
         "current": false
       }
     },
@@ -141,7 +141,7 @@
       "settings": {
         "title": "FREYA LEATHER PANT",
         "url": "/product.html",
-        "thumb": "/assets/product/freya-pant-1-thumb.jpg",
+        "thumb": "/assets/product/freya-pant-1-thumb.webp",
         "current": true
       }
     },
@@ -150,7 +150,7 @@
       "settings": {
         "title": "NIKITA BODY sable",
         "url": "/product.html?p=nikita-body",
-        "thumb": "/assets/product/nikita-body-sable-thumb.jpg",
+        "thumb": "/assets/product/nikita-body-sable-thumb.webp",
         "current": false
       }
     }

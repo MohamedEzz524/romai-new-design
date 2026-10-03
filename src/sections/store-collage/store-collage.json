@@ -28,8 +28,7 @@
         "url": "https://maps.google.com",
         "label": "see on google maps",
         "line_1": "27 rue de Saintonge",
-        "line_2": "75003 Paris",
-        "dark_map": true
+        "line_2": "75003 Paris"
       }
     }
   ]

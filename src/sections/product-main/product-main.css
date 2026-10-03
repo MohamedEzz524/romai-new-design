@@ -236,7 +236,7 @@
 @media screen and (max-width: 900px) {
   .pm-thumb { height: 29px; }
   .pm-thumb__media { width: 29px; height: 29px; }
-  .pm-thumb.is-current { outline: 0.9px solid var(--pm-black); }
+  .pm-thumb.is-current { outline: none; }
 }
 
 /* ---------- page info ---------- */
@@ -724,4 +724,42 @@
 /* phones: Materials / Shipping copy matches the description */
 @media screen and (max-width: 900px) {
   .pm-panels .pm-panel__content { font-family: var(--pm-ff-serif); font-size: 12.5px; line-height: 1.5; letter-spacing: 0; text-transform: none; font-weight: 400; }
+}
+
+/* ---------- selection rings: whole-pixel and drawn inside the element ----------
+   Sub-pixel outlines (0.5px / 0.9px) are dropped by the browser at some zoom
+   levels and screen densities, so the current colour / image could lose its ring.
+   Swatch: 1px ring on the edge, 2px gap, colour fills the content box. */
+.pm-color {
+  width: 28px;
+  height: 18px;
+  padding: 2px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  outline: none;
+  background: var(--swatch, #ccc) content-box;
+  box-shadow: inset 0 0 0 2px var(--obsidian);
+  transition: border-color 0.2s ease;
+}
+.pm-color::before {                       /* hairline on the colour itself, so near-black swatches still show */
+  content: '';
+  position: absolute;
+  inset: 2px;
+  box-shadow: inset 0 0 0 1px var(--pm-line-strong);
+  pointer-events: none;
+}
+.pm-color:hover { border-color: var(--pm-grey); }
+.pm-color.is-active { border-color: var(--pm-accent); outline: none; }
+.pm-color.is-oos::after { inset: 2px; }
+.pm-color:focus-visible { outline: 1px solid var(--pm-accent); outline-offset: 2px; }
+
+.pm-thumb { position: relative; }
+.pm-thumb.is-current { outline: none; }
+.pm-thumb.is-current::after {            /* ring above the image, inside the box */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--pm-black);
+  pointer-events: none;
 }
