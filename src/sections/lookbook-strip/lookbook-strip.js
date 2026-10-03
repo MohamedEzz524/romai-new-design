@@ -100,8 +100,9 @@ class LookbookStrip {
     this.travel = 3 * this.pitch
     this.root.style.height = `${vh + this.travel}px`
     const cs = getComputedStyle(this.root)
-    this.colors.bg = cs.getPropertyValue('--strip-bg').trim() || '#F2F3F5'
-    this.colors.fg = cs.getPropertyValue('--strip-fg').trim() || '#222'
+    this.colors.bg = cs.getPropertyValue('--strip-bg').trim() || '#0B0B0B'
+    this.colors.fg = cs.getPropertyValue('--strip-fg').trim() || '#F7F5EF'
+    this.colors.ph = cs.getPropertyValue('--strip-ph').trim() || 'rgba(217,209,198,.08)'
     this.font = getComputedStyle(document.documentElement).getPropertyValue('--ff-heading').trim() || 'Georgia, serif'
     this.draw()
   }
@@ -195,7 +196,7 @@ class LookbookStrip {
         ctx.translate(sl + cardW / 2, cy)
         ctx.rotate(ang)
         if (img) this.drawCover(img, -cardW / 2, -cardH / 2, cardW, cardH)
-        else { ctx.fillStyle = 'rgba(127,127,127,.18)'; ctx.fillRect(-cardW / 2, -cardH / 2, cardW, cardH) }
+        else { ctx.fillStyle = this.colors.ph; ctx.fillRect(-cardW / 2, -cardH / 2, cardW, cardH) }
         ctx.restore()
       }
       ctx.restore()

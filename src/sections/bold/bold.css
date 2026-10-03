@@ -75,9 +75,9 @@
   letter-spacing: -0.04em;
   text-transform: uppercase;
 }
-.bold__text strong { color: var(--amber); font-weight: inherit; }
+.bold__text strong { color: var(--color-accent); font-weight: inherit; }
 .bold__text--top { width: max(180px, calc(18.3 * var(--sr))); }
-.bold__text--top i { margin-left: calc(5.5 * var(--sr)); color: var(--amber); font-style: normal; }
+.bold__text--top i { margin-left: calc(5.5 * var(--sr)); color: var(--color-accent); font-style: normal; }
 
 /* "BOLD FASHION" overlay and model cut-out */
 .bold__overlay {
@@ -161,3 +161,8 @@
   .bold__cursor b { font-weight: 300; }
   .bold__cursor.is-visible { opacity: 1; }
 }
+
+/* brand palette: the source images are gold / orange. Pull them to the neutral
+   sand-taupe range (desaturate, then a light warm tint) so nothing reads orange */
+.bold__bg img { filter: grayscale(1) sepia(0.22) saturate(0.7) brightness(0.85) contrast(1.05); }
+.bold__overlay img { filter: grayscale(1) sepia(0.28) saturate(0.6) brightness(1.08) contrast(1.05); }

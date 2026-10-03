@@ -5,26 +5,34 @@
    ===================================================================== */
 :root {
   /* ---------- Raw palette ---------- */
-  --black:    #0B0B0B;
-  --black-2:  #121212;
-  --black-3:  #1A1A1A;
-  --black-4:  #262626;
-  --white:    #FFFFFF;
-  --cream:    #FFF9F7;
-  --sand:     #EDE6DC;
-  --amber:    #FFBF00;
-  --amber-2:  #FFD24D;   /* hover / highlight */
-  --amber-3:  #CC9900;   /* pressed / on light bg */
+  /* Brand palette (Romai branding board, 2026): dark theme, no orange / gold */
+  --obsidian: #0B0B0B;
+  --espresso: #3A2F27;
+  --taupe:    #A89B8F;
+  --sand:     #D9D1C6;
+  --ivory:    #F7F5EF;
+
+  --black:    var(--obsidian);
+  --black-2:  #13110F;   /* obsidian warmed towards espresso: raised surfaces */
+  --black-3:  #1C1916;
+  --black-4:  #27221E;
+  --white:    var(--ivory);
+  --cream:    var(--ivory);
+
+  /* legacy accent names: the old amber now resolves to the brand neutrals */
+  --amber:    var(--sand);
+  --amber-2:  var(--ivory);   /* hover / highlight */
+  --amber-3:  var(--taupe);   /* pressed / muted */
 
   /* ---------- Semantic colours (dark scheme is the brand default) ---------- */
   --color-bg:            var(--black);
   --color-bg-elev:       var(--black-2);
   --color-bg-elev-2:     var(--black-3);
   --color-fg:            var(--white);
-  --color-fg-2:          rgb(255 255 255 / 0.72);   /* body copy on dark */
-  --color-fg-3:          rgb(255 255 255 / 0.48);   /* captions, meta */
-  --color-line:          rgb(255 255 255 / 0.12);
-  --color-line-strong:   rgb(255 255 255 / 0.28);
+  --color-fg-2:          rgb(247 245 239 / 0.72);   /* body copy on dark */
+  --color-fg-3:          rgb(247 245 239 / 0.5);   /* captions, meta */
+  --color-line:          rgb(217 209 198 / 0.14);
+  --color-line-strong:   rgb(217 209 198 / 0.32);
   --color-overlay:       rgb(11 11 11 / 0.55);
   --color-accent:        var(--amber);
   --color-accent-hover:  var(--amber-2);
@@ -42,7 +50,7 @@
   --btn-primary-fg-hover:    var(--black);
   --btn-secondary-bg:        transparent;
   --btn-secondary-fg:        var(--white);
-  --btn-secondary-border:    rgb(255 255 255 / 0.28);
+  --btn-secondary-border:    rgb(217 209 198 / 0.32);
   --btn-secondary-bg-hover:  var(--white);
   --btn-secondary-fg-hover:  var(--black);
 
@@ -150,7 +158,7 @@
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
   --shadow-md: 0 8px 24px rgb(0 0 0 / 0.45);
   --shadow-lg: 0 24px 64px rgb(0 0 0 / 0.55);
-  --shadow-accent: 0 0 0 1px var(--amber), 0 8px 32px rgb(255 191 0 / 0.25);
+  --shadow-accent: 0 0 0 1px var(--sand), 0 8px 32px rgb(217 209 198 / 0.18);
 
   color-scheme: dark;
 }
@@ -161,10 +169,10 @@
   --color-bg-elev:      var(--black-2);
   --color-bg-elev-2:    var(--black-3);
   --color-fg:           var(--white);
-  --color-fg-2:         rgb(255 255 255 / 0.72);
-  --color-fg-3:         rgb(255 255 255 / 0.48);
-  --color-line:         rgb(255 255 255 / 0.12);
-  --color-line-strong:  rgb(255 255 255 / 0.28);
+  --color-fg-2:         rgb(247 245 239 / 0.72);
+  --color-fg-3:         rgb(247 245 239 / 0.5);
+  --color-line:         rgb(217 209 198 / 0.14);
+  --color-line-strong:  rgb(217 209 198 / 0.32);
   --color-accent:       var(--amber);
   --color-accent-hover: var(--amber-2);
   --btn-primary-bg:         var(--white);
@@ -172,7 +180,7 @@
   --btn-primary-bg-hover:   var(--amber);
   --btn-primary-fg-hover:   var(--black);
   --btn-secondary-fg:       var(--white);
-  --btn-secondary-border:   rgb(255 255 255 / 0.28);
+  --btn-secondary-border:   rgb(217 209 198 / 0.32);
   --btn-secondary-bg-hover: var(--white);
   --btn-secondary-fg-hover: var(--black);
   color-scheme: dark;

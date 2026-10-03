@@ -9,7 +9,7 @@
       Timeline: per layer i (5 layers) two tweens of duration 1, each added at
       "-=0.5", so layer i runs over [0.5i, 0.5i + 1] of a 3-unit timeline:
         image   clip-path inset(0 0 0 0) -> inset(0 0 (h+2)px 0)  (bottom edge wipes up)
-        param   y 0 -> -(h+2)px  (the white line rides the wipe edge)
+        param   y 0 -> -(h+2)px  (the ivory line rides the wipe edge)
                 counter text = progress.toFixed(6) as "0’  427141";
                 class "off" (opacity 0) when that tween reaches 1.
    2. FIT2SUB  start/end = trigger top + 2vh / + 3vh (i.e. the 100vh right after

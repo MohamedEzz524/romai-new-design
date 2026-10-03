@@ -3,10 +3,12 @@
    (Dawn theme, root 62.5% so their 1rem = 10px; converted to px here).
    ===================================================================== */
 .store-collage {
-  --sc-line: #f2f2f2;
+  --sc-line: rgb(217 209 198 / 0.14);
   --sc-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  background: #fff;
-  color: #000;
+  --sc-surface: var(--black-2);
+  --sc-sweep: var(--espresso);
+  background: var(--obsidian);
+  color: var(--ivory);
 }
 
 /* ---------- heading ---------- */
@@ -32,7 +34,7 @@
   font-size: 12px;
   line-height: 1.5;
   letter-spacing: 0.04em;
-  color: rgb(0 0 0 / 0.75);
+  color: var(--taupe);
 }
 
 /* ---------- grid ---------- */
@@ -48,8 +50,8 @@
   height: 100%;
   overflow: hidden;
   aspect-ratio: 2 / 3;               /* their --ratio-percent 150% */
-  background: #f5f5f5;
-  color: #fff;
+  background: var(--sc-surface);
+  color: var(--ivory);
 }
 .store-collage__img {
   position: absolute;
@@ -78,8 +80,8 @@
   display: inline-block;
   margin: 0 0 0 30px;
   padding: 1px 3px;
-  background: #000;
-  color: #fff;
+  background: var(--ivory);
+  color: var(--obsidian);
   font-family: var(--ff-body);
   font-size: 15px;
   font-weight: 700;
@@ -94,8 +96,8 @@
   gap: 2px;
   margin: 0 0 0 30px;
   padding: 3px 3px 4px;
-  background: #fff;
-  color: #000;
+  background: var(--obsidian);
+  color: var(--ivory);
   font-size: 10px;
   font-weight: 400;
   line-height: 1.2;
@@ -113,13 +115,13 @@
    A dark bar sweeps in from the left (0.28s), the photo switches on behind it at 0.4s,
    the bar clears off to the right; cards follow one another left to right, then the
    label blinks in (3x) and the details box lifts. .is-inview comes from reveal.js. */
-.store-collage__card { background: #f2f3f5; }
+.store-collage__card { background: var(--sc-surface); }
 .store-collage__card::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 4;
-  background: #272727;
+  background: var(--sc-sweep);
   transform: scaleX(0);
   pointer-events: none;
 }
@@ -166,7 +168,7 @@
     position: absolute;
     inset: 0;
     z-index: 3;
-    background: #fff;
+    background: var(--obsidian);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s var(--sc-ease);
@@ -185,3 +187,6 @@
   .js .store-collage__grid[data-reveal] .store-card__info { opacity: 1; animation: none; }
   .js .store-collage__grid .store-collage__card::after { animation: none; }
 }
+
+/* light street-map image on the dark brand: invert to a dark map, keep it neutral */
+.store-collage__img--map { filter: invert(1) grayscale(1) brightness(0.82) contrast(1.1); }

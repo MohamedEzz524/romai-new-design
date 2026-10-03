@@ -5,7 +5,7 @@
    whole sheet slides down to reveal the page.
    ===================================================================== */
 .preloader {
-  --preloader-color: var(--amber);
+  --preloader-color: var(--ivory);
   --preloader-logo-w: 220px;
   position: fixed;
   inset: 0;

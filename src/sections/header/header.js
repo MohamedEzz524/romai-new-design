@@ -270,7 +270,7 @@ class SiteHeader {
   }
   renderCart(animate = true) {
     const cur = this.drawer.dataset.currency || 'USD'
-    const COLOR_NAMES = { '#0B0B0B': 'Black', '#3A3A3A': 'Charcoal', '#5C5648': 'Olive', '#FFBF00': 'Amber', '#FFFFFF': 'White', '#EDE6DC': 'Ecru' }
+    const COLOR_NAMES = { '#0B0B0B': 'Black', '#3A3A3A': 'Charcoal', '#5C5648': 'Olive', '#A89B8F': 'Taupe', '#3A2F27': 'Espresso', '#D9D1C6': 'Sand', '#F7F5EF': 'Ivory', '#FFFFFF': 'White', '#EDE6DC': 'Ecru' }
     let count = 0, total = 0
     const rows = this.items.map((it, i) => {
       const p = this.catalog.find((x) => x.handle === it.handle)

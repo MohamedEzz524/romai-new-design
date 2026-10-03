@@ -4,13 +4,15 @@
    Everything visual is drawn on the canvas.
    ===================================================================== */
 .strip {
-  --strip-bg: #F2F3F5;
-  --strip-fg: #222;
+  --strip-bg: var(--obsidian);
+  --strip-fg: var(--ivory);
+  --strip-ph: rgb(217 209 198 / 0.08);   /* placeholder card fill (sand, low alpha) */
   position: relative;
   height: 300vh;               /* replaced by JS with the exact pin length */
   background: var(--strip-bg);
 }
-.strip.scheme-dark { --strip-bg: var(--black); --strip-fg: #f2f2f2; }
+.strip.scheme-dark { --strip-bg: var(--obsidian); --strip-fg: var(--ivory); }
+.strip.scheme-light { --strip-bg: var(--ivory); --strip-fg: var(--obsidian); --strip-ph: rgb(58 47 39 / 0.10); }
 
 .strip__pin {
   position: sticky;

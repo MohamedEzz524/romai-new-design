@@ -245,7 +245,7 @@ void main() {
   float b = texture2D(uBackdrop, zoomed + offset * 0.96).b;
   vec3 col = vec3(r, g, b);
 
-  /* glass shading: warm tint and amber glow on steep faces, key-light glint;
+  /* glass shading: warm tint and sand glow on steep faces, key-light glint;
      the carrying face is clearly tinted so the reveal reads as "the face draws the next image" */
   float fres = pow(tiltAmt, 2.6);
   col = mix(col, col * vec3(1.08, 0.97, 0.85), uTint * fres);
@@ -422,7 +422,7 @@ class RomaiHero {
 
   async init() {
     const cfg = this.config
-    const accent = new THREE.Color('#FFBF00')
+    const accent = new THREE.Color('#D9D1C6')
 
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: true, alpha: false, powerPreference: 'high-performance' })
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75))

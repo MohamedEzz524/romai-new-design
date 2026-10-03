@@ -4,7 +4,7 @@
     "price": 420, "compare_at_price": null, "available": true, "tags": ["new", "outerwear"], "badge": "New",
     "featured_image": "/branding/sample-products/section3/1.png",
     "images": ["/branding/sample-products/section3/1.png", "/branding/Product-Romai/Test Product/1.png", "/branding/Product-Romai/Test Product/2.png"],
-    "colors": ["#0B0B0B", "#FFBF00"], "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["#0B0B0B", "#A89B8F"], "sizes": ["XS", "S", "M", "L", "XL"],
     "description": "Thermal down fill, high-gloss shell and a detachable faux-fur hood. Our warmest piece to date."
   },
   {
@@ -36,7 +36,7 @@
     "price": 75, "compare_at_price": null, "available": true, "tags": ["tops", "best-seller"], "badge": "Best Seller",
     "featured_image": "/branding/sample-products/section8/2.png",
     "images": ["/branding/sample-products/section8/2.png"],
-    "colors": ["#0B0B0B", "#FFFFFF", "#FFBF00"], "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "colors": ["#0B0B0B", "#FFFFFF", "#A89B8F"], "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
     "description": "280gsm garment-dyed cotton with the pentagon mark across the chest."
   },
   {
@@ -44,7 +44,7 @@
     "price": 45, "compare_at_price": null, "available": true, "tags": ["accessories"], "badge": null,
     "featured_image": "/branding/sample-products/section8/3.png",
     "images": ["/branding/sample-products/section8/3.png"],
-    "colors": ["#0B0B0B", "#FFBF00"], "sizes": ["One Size"],
+    "colors": ["#0B0B0B", "#A89B8F"], "sizes": ["One Size"],
     "description": "Merino blend rib knit with a woven label."
   },
   {

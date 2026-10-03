@@ -9,8 +9,12 @@
    ===================================================================== */
 .fitting-section {
   --u: calc(100vw / 360);
-  --fit-bg: #f2f3f5;
-  --fit-ink: #272727;
+  --fit-bg: var(--obsidian);
+  --fit-surface: var(--black-2);                 /* empty card tiles before the photo switches on */
+  --fit-ink: var(--ivory);
+  --fit-meta: var(--taupe);
+  --fit-on-photo: var(--ivory);                  /* labels, slashes and frames drawn over photos */
+  --fit-sweep: var(--espresso);                  /* the reveal bar */
   --fit-ff-name: 'Inter', 'Helvetica Neue', Arial, sans-serif;   /* theirs: "SK Goldilocks" */
   --fit-ff-card: var(--ff-display, 'Inter', sans-serif);         /* theirs: "Moniqa" (condensed display); SeroThunder is the closest condensed face we ship */
   position: relative;
@@ -127,7 +131,7 @@
   left: 0;
   width: 100%;
   height: calc(1 * var(--u));
-  background-color: #fff;
+  background-color: var(--fit-ink);
 }
 .fitting-section .fitting__name {
   position: absolute;
@@ -141,7 +145,7 @@
   line-height: 90%;
   letter-spacing: -0.01em;
   font-feature-settings: "salt" on;
-  color: #fff;
+  color: var(--fit-ink);
 }
 @media only screen and (min-width: 600px) {
   .fitting-section .fitting__name { font-size: calc(42 * var(--u)); }
@@ -162,7 +166,7 @@
   line-height: 1;
   letter-spacing: 0.06em;
   white-space: nowrap;
-  color: #fff;
+  color: var(--fit-meta);
 }
 .fitting-section .fitting__param.off { opacity: 0; }
 
@@ -193,12 +197,13 @@
   flex: 0 1 auto;
   overflow: hidden;
   border: 3px solid var(--fit-bg);
+  background-color: var(--fit-surface);
   width: calc(101 * var(--u));
   height: calc(234 * var(--u));
 }
 .fitting-section .walk__left,
 .fitting-section .walk__center,
-.fitting-section .walk__right { border-color: #fff; }
+.fitting-section .walk__right { border-color: var(--fit-on-photo); }
 @media only screen and (min-width: 600px) {
   .fitting-section .subdivide__item,
   .fitting-section .walk__left,
@@ -243,7 +248,7 @@
   line-height: 90%;
   text-align: center;
   letter-spacing: -0.01em;
-  color: #fff;
+  color: var(--fit-on-photo);
   padding-bottom: calc(9 * var(--u));
 }
 @media only screen and (min-width: 600px) {
@@ -273,7 +278,7 @@
   display: inline-block;
   width: calc(79 * var(--u));
   height: auto;
-  fill: #f2f3f5;
+  fill: var(--fit-on-photo);
 }
 @media only screen and (min-width: 600px) {
   .fitting-section .subdivideCard__bar { width: calc(139 * var(--u)); }
@@ -285,10 +290,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #272727;
+  background-color: var(--fit-sweep);
   transform: scaleX(0);
 }
-.fitting-section .subdivideCard--origin .subdivideCard__text { color: #fff; }
+.fitting-section .subdivideCard--origin .subdivideCard__text { color: var(--fit-on-photo); }
 .fitting-section .subdivideCard__rectClip {
   transform: translate(-100%, 0%);
   transition: transform 0.4s 0.3s linear;
@@ -316,7 +321,7 @@
 }
 @keyframes fitting-card-text-off { 0% { opacity: 1; } 100% { opacity: 0; } }
 
-/* ---------- walk (the three white frames that step down the rows) ---------- */
+/* ---------- walk (the three ivory frames that step down the rows) ---------- */
 .fitting-section .walk { display: flex; justify-content: space-between; }
 .fitting-section .walk__card { position: relative; width: 100%; height: 100%; }
 .fitting-section .walk__img picture { display: contents; }

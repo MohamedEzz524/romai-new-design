@@ -27,7 +27,7 @@
 @media (min-width: 1024px) { .film__top { margin-bottom: calc(-4 * var(--sr)); } }
 .film__label {
   margin: 0;
-  color: var(--amber);
+  color: var(--color-accent);
   font-family: var(--ff-body);
   font-size: 0.875rem;
   font-weight: 600;
@@ -68,7 +68,7 @@
   text-transform: uppercase;
 }
 @media (min-width: 768px) { .film__text { width: calc(66.9 * var(--sr)); } }
-.film__text strong, .film__tip strong { color: var(--amber); font-weight: inherit; }
+.film__text strong, .film__tip strong { color: var(--color-accent); font-weight: inherit; }
 
 /* pinned stage */
 .film__track { position: relative; height: calc(100vh * var(--film-len, 2.7)); margin-top: -25vh; }

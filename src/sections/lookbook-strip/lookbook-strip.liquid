@@ -2,7 +2,7 @@
   assign s = section.settings
 -%}
 <section
-  class="strip scheme-{{ s.scheme | default: 'light' }}"
+  class="strip scheme-{{ s.scheme | default: 'dark' }}"
   data-section="lookbook-strip"
   aria-label="Capsules"
 >
@@ -39,7 +39,7 @@
   "tag": "section",
   "class": "section-lookbook-strip",
   "settings": [
-    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "light", "options": [
+    { "type": "select", "id": "scheme", "label": "Colour scheme", "default": "dark", "options": [
       { "value": "light", "label": "Light" }, { "value": "dark", "label": "Dark" }
     ] },
     { "type": "range", "id": "tilt", "label": "Card tilt (deg)", "min": 0, "max": 16, "step": 1, "default": 10 }

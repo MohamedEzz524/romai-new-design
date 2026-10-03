@@ -4,8 +4,33 @@
     "subtitle": "our first boutique"
   },
   "blocks": [
-    { "type": "image", "settings": { "image": "/assets/store/storefront.webp", "url": "/find-a-store.html" } },
-    { "type": "card", "settings": { "image": "/assets/store/interior.webp", "url": "/find-a-store.html", "label": "opening hours", "line_1": "Mon - Sat / 11:00 AM - 7:30 PM", "line_2": "Sun / 11:00 AM - 7:00 PM" } },
-    { "type": "card", "settings": { "image": "/assets/store/map.webp", "url": "https://maps.google.com", "label": "see on google maps", "line_1": "27 rue de Saintonge", "line_2": "75003 Paris" } }
+    {
+      "type": "image",
+      "settings": {
+        "image": "/assets/store/storefront.webp",
+        "url": "/find-a-store.html"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image": "/assets/store/interior.webp",
+        "url": "/find-a-store.html",
+        "label": "opening hours",
+        "line_1": "Mon - Sat / 11:00 AM - 7:30 PM",
+        "line_2": "Sun / 11:00 AM - 7:00 PM"
+      }
+    },
+    {
+      "type": "card",
+      "settings": {
+        "image": "/assets/store/map.webp",
+        "url": "https://maps.google.com",
+        "label": "see on google maps",
+        "line_1": "27 rue de Saintonge",
+        "line_2": "75003 Paris",
+        "dark_map": true
+      }
+    }
   ]
 }

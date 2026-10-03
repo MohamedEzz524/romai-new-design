@@ -2,7 +2,7 @@
   "settings": {
     "enabled": true,
     "show_once": false,
-    "color": "#FFBF00",
+    "color": "#F7F5EF",
     "logo_width": 220,
     "letter_stagger": 90,
     "letter_duration": 1100,

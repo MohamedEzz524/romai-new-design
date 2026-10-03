@@ -15,7 +15,7 @@ body {
   overflow-x: clip;
 }
 
-::selection { background: var(--amber); color: var(--black); }
+::selection { background: var(--color-accent); color: var(--black); }
 
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: var(--r-xs); }
 :focus:not(:focus-visible) { outline: none; }
@@ -75,9 +75,9 @@ body {
    Brand actions: one system for every button, chip and text link.
    Shape, size and type come from tokens (tokens.css -> "Actions"); colour
    comes from the surrounding scheme (.scheme-dark / -light / -accent).
-     .btn                 primary: solid fg-on-bg, amber sweep on hover
+     .btn                 primary: solid fg-on-bg, sand sweep on hover
      .btn.btn--secondary  outline, fills on hover
-     .btn.btn--accent     amber, for the one action that must win
+     .btn.btn--accent     sand, for the one action that must win
      .btn.btn--ghost      no frame, for toolbars
      .btn--sm / --lg / --block / --icon
      .chip                rounded filter / suggestion pill (.is-active)
@@ -186,9 +186,9 @@ body {
   --_fg-hover: var(--btn-secondary-fg-hover);
 }
 .btn--accent {
-  --_bg: var(--amber);
+  --_bg: var(--color-accent);
   --_fg: var(--black);
-  --_border: var(--amber);
+  --_border: var(--color-accent);
   --_fill: var(--black);
   --_fg-hover: var(--white);
 }
@@ -247,7 +247,7 @@ body {
   letter-spacing: var(--ls-wide);
   text-transform: uppercase;
 }
-.badge--accent { background: var(--amber); color: var(--black); }
+.badge--accent { background: var(--color-accent); color: var(--black); }
 .badge--outline { background: transparent; color: var(--color-fg); border: 1px solid var(--color-line-strong); }
 .badge--muted { background: var(--color-bg-elev-2); color: var(--color-fg-2); }
 

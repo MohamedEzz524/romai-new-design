@@ -2,12 +2,12 @@
    Collection header — values taken from aoiofficial.com (Tailwind build):
    lg:mt-4 · intro px-4 pb-4 pt-6, lg:p-20, lg:w-47.5% · media lg:w-52.5%
    h1 mb-4 mt-4 text-md uppercase, lg:mt-0 lg:text-xl
-   p font-body text-md black/50, md:max-w-475px, lg:mb-20, pre-line
+   p font-body text-md taupe, md:max-w-475px, lg:mb-20, pre-line
    cards: gap 2px (md+) / 6px (phone); active 25% / 60%, others 12.5% / 20%
    width transition .5s ease-in-out; frame h 300 / md 400 / 2xl 600 / 4xl 800
-   tint black .2 (0 on active); label font-heading 8px uppercase white,
+   tint obsidian .35 (0 on active); label 8px uppercase ivory; sand rule on the active card,
    rotated 90deg on phones, hidden on the active card
-   next button: absolute right-0 top-80% p-8, white dot with chevron
+   next button: absolute right-0 top-80% p-8, black-2 dot with ivory chevron
    ===================================================================== */
 .ch {
   --ch-gap: 2px;
@@ -15,8 +15,8 @@
   --ch-w: 12.5%;
   --ch-h: 400px;
   --ch-ease: ease-in-out;
-  background: #fff;
-  color: #000;
+  background: var(--obsidian, #0B0B0B);
+  color: var(--ivory, #F7F5EF);
   padding-top: calc(var(--header-h) + 1rem);          /* lg:mt-4 below the fixed header */
 }
 .ch__row { display: flex; flex-direction: column; }
@@ -36,7 +36,7 @@
   font-family: var(--ff-heading);                     /* their font-body is a serif */
   font-size: 1rem;
   line-height: 1.375;
-  color: rgb(0 0 0 / 0.5);
+  color: var(--taupe, #A89B8F);
   white-space: pre-line;
 }
 
@@ -56,7 +56,7 @@
 }
 .ch__item.is-wide { width: var(--ch-w-active); max-width: var(--ch-w-active); }
 
-.ch__link { position: relative; display: flex; flex-grow: 1; width: 100%; height: 100%; cursor: pointer; color: #fff; }
+.ch__link { position: relative; display: flex; flex-grow: 1; width: 100%; height: 100%; cursor: pointer; color: var(--ivory, #F7F5EF); }
 .ch__item.is-active .ch__link { cursor: default; }
 .ch__frame {
   position: relative;
@@ -68,8 +68,11 @@
   transform-origin: center;
 }
 .ch__img { position: relative; width: 100%; height: 100%; object-fit: cover; }
-.ch__tint { position: absolute; inset: 0; background: #000; opacity: 0.2; transition: opacity 0.5s var(--ch-ease); }
+.ch__tint { position: absolute; inset: 0; background: var(--obsidian, #0B0B0B); opacity: 0.35; transition: opacity 0.5s var(--ch-ease); }
 .ch__item.is-wide .ch__tint { opacity: 0; }
+/* active collection: a thin sand rule under its card */
+.ch__item.is-active .ch__frame::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--sand, #D9D1C6); z-index: 41; pointer-events: none; }
+.ch__link:focus-visible { outline: 1px solid var(--sand, #D9D1C6); outline-offset: -1px; }
 
 .ch__label {
   position: absolute;
@@ -93,7 +96,7 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--ivory, #F7F5EF);
 }
 
 .ch__next {
@@ -104,12 +107,14 @@
   translate: 0 -50%;
   padding: 2rem;
   background: transparent;
-  color: #000;
+  color: var(--ivory, #F7F5EF);
   transition: color 0.3s ease, opacity 0.3s ease;
 }
-.ch__next:hover { color: rgb(0 0 0 / 0.7); }
+.ch__next:hover { color: var(--sand, #D9D1C6); }
+.ch__next:hover .ch__next-dot { border-color: rgb(217 209 198 / 0.32); }
+.ch__next:focus-visible { outline: 1px solid var(--sand, #D9D1C6); outline-offset: -1.5rem; }
 .ch__next:disabled { opacity: 0; pointer-events: none; }
-.ch__next-dot { display: flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; border-radius: 999px; background: #fff; pointer-events: none; }
+.ch__next-dot { display: flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; border-radius: 999px; background: var(--black-2, #13110F); border: 1px solid rgb(217 209 198 / 0.14); pointer-events: none; transition: border-color 0.3s ease; }
 .ch__next-dot svg { width: 1.25rem; height: 1.25rem; }
 
 /* ---------- phones (< md): 60% / 20%, 6px gap, vertical labels ---------- */

@@ -1,6 +1,6 @@
 {%- comment -%}
   Store collage (after suuupply.com "suuupply store"): heading + three equal columns.
-  Desktop: 3 columns, 1px #f2f2f2 dividers. Phones: cards stack as sticky layers;
+  Desktop: 3 columns, 1px palette-line dividers. Phones: cards stack as sticky layers;
   each one shrinks slightly and dims as the next slides over it.
   Card hover: one vowel in the label stretches (o -> oo -> ooo), like their "suuupply".
 {%- endcomment -%}
@@ -18,11 +18,11 @@
       <div class="store-collage__item" data-collage-item style="--i: {{ forloop.index0 }}">
         {%- if block.type == 'image' -%}
           <a class="store-collage__card" href="{{ block.settings.url }}" aria-label="{{ s.title | escape }}">
-            <img class="store-collage__img" src="{{ block.settings.image }}" alt="" loading="eager" decoding="async">
+            <img class="store-collage__img{% if block.settings.dark_map %} store-collage__img--map{% endif %}" src="{{ block.settings.image }}" alt="" loading="eager" decoding="async">
           </a>
         {%- else -%}
           <a class="store-collage__card store-card" href="{{ block.settings.url }}"{% if block.settings.url contains 'http' %} target="_blank" rel="noopener"{% endif %} data-stretch>
-            <img class="store-collage__img" src="{{ block.settings.image }}" alt="" loading="eager" decoding="async">
+            <img class="store-collage__img{% if block.settings.dark_map %} store-collage__img--map{% endif %}" src="{{ block.settings.image }}" alt="" loading="eager" decoding="async">
             <span class="store-card__info">
               <span class="store-card__top" data-stretch-text>{{ block.settings.label }}</span>
               <span class="store-card__bottom">
@@ -53,6 +53,7 @@
     ] },
     { "type": "card", "name": "Info card", "settings": [
       { "type": "image_picker", "id": "image", "label": "Image" },
+      { "type": "checkbox", "id": "dark_map", "label": "Light map image: show it dark (inverted)", "default": false },
       { "type": "url", "id": "url", "label": "Link" },
       { "type": "text", "id": "label", "label": "Label", "default": "opening hours" },
       { "type": "text", "id": "line_1", "label": "Line 1" },

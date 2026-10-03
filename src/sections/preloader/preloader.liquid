@@ -19,7 +19,7 @@
   class="preloader"
   data-section="preloader"
   data-preloader
-  style="--preloader-color: {{ s.color | default: '#FFBF00' }}; --preloader-logo-w: {{ s.logo_width | default: 220 }}px;"
+  style="--preloader-color: {{ s.color | default: '#F7F5EF' }}; --preloader-logo-w: {{ s.logo_width | default: 220 }}px;"
   aria-hidden="true"
 >
   {%- comment -%} the mark, one layer per shape so each can fly in on its own 3D path {%- endcomment -%}
@@ -58,7 +58,7 @@
   "settings": [
     { "type": "checkbox", "id": "enabled", "label": "Enable preloader", "default": true },
     { "type": "checkbox", "id": "show_once", "label": "Show once per browser session", "default": false },
-    { "type": "color", "id": "color", "label": "Logo and fill colour", "default": "#FFBF00" },
+    { "type": "color", "id": "color", "label": "Logo and fill colour", "default": "#F7F5EF" },
     { "type": "range", "id": "logo_width", "label": "Logo width (px)", "min": 120, "max": 480, "step": 10, "default": 220 },
     { "type": "header", "content": "Timing (ms)" },
     { "type": "range", "id": "letter_stagger", "label": "Delay between letters", "min": 40, "max": 400, "step": 10, "default": 90 },
