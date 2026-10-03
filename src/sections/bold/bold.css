@@ -1,152 +1,128 @@
 /* =====================================================================
-   Bold statement, ported from the Romai theme section "custom-sero-bold".
-   Layers: background (-3) < "BOLD FASHION" overlay (-2) < model cut-out (-1)
-   < titles and copy (difference blend). Scale unit --sr as in the original:
-   360 design px on phones, 768 on tablets, 1440 on desktop.
+   Bold statement (Sero design, 2026-10).
+   Layers: studio photo (-3) < "BEYOND ORDINARY" lettering (-2) < model cut-out (-1)
+   < copy. The photo and the cut-out are the same 1672 x 941 canvas and are
+   both object-fit: cover / centre, so they always register. The lettering
+   is placed by its box on that canvas (2.03% / 37.73%, 96.29% wide), lifted to
+   ~26.7% from the top as in the design board.
+   Desktop and tablet: the section keeps the canvas ratio (16:9), so the
+   section box IS the canvas. Phones: a taller box; the canvas is cropped
+   from the centre, and the lettering is sized to the screen instead.
    ===================================================================== */
 .bold {
-  --sr: 2.6666667vw;
   position: relative;
   z-index: 0;
-  height: calc(82 * var(--sr));
-  padding: calc(1.9 * var(--sr)) 0 calc(1.4 * var(--sr));
-  overflow: clip;
-  background: var(--black);
-  color: #fff;
   isolation: isolate;
+  overflow: clip;
+  height: 130vw;                         /* phones: the model (43% of the canvas width) fits the screen */
+  background: var(--obsidian);
+  color: var(--ivory);
 }
 @media (min-width: 768px) {
-  .bold { --sr: 1.3020833vw; height: calc(77.2 * var(--sr)); padding: calc(3.5 * var(--sr)) 0 calc(3 * var(--sr)); }
-}
-@media (min-width: 1024px) {
-  .bold { --sr: 0.6944444vw; height: calc(81 * var(--sr)); padding: calc(3.8 * var(--sr)) 0 calc(2.4 * var(--sr)); }
+  .bold { height: auto; aspect-ratio: 1672 / 941; }
 }
 
-.bold__bg { position: absolute; inset: 0; z-index: -3; }
-.bold__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
-@media (max-width: 767px) { .bold__bg img { object-position: 50% 50%; } }
-
-.bold__inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+/* ---------- image layers ---------- */
+.bold__bg, .bold__model { position: absolute; inset: 0; pointer-events: none; }
+.bold__bg { z-index: -3; }
+.bold__model { z-index: -1; }
+.bold__bg img, .bold__model img {
+  display: block;
+  width: 100%;
   height: 100%;
-  padding: 0 calc(1.6 * var(--sr));
-  color: inherit;
-  text-decoration: none;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
-@media (min-width: 768px) { .bold__inner { padding: 0 calc(3.2 * var(--sr)); } }
-@media (min-width: 1024px) { .bold__inner { padding: 0 calc(3.5 * var(--sr)); cursor: none; } }
 
-/* titles + copy */
-.bold__top, .bold__bottom { display: flex; flex-direction: column; gap: calc(0.8 * var(--sr)); mix-blend-mode: difference; }
-.bold__title {
-  display: flex;
-  align-items: flex-end;
-  gap: calc(0.2 * var(--sr));
-  margin: 0;
-  color: #fff;
-  font-family: var(--ff-heading);
-  font-size: 5rem;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-@media (max-width: 767px) { .bold__title { font-size: 3rem; } }
-.bold__title i {
-  margin-bottom: 0.4em;
-  font-family: var(--ff-body);
-  font-size: 0.3em;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.02em;
-}
-.bold__title i b { font-weight: 300; }
-
-.bold__text {
-  margin: 0;
-  color: #fff;
-  font-family: var(--ff-body);
-  font-size: max(11px, calc(1.2 * var(--sr)));
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-}
-.bold__text strong { color: var(--color-accent); font-weight: inherit; }
-.bold__text--top { width: max(180px, calc(18.3 * var(--sr))); }
-.bold__text--top i { margin-left: calc(5.5 * var(--sr)); color: var(--color-accent); font-style: normal; }
-
-/* "BOLD FASHION" overlay and model cut-out */
 .bold__overlay {
   position: absolute;
-  top: 42%;
-  left: 50%;
   z-index: -2;
-  width: 86vw;
-  translate: -50% -50%;
+  top: 26.7%;
+  left: 2.03%;
+  width: 96.29%;
   pointer-events: none;
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.9s cubic-bezier(0.33, 1, 0.68, 1);
 }
 .bold.is-in .bold__overlay, .no-js .bold__overlay { clip-path: inset(0 0 0 0); }
 .bold__overlay img { display: block; width: 100%; height: auto; }
-.bold__model {
-  position: absolute;
-  bottom: 4%;
-  left: 50%;
-  z-index: -1;
-  height: 80%;
-  translate: -50% 0;
-  pointer-events: none;
-}
-.bold__model img { display: block; width: auto; max-width: none; height: 100%; }
 @media (max-width: 767px) {
-  .bold__overlay { top: 38%; width: 118vw; }
-  .bold__model { bottom: 16%; height: 48%; }
+  .bold__overlay { top: 30%; left: 3vw; width: 94vw; }
 }
 
-/* icon row and dot: tablet and up */
-.bold__mid, .bold__dot { display: none; }
-.bold__cursor { display: none; }
+/* ---------- copy ---------- */
+.bold__inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5vw 4.4vw 6vw;
+  color: inherit;
+  text-decoration: none;
+}
+@media (min-width: 768px) { .bold__inner { padding: 3.4vw 3.2vw 4.2vw; } }
+@media (min-width: 1024px) { .bold__inner { cursor: none; } }
 
+.bold__top, .bold__bottom { display: flex; flex-direction: column; gap: 2.5vw; }
 @media (min-width: 768px) {
-  .bold__top { flex-direction: row; justify-content: space-between; }
-  .bold__bottom {
-    position: relative;
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: calc(9 * var(--sr));
-    padding-right: calc(0.5 * var(--sr));
-  }
-  .bold__title--bottom { flex-direction: row-reverse; }
-  .bold__text--bottom { margin-bottom: calc(0.9 * var(--sr)); }
-  .bold__dot {
-    display: block;
-    position: absolute;
-    right: calc(-1.7 * var(--sr));
-    bottom: calc(1 * var(--sr));
-    width: calc(2.4 * var(--sr));
-    height: calc(2.4 * var(--sr));
-    mix-blend-mode: difference;
-  }
-  .bold__mid { display: flex; justify-content: space-between; margin-top: calc(0.5 * var(--sr)); }
-  .bold__group { display: flex; }
-  .bold__group img { display: block; width: max(28px, calc(3.2 * var(--sr))); height: max(28px, calc(3.2 * var(--sr))); }
+  .bold__top { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+  .bold__bottom { flex-direction: row; align-items: flex-end; justify-content: space-between; }
 }
+
+.bold__title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.18em;
+  margin: 0;
+  color: var(--ivory);
+  font-family: var(--ff-heading);
+  font-size: 11vw;
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) { .bold__title { font-size: 4.6vw; } }
+.bold__title i {
+  font-family: var(--ff-body);
+  font-size: 0.24em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+.bold__title--bottom { justify-content: flex-start; }
+@media (min-width: 768px) { .bold__title--bottom { justify-content: flex-end; } }
+
+.bold__text { margin: 0; color: var(--ivory); }
+.bold__text--top {
+  font-family: var(--ff-body);
+  font-size: max(10px, 2.8vw);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) { .bold__text--top { margin-top: 0.4vw; font-size: max(10px, 0.9vw); } }
+.bold__text--bottom {
+  font-family: var(--ff-heading);
+  font-size: max(14px, 4.4vw);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+@media (min-width: 768px) { .bold__text--bottom { margin-bottom: 0.5vw; font-size: max(14px, 1.7vw); } }
+
+/* "[ WHO WE ARE ]" follows the pointer (desktop) */
+.bold__cursor { display: none; }
 @media (min-width: 1024px) {
-  .bold__text--bottom { width: calc(30 * var(--sr)); text-align: justify; }
-  /* "[ WHO WE ARE ]" follows the pointer */
   .bold__cursor {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
-    color: #fff;
+    color: var(--ivory);
     font-family: var(--ff-heading);
     font-size: 1.125rem;
     letter-spacing: 0.04em;
@@ -162,3 +138,22 @@
   .bold__cursor.is-visible { opacity: 1; }
 }
 
+/* ---------- phones: the canvas becomes a 200vw-wide band (model fully visible),
+   copy sits in the clear space above and below, the photo fades into obsidian ---------- */
+@media (max-width: 767px) {
+  .bold { --band-top: 30vw; --band-w: 200vw; --band-h: calc(var(--band-w) * 941 / 1672); height: calc(var(--band-top) + var(--band-h) + 30vw); }
+  .bold__bg, .bold__model {
+    inset: auto;
+    top: var(--band-top);
+    left: 50%;
+    width: var(--band-w);
+    height: var(--band-h);
+    translate: -50% 0;
+  }
+  .bold__bg {
+    -webkit-mask: linear-gradient(to bottom, transparent, #000 14%, #000 82%, transparent);
+            mask: linear-gradient(to bottom, transparent, #000 14%, #000 82%, transparent);
+  }
+  .bold__overlay { top: calc(var(--band-top) + var(--band-h) * 0.3); }
+  .bold__inner { padding: 6vw 4.4vw 7vw; }
+}

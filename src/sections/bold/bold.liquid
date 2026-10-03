@@ -1,39 +1,39 @@
 {%- liquid
   assign s = section.settings
 -%}
+{%- comment -%}
+  Bold statement (Sero). Three image layers share one canvas so they register exactly:
+  studio photo (back) < "BEYOND ORDINARY" lettering < model cut-out (front).
+  The studio photo and the cut-out are the same size and fill the section the same
+  way; the lettering is trimmed and placed by its position on that canvas.
+{%- endcomment -%}
 <section class="bold" data-section="bold" aria-label="{{ s.top_title | escape }} / {{ s.bottom_title | escape }}">
-  <picture class="bold__bg" aria-hidden="true"><img src="{{ s.bg_image }}" alt="" loading="lazy"></picture>
+  <picture class="bold__bg" aria-hidden="true">
+    <img src="{{ s.bg_image }}" alt="" width="1672" height="941" loading="lazy" decoding="async">
+  </picture>
 
   <a class="bold__inner" href="{{ s.link }}">
     <div class="bold__top" data-reveal-group data-reveal-stagger="80">
       <h2 class="bold__title" data-reveal="mask-up">
-        {{ s.top_title }} <i><b>(</b>{{ s.top_title_note }}<b>)</b></i>
+        {{ s.top_title }} <i>({{ s.top_title_note }})</i>
       </h2>
       <p class="bold__text bold__text--top" data-reveal="mask-up">{{ s.top_text }}</p>
     </div>
 
     <span class="bold__cursor" data-bold-cursor aria-hidden="true"><b>[ </b>{{ s.cursor_text }}<b> ]</b></span>
 
-    <div class="bold__overlay" data-bold-overlay aria-hidden="true"><img src="{{ s.overlay_image }}" alt="" width="2062" height="781" loading="lazy"></div>
-    <picture class="bold__model" aria-hidden="true"><img src="{{ s.main_image }}" alt="" width="1126" height="1174" loading="lazy"></picture>
-
-    <div class="bold__mid" aria-hidden="true">
-      <span class="bold__group">
-        <img src="{{ 'bold/icon-1.svg' | asset_url }}" alt="" width="32" height="32">
-        <img src="{{ 'bold/icon-2.svg' | asset_url }}" alt="" width="32" height="32">
-      </span>
-      <span class="bold__group">
-        <img src="{{ 'bold/icon-3.svg' | asset_url }}" alt="" width="32" height="32">
-        <img src="{{ 'bold/icon-4.svg' | asset_url }}" alt="" width="32" height="32">
-      </span>
+    <div class="bold__overlay" data-bold-overlay aria-hidden="true">
+      <img src="{{ s.overlay_image }}" alt="" width="1610" height="246" loading="lazy" decoding="async">
     </div>
+    <picture class="bold__model" aria-hidden="true">
+      <img src="{{ s.main_image }}" alt="" width="1672" height="941" loading="lazy" decoding="async">
+    </picture>
 
     <div class="bold__bottom" data-reveal-group data-reveal-stagger="80">
-      <img class="bold__dot" src="{{ 'film/dot.webp' | asset_url }}" alt="" aria-hidden="true" data-reveal="mask-up">
-      <h3 class="bold__title bold__title--bottom" data-reveal="mask-up">
-        {{ s.bottom_title }} <i><b>(</b>{{ s.bottom_title_note }}<b>)</b></i>
-      </h3>
       <p class="bold__text bold__text--bottom" data-reveal="mask-up">{{ s.bottom_text }}</p>
+      <h3 class="bold__title bold__title--bottom" data-reveal="mask-up">
+        <i>({{ s.bottom_title_note }})</i> {{ s.bottom_title }}
+      </h3>
     </div>
   </a>
 </section>
@@ -45,16 +45,16 @@
   "class": "section-bold",
   "settings": [
     { "type": "url", "id": "link", "label": "Link" },
-    { "type": "image_picker", "id": "bg_image", "label": "Background image" },
-    { "type": "image_picker", "id": "overlay_image", "label": "Overlay image (behind the model)" },
-    { "type": "image_picker", "id": "main_image", "label": "Main image (model cut-out)" },
+    { "type": "image_picker", "id": "bg_image", "label": "Studio photo (back layer, 1672 x 941)" },
+    { "type": "image_picker", "id": "overlay_image", "label": "Lettering (middle layer, trimmed)" },
+    { "type": "image_picker", "id": "main_image", "label": "Model cut-out (front layer, same canvas as the studio photo)" },
     { "type": "text", "id": "top_title", "label": "Top title", "default": "Space" },
     { "type": "text", "id": "top_title_note", "label": "Top title note (in brackets)", "default": "transformation" },
-    { "type": "html", "id": "top_text", "label": "Top text (<strong> sand accent, <i> sand + indent)" },
+    { "type": "text", "id": "top_text", "label": "Top right text", "default": "Our pieces are built to last." },
     { "type": "text", "id": "cursor_text", "label": "Cursor label", "default": "Who we are" },
-    { "type": "text", "id": "bottom_title", "label": "Bottom title", "default": "Freedom" },
-    { "type": "text", "id": "bottom_title_note", "label": "Bottom title note (in brackets)", "default": "creative" },
-    { "type": "html", "id": "bottom_text", "label": "Bottom text (<strong> = sand accent)" }
+    { "type": "text", "id": "bottom_text", "label": "Bottom left text", "default": "Wear what moves you." },
+    { "type": "text", "id": "bottom_title", "label": "Bottom title", "default": "Freedom." },
+    { "type": "text", "id": "bottom_title_note", "label": "Bottom title note (in brackets)", "default": "creative" }
   ],
   "presets": [{ "name": "Bold statement" }]
 }
