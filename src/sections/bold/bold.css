@@ -157,3 +157,15 @@
   .bold__overlay { top: calc(var(--band-top) + var(--band-h) * 0.3); }
   .bold__inner { padding: 6vw 4.4vw 7vw; }
 }
+
+/* ---------- blend into the page: the studio photo is warmer than obsidian, so its
+   top and bottom dissolve into the section background instead of ending on a hard
+   line; the cut-out only softens at its very bottom (shoes into the floor) ---------- */
+.bold__bg {
+  -webkit-mask: linear-gradient(to bottom, transparent 0%, #000 20%, #000 74%, transparent 100%);
+          mask: linear-gradient(to bottom, transparent 0%, #000 20%, #000 74%, transparent 100%);
+}
+.bold__model {
+  -webkit-mask: linear-gradient(to bottom, #000 88%, transparent 100%);
+          mask: linear-gradient(to bottom, #000 88%, transparent 100%);
+}
