@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head><style data-critical>
+  html { background: #0B0B0B; }
+  :where(svg:not([width])) { width: 1em; height: 1em; }
+  :where(.site-header__mark) { height: 44px; width: auto; }
+  /* hide the page until main.js has applied the stylesheets; reveal anyway after 3s */
+  html:not(.styles-ready) body { visibility: hidden; animation: critical-reveal 0s 3s forwards; }
+  @keyframes critical-reveal { to { visibility: visible; } }
+</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROMAI — Style guide</title>
+  <meta name="theme-color" content="#0B0B0B">
+  <link rel="icon" type="image/png" href="/romai-new-design/assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .sg { padding-block: var(--sp-16); }
+    .sg h2.sg-title { margin-bottom: var(--sp-8); padding-bottom: var(--sp-3); border-bottom: 1px solid var(--color-line); }
+    .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--sp-3); }
+    .sg-swatch { border: 1px solid var(--color-line); border-radius: var(--r-md); overflow: hidden; }
+    .sg-swatch i { display: block; height: 72px; }
+    .sg-swatch span { display: block; padding: var(--sp-2) var(--sp-3); font-size: var(--fs-xs); font-family: var(--ff-mono); color: var(--color-fg-2); }
+    .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); }
+    .sg-type > * + * { margin-top: var(--sp-5); }
+    .sg-schemes { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .sg-scheme { padding: var(--sp-8); border-radius: var(--r-lg); }
+    .sg-cards { display: grid; gap: var(--grid-gap); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .sg-card .media { border-radius: var(--r-md); }
+    .sg-card .meta { padding-top: var(--sp-3); }
+    .sg-collections { display: grid; gap: var(--grid-gap); grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .sg-collections figure .media { border-radius: var(--r-md); }
+    .sg-collections figcaption { padding-top: var(--sp-2); font-size: var(--fs-sm); }
+  </style>
+  <script type="module" crossorigin src="/romai-new-design/assets/three-BRLZNJvM.js"></script>
+  <script type="module" crossorigin src="/romai-new-design/assets/main-OpMykJpe.js"></script>
+  <link rel="stylesheet" crossorigin href="/romai-new-design/assets/main-CKOJhZkY.css">
+</head>
+<body class="template-styleguide">
+<main class="container">
+
+  <section class="sg">
+    <p class="eyebrow">Style guide</p>
+    <h1 class="display">ROMAI</h1>
+    <p class="lead" style="max-width: 48ch; margin-top: var(--sp-4)">Built for the cold. Worn in the city. Design tokens, type, buttons and mock data used by every section.</p>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Colour</h2>
+    <div class="sg-swatches">
+      <div class="sg-swatch"><i style="background:var(--black)"></i><span>--black</span></div>
+      <div class="sg-swatch"><i style="background:var(--black-2)"></i><span>--black-2</span></div>
+      <div class="sg-swatch"><i style="background:var(--black-3)"></i><span>--black-3</span></div>
+      <div class="sg-swatch"><i style="background:var(--black-4)"></i><span>--black-4</span></div>
+      <div class="sg-swatch"><i style="background:var(--white)"></i><span>--white</span></div>
+      <div class="sg-swatch"><i style="background:var(--cream)"></i><span>--cream</span></div>
+      <div class="sg-swatch"><i style="background:var(--sand)"></i><span>--sand</span></div>
+      <div class="sg-swatch"><i style="background:var(--amber)"></i><span>--amber</span></div>
+      <div class="sg-swatch"><i style="background:var(--amber-2)"></i><span>--amber-2</span></div>
+      <div class="sg-swatch"><i style="background:var(--amber-3)"></i><span>--amber-3</span></div>
+      <div class="sg-swatch"><i style="background:var(--color-success)"></i><span>success</span></div>
+      <div class="sg-swatch"><i style="background:var(--color-error)"></i><span>error</span></div>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Typography</h2>
+    <div class="sg-type">
+      <p class="display">Display / SeroThunder</p>
+      <h1 class="h1">H1 — Burberry House serif heading</h1>
+      <h2 class="h2">H2 — Built for the cold, worn in the city</h2>
+      <h3 class="h3">H3 — Residual Heat Capsule</h3>
+      <h4 class="h4">H4 — Inter semibold subheading</h4>
+      <p class="eyebrow">Eyebrow — new arrivals</p>
+      <p class="lead">Lead — Thermal down fill, high-gloss shell and a detachable faux-fur hood. Our warmest piece to date.</p>
+      <p class="body">Body — Reflective piping, ribbed collar and a water-repellent nylon shell. Six-pocket cargo in a heavyweight ripstop with an articulated knee.</p>
+      <p class="small">Small — Free worldwide shipping on orders over $200</p>
+      <p class="caption">Caption — SKU RM-1001-BLK</p>
+      <p><a href="#" class="link">Text link — Shop the drop</a></p>
+      <p class="body">Inline copy with a <a href="#" class="link--quiet">quiet link</a> inside a sentence.</p>
+      <div class="sg-row"><button class="chip">Jackets</button><button class="chip is-active">Outerwear</button><button class="chip">Headwear</button></div>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Buttons</h2>
+    <div class="sg-row">
+      <a class="btn" href="#">Primary</a>
+      <a class="btn btn--secondary" href="#">Secondary</a>
+      <a class="btn btn--accent" href="#">Accent</a>
+      <a class="btn btn--ghost" href="#">Ghost</a>
+      <a class="btn btn--sm" href="#">Small</a>
+      <a class="btn btn--lg" href="#">Large</a>
+      <a class="btn btn--block" style="max-width:220px" href="#">Block</a>
+      <button class="btn btn--icon" aria-label="Cart">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      </button>
+      <button class="btn" disabled>Disabled</button>
+    </div>
+    <div class="sg-row" style="margin-top: var(--sp-4)">
+      <span class="badge">New</span>
+      <span class="badge badge--accent">Sale</span>
+      <span class="badge badge--outline">Limited</span>
+      <span class="badge badge--muted">Sold out</span>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Colour schemes</h2>
+    <div class="sg-schemes">
+      <div class="sg-scheme scheme-dark">
+        <p class="eyebrow">scheme-dark</p>
+        <h3 class="h3">Default on black</h3>
+        <p class="body" style="margin: var(--sp-3) 0 var(--sp-5)">Body copy at 72% white. Lines at 12%.</p>
+        <div class="sg-row"><a class="btn" href="#">Primary</a><a class="btn btn--secondary" href="#">Secondary</a></div>
+      </div>
+      <div class="sg-scheme scheme-light">
+        <p class="eyebrow">scheme-light</p>
+        <h3 class="h3">Cream editorial</h3>
+        <p class="body" style="margin: var(--sp-3) 0 var(--sp-5)">Used for storytelling and lookbook moments.</p>
+        <div class="sg-row"><a class="btn" href="#">Primary</a><a class="btn btn--secondary" href="#">Secondary</a></div>
+      </div>
+      <div class="sg-scheme scheme-accent">
+        <p class="eyebrow">scheme-accent</p>
+        <h3 class="h3">Amber statement</h3>
+        <p class="body" style="margin: var(--sp-3) 0 var(--sp-5)">Promo bars, flash deals, big moments.</p>
+        <div class="sg-row"><a class="btn" href="#">Primary</a><a class="btn btn--secondary" href="#">Secondary</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Mock products (8)</h2>
+    <div class="sg-cards">
+      
+        <article class="sg-card" data-reveal data-reveal-delay="0">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section3/1.png" alt="Residual Heat Puffer Jacket" loading="lazy">
+          </div>
+          <div class="meta">
+            <span class="badge ">New</span>
+            <h3 class="h6" style="margin-top: var(--sp-2)">Residual Heat Puffer Jacket</h3>
+            <p class="small">
+              $420.00
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="60">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section3/2.png" alt="Echoes Bomber" loading="lazy">
+          </div>
+          <div class="meta">
+            <span class="badge badge--accent">Sale</span>
+            <h3 class="h6" style="margin-top: var(--sp-2)">Echoes Bomber</h3>
+            <p class="small">
+              <s>$450.00</s> <span class="accent">$360.00</span>
+              
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="120">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section3/3.png" alt="Bear Smart Parka" loading="lazy">
+          </div>
+          <div class="meta">
+            
+            <h3 class="h6" style="margin-top: var(--sp-2)">Bear Smart Parka</h3>
+            <p class="small">
+              $520.00
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="180">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section8/1.png" alt="Urban Gear Cargo Pants" loading="lazy">
+          </div>
+          <div class="meta">
+            
+            <h3 class="h6" style="margin-top: var(--sp-2)">Urban Gear Cargo Pants</h3>
+            <p class="small">
+              $190.00
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="240">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section8/2.png" alt="Heavyweight Logo Tee" loading="lazy">
+          </div>
+          <div class="meta">
+            <span class="badge ">Best Seller</span>
+            <h3 class="h6" style="margin-top: var(--sp-2)">Heavyweight Logo Tee</h3>
+            <p class="small">
+              $75.00
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="300">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section8/3.png" alt="Thermal Knit Beanie" loading="lazy">
+          </div>
+          <div class="meta">
+            
+            <h3 class="h6" style="margin-top: var(--sp-2)">Thermal Knit Beanie</h3>
+            <p class="small">
+              $45.00
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="360">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/sample-products/section8/4.png" alt="Chunky Rib Sweater" loading="lazy">
+          </div>
+          <div class="meta">
+            <span class="badge badge--muted">Sold Out</span>
+            <h3 class="h6" style="margin-top: var(--sp-2)">Chunky Rib Sweater</h3>
+            <p class="small">
+              $220.00
+            </p>
+          </div>
+        </article>
+      
+        <article class="sg-card" data-reveal data-reveal-delay="420">
+          <div class="media media--portrait">
+            <img src="/romai-new-design/branding/Product/p1.png" alt="Glossy Down Vest" loading="lazy">
+          </div>
+          <div class="meta">
+            <span class="badge badge--accent">Sale</span>
+            <h3 class="h6" style="margin-top: var(--sp-2)">Glossy Down Vest</h3>
+            <p class="small">
+              <s>$320.00</s> <span class="accent">$260.00</span>
+              
+            </p>
+          </div>
+        </article>
+      
+    </div>
+  </section>
+
+  <section class="sg">
+    <h2 class="h3 sg-title">Mock collections (21)</h2>
+    <div class="sg-collections">
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/new-arrivals.png" alt="New Arrivals" loading="lazy"></div>
+          <figcaption>New Arrivals <span class="muted">(24)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/best-sellers.png" alt="Best Sellers" loading="lazy"></div>
+          <figcaption>Best Sellers <span class="muted">(18)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/men.png" alt="Men" loading="lazy"></div>
+          <figcaption>Men <span class="muted">(64)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/women.png" alt="Women" loading="lazy"></div>
+          <figcaption>Women <span class="muted">(58)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/jackets.png" alt="Jackets" loading="lazy"></div>
+          <figcaption>Jackets <span class="muted">(32)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/outerwear.png" alt="Outerwear" loading="lazy"></div>
+          <figcaption>Outerwear <span class="muted">(40)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/bombers.png" alt="Bombers" loading="lazy"></div>
+          <figcaption>Bombers <span class="muted">(12)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/tops.png" alt="Tops" loading="lazy"></div>
+          <figcaption>Tops <span class="muted">(28)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/tees.png" alt="Tees" loading="lazy"></div>
+          <figcaption>Tees <span class="muted">(20)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/sweater.png" alt="Sweaters" loading="lazy"></div>
+          <figcaption>Sweaters <span class="muted">(14)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/bottoms.png" alt="Bottoms" loading="lazy"></div>
+          <figcaption>Bottoms <span class="muted">(22)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/pants.png" alt="Pants" loading="lazy"></div>
+          <figcaption>Pants <span class="muted">(16)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/shorts.png" alt="Shorts" loading="lazy"></div>
+          <figcaption>Shorts <span class="muted">(8)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/headwear.png" alt="Headwear" loading="lazy"></div>
+          <figcaption>Headwear <span class="muted">(10)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/sunglasses.png" alt="Sunglasses" loading="lazy"></div>
+          <figcaption>Sunglasses <span class="muted">(6)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/accessories.png" alt="Accessories" loading="lazy"></div>
+          <figcaption>Accessories <span class="muted">(26)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/residual-heat.png" alt="Residual Heat" loading="lazy"></div>
+          <figcaption>Residual Heat <span class="muted">(9)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/echoes.png" alt="Echoes" loading="lazy"></div>
+          <figcaption>Echoes <span class="muted">(11)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/bear-smart.png" alt="Bear Smart" loading="lazy"></div>
+          <figcaption>Bear Smart <span class="muted">(7)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/urban gear.png" alt="Urban Gear" loading="lazy"></div>
+          <figcaption>Urban Gear <span class="muted">(15)</span></figcaption>
+        </figure>
+      
+        <figure data-reveal="fade">
+          <div class="media media--square"><img src="/romai-new-design/branding/collections/flash-deals.png" alt="Flash Deals" loading="lazy"></div>
+          <figcaption>Flash Deals <span class="muted">(13)</span></figcaption>
+        </figure>
+      
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
